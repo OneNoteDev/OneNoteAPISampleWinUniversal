@@ -1,0 +1,100 @@
+﻿<local:SharedBasePage
+    x:Class="OneNoteServiceSamplesWinUniversal.ItemPage"
+    DataContext="{Binding DefaultViewModel.Item, RelativeSource={RelativeSource Self}}"
+    d:DataContext="{Binding Groups[0].Items[0], Source={d:DesignData Source=../OneNoteServiceSamplesWinUniversal.Shared/DataModel/SampleData.json, Type=data:SampleDataSource}}"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:OneNoteServiceSamplesWinUniversal"
+    xmlns:data="using:OneNoteServiceSamplesWinUniversal.Data"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Page.Transitions>
+        <TransitionCollection>
+            <NavigationThemeTransition>
+                <NavigationThemeTransition.DefaultNavigationTransitionInfo>
+                    <ContinuumNavigationTransitionInfo></ContinuumNavigationTransitionInfo>
+                </NavigationThemeTransition.DefaultNavigationTransitionInfo>
+            </NavigationThemeTransition>
+        </TransitionCollection>
+    </Page.Transitions>
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceDictionary x:Key="Default">
+                    <ImageBrush x:Key="BackgroundImageBrush" ImageSource="Assets/HubBackground.png"/>
+                </ResourceDictionary>
+                <ResourceDictionary x:Key="HighContrast">
+                    <ImageBrush x:Key="BackgroundImageBrush" ImageSource="{x:Null}"/>
+                </ResourceDictionary>
+            </ResourceDictionary.ThemeDictionaries>
+        </ResourceDictionary>
+    </Page.Resources>
+    
+    <Grid x:Name="LayoutRoot" Background="{ThemeResource BackgroundImageBrush}">
+        <Grid.ChildrenTransitions>
+            <TransitionCollection>
+                <EntranceThemeTransition/>
+            </TransitionCollection>
+        </Grid.ChildrenTransitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Title Panel -->
+        <StackPanel Orientation="Vertical" Margin="10,0,0,5">
+        <TextBlock Text="{Binding Title}" Style="{ThemeResource SubheaderTextBlockStyle}" CharacterSpacing="{ThemeResource PivotHeaderItemCharacterSpacing}" TextWrapping="Wrap"/>
+        <TextBlock Text="{Binding Description}" TextWrapping="Wrap"></TextBlock>
+        </StackPanel>
+
+        <Grid Grid.Row="1" Margin="10,0,10,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" Orientation="Vertical" HorizontalAlignment="Left">
+                <StackPanel x:Name="InputSelectionPanel1" Orientation="Vertical" Width="Auto" Margin="0,0,0,0">
+                    <TextBlock Text="Select an item from the drop-down to continue:" Margin="0,0,0,0"/>
+                    <ComboBox x:Name="InputComboBox1" ItemsSource="{Binding}" SelectionChanged="InputComboBox1_OnSelectionChanged"></ComboBox>
+                </StackPanel>
+                <StackPanel x:Name="InputSelectionPanel2" Orientation="Vertical" Width="Auto" Margin="0,0,0,0">
+                    <TextBlock Text="Select an item from the drop-down to continue:" Margin="0,0,0,0"/>
+                    <ComboBox x:Name="InputComboBox2"></ComboBox>
+                </StackPanel>
+            </StackPanel>
+            <TextBox Grid.Row="1" x:Name="InputTextBox" Text="Enter required text here" GotFocus="InputTextBox_OnGotFocus" LostFocus="InputTextBox_OnLostFocus" Margin="0,0,0,0">
+            </TextBox>
+            <StackPanel Orientation="Horizontal" Grid.Row="2">
+                <Button x:Name="RunButton" Margin="0,0,0,0" Click="Button_Click">Run</Button>
+            </StackPanel>
+            <Grid Grid.Row="3" x:Name="OutputRegionGrid">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Grid.Row="0" TextAlignment="Left" VerticalAlignment="Center">User:</TextBlock>
+                <TextBlock Grid.Column="1" Grid.Row="0" x:Name="AuthUserName" Margin="10,0,0,0" HorizontalAlignment="Left" TextAlignment="Left" VerticalAlignment="Center"/>
+                <TextBlock Grid.Column="0" Grid.Row="1"  TextAlignment="Left" VerticalAlignment="Center">Response:</TextBlock>
+                <TextBlock Grid.Column="1" Grid.Row="1" x:Name="ResponseTextBox" Margin="10,0,0,0" HorizontalAlignment="Left" TextAlignment="Left" VerticalAlignment="Center"/>
+                <TextBlock Grid.Column="0" Grid.Row="2" x:Name="ResponseListTextBlock" Visibility="Collapsed">List of items in response:</TextBlock>
+                <ComboBox Grid.Column="1" Grid.Row="2" x:Name="ResponseListBox" SelectionChanged="ResponseListBox_OnSelectionChanged" ItemsSource="{Binding}" Visibility="Collapsed" Margin="10,0,0,0">
+                </ComboBox>
+                <HyperlinkButton Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" x:Name="ClientLinkLaunchButton" Content="OneNote client link" HorizontalAlignment="Left" VerticalAlignment="Center" Click="ClientLinkLaunchButton_OnClickLinkLaunchButton_Click" DataContext="{Binding}"/>
+                <TextBlock Grid.Column="0" Grid.Row="4" TextAlignment="Left" VerticalAlignment="Center">Body:</TextBlock>
+                <TextBox Grid.Column="1" Grid.Row="4" x:Name="ResponseBodyTextBox" Margin="0,0,10,10" IsReadOnly="True" TextWrapping="Wrap" AcceptsReturn="True"></TextBox>
+            </Grid>
+        </Grid>
+    </Grid>
+</local:SharedBasePage>

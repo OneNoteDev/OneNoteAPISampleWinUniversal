@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>556a67f3-bd06-49be-ae69-e638d2d6a790</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>OneNoteServiceSamplesWinUniversal</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="$(MSBuildThisFileDirectory)App.xaml">
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)DataModel\SampleDataSource.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)OneNoteApi\ApiBaseResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)OneNoteApi\Auth.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)OneNoteApi\GenericEntityResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)OneNoteApi\Notebooks\GetNotebooksExample.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)OneNoteApi\Notebooks\PostNotebooksExample.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)OneNoteApi\Pages\GetPagesExample.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)OneNoteApi\Pages\PageResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)OneNoteApi\Pages\PostPagesExample.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)OneNoteApi\SectionGroups\GetSectionGroupsExample.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)OneNoteApi\Sections\GetSectionsExample.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)OneNoteApi\Sections\PostSectionsExample.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SharedBasePage.xaml.cs">
+      <DependentUpon>SharedBasePage.xaml</DependentUpon>
+    </Compile>
+    <Content Include="$(MSBuildThisFileDirectory)Assets\BizCard.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Logo.jpg" />
+    <Content Include="$(MSBuildThisFileDirectory)DataModel\SampleData.json" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\LightGray.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\MediumGray.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\DarkGray.png" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\NavigationHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\RelayCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\SuspensionManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\ObservableDictionary.cs" />
+    <PRIResource Include="$(MSBuildThisFileDirectory)Strings\en-US\Resources.resw" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="$(MSBuildThisFileDirectory)SharedBasePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)Assets\attachment.pdf" />
+  </ItemGroup>
+</Project>

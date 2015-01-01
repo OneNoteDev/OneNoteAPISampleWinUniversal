@@ -1,0 +1,360 @@
+{
+    "Groups": [
+        {
+            "UniqueId": "Group-0",
+            "Title": "Create Pages",
+            "ImagePath": "Assets/DarkGray.png",
+            "Description": "Examples of how to use the HTTP POST verb to create pages with different types of content",
+            "Items": [
+                {
+                    "UniqueId": "Group-0-Item-0",
+                    "Title": "Simple page using HTML",
+                    "ImagePath": "Assets/LightGray.png",
+                    "Description": "Create a simple page using HTML to describe the page content",
+                    "RequiresInputComboBox1": "false",
+                    "RequiresInputComboBox2": "false",
+                    "RequiresInputTextBox": "false"
+                },
+                {
+                    "UniqueId": "Group-0-Item-1",
+                    "Title": "Page with an image",
+                    "ImagePath": "Assets/DarkGray.png",
+                    "Description": "Create a page with some formatted text and an image",
+                    "RequiresInputComboBox1": "false",
+                    "RequiresInputComboBox2": "false",
+                    "RequiresInputTextBox": "false"
+                },
+                {
+                    "UniqueId": "Group-0-Item-2",
+                    "Title": "Page with a snapshot of an embedded web page",
+                    "ImagePath": "Assets/MediumGray.png",
+                    "Description": "Create a page with a snapshot of the HTML of a web page on it",
+                    "RequiresInputComboBox1": "false",
+                    "RequiresInputComboBox2": "false",
+                    "RequiresInputTextBox": "false"
+                },
+                {
+                    "UniqueId": "Group-0-Item-3",
+                    "Title": "Page with a snapshot of a url",
+                    "ImagePath": "Assets/DarkGray.png",
+                    "Description": "Create a page with a snapshot of the OneNote.com homepage on it.",
+                    "RequiresInputComboBox1": "false",
+                    "RequiresInputComboBox2": "false",
+                    "RequiresInputTextBox": "false"
+                },
+                {
+                    "UniqueId": "Group-0-Item-4",
+                    "Title": "Page with a PDF attachment rendered",
+                    "ImagePath": "Assets/MediumGray.png",
+                    "Description": "Create a page with a PDF file attachment rendered",
+                    "RequiresInputComboBox1": "false",
+                    "RequiresInputComboBox2": "false",
+                    "RequiresInputTextBox": "false"
+                },
+                {
+                    "UniqueId": "Group-0-Item-5",
+                    "Title": "Page with note tags",
+                    "ImagePath": "Assets/LightGray.png",
+                    "Description": "Create a page with examples of note tags. For example build a to do list",
+                    "RequiresInputComboBox1": "false",
+                    "RequiresInputComboBox2": "false",
+                    "RequiresInputTextBox": "false"
+                },
+                {
+                    "UniqueId": "Group-0-Item-6",
+                    "Title": "Page with a business card",
+                    "ImagePath": "Assets/MediumGray.png",
+                    "Description": "Create a page with a business card info automatically extracted from an image",
+                    "RequiresInputComboBox1": "false",
+                    "RequiresInputComboBox2": "false",
+                    "RequiresInputTextBox": "false"
+                },
+                {
+                    "UniqueId": "Group-0-Item-7",
+                    "Title": "Page with a recipe",
+                    "ImagePath": "Assets/DarkGray.png",
+                    "Description": "Create a page with a cooking recipe automatically extracted from an example webpage",
+                    "RequiresInputComboBox1": "false",
+                    "RequiresInputComboBox2": "false",
+                    "RequiresInputTextBox": "false"
+                },
+                {
+                    "UniqueId": "Group-0-Item-8",
+                    "Title": "Page with product info",
+                    "ImagePath": "Assets/LightGray.png",
+                    "Description": "Create a page with a product info automatically extracted from an example amazon.com webpage",
+                    "RequiresInputComboBox1": "false",
+                    "RequiresInputComboBox2": "false",
+                    "RequiresInputTextBox": "false"
+                },
+                {
+                    "UniqueId": "Group-0-Item-9",
+                    "Title": "Page under a named section",
+                    "ImagePath": "Assets/MediumGray.png",
+                    "Description": "Create a page under a given section name using the 'sectionName' query parameter. Please enter a section name in the TextBox below. If the named section does not exist, it will be auto-created",
+                    "RequiresInputComboBox1": "false",
+                    "RequiresInputComboBox2": "false",
+                    "RequiresInputTextBox": "true"
+                },
+                {
+                    "UniqueId": "Group-0-Item-10",
+                    "Title": "Page under a specific notebook and section",
+                    "ImagePath": "Assets/DarkGray.png",
+                    "Description": "Create a page under a specific notebook and section. First we will make a call to fetch all the user's notebooks and sections and then create a page under one of the selected notebook and section. Please select a specific notebook and section in the drop-down below.",
+                    "RequiresInputComboBox1": "true",
+                    "RequiresInputComboBox2": "true",
+                    "RequiresInputTextBox": "false"
+                }
+            ]
+        },
+        {
+            "UniqueId": "Group-1",
+            "Title": "Query and Search Pages",
+            "ImagePath": "Assets/LightGray.png",
+            "Description": "Examples of how to use the HTTP GET verb to query and search for pages and their contents using the OneNote API",
+            "Items": [
+                {
+                    "UniqueId": "Group-1-Item-0",
+                    "Title": "List of all pages",
+                    "ImagePath": "Assets/DarkGray.png",
+                    "Description": "Queries for all pages in OneNote and returns a paginated list. By default, paging returns the first 20 pages ordered by created time descending (default sort order). The @odata.nextLink in the Response or $skip and $top query parameters can be used to retrieve the next set of pages",
+                    "RequiresInputComboBox1": "false",
+                    "RequiresInputComboBox2": "false",
+                    "RequiresInputTextBox": "false"
+                },
+                {
+                    "UniqueId": "Group-1-Item-1",
+                    "Title": "Metadata of a specific page",
+                    "ImagePath": "Assets/MediumGray.png",
+                    "Description": "Following the previous example, first we get a paginated list of all pages and then query the metadata for one of the selected pages. Please select a specific page from the drop-down below",
+                    "RequiresInputComboBox1": "true",
+                    "RequiresInputComboBox2": "false",
+                    "RequiresInputTextBox": "false"
+                },
+                {
+                    "UniqueId": "Group-1-Item-2",
+                    "Title": "Pages with a specific title",
+                    "ImagePath": "Assets/LightGray.png",
+                    "Description": "Query for a paginated list of pages that contain a given title substring. This example shows how to use the $filter=contains(title, '<term>') query parameter. Please enter a case-sensitive title substring in the TextBox below.",
+                    "RequiresInputComboBox1": "false",
+                    "RequiresInputComboBox2": "false",
+                    "RequiresInputTextBox": "true"
+                },
+                {
+                    "UniqueId": "Group-1-Item-3",
+                    "Title": "Pages query with $skip and $top params",
+                    "ImagePath": "Assets/MediumGray.png",
+                    "Description": "Since the list of pages returned is paginated, this example shows how to use the $skip=20&$top=3 query parameters to get up to 3 additional pages after the first 20 pages",
+                    "RequiresInputComboBox1": "false",
+                    "RequiresInputComboBox2": "false",
+                    "RequiresInputTextBox": "false"
+                },
+                {
+                    "UniqueId": "Group-1-Item-4",
+                    "Title": "Sorted list of pages with selected metadata",
+                    "ImagePath": "Assets/LightGray.png",
+                    "Description": "Get a sorted list of pages using the $orderBy=title asc query parameter and only specific metadata in the response using the $select=id,title query parameter. $orderBy can be used to specify your custom sort order",
+                    "RequiresInputComboBox1": "false",
+                    "RequiresInputComboBox2": "false",
+                    "RequiresInputTextBox": "false"
+                },
+                {
+                    "UniqueId": "Group-1-Item-5",
+                    "Title": "Search all pages",
+                    "ImagePath": "Assets/DarkGray.png",
+                    "Description": "Search all pages and return the paginated list of matching pages that contain the given search term (case-insensitive search)",
+                    "RequiresInputComboBox1": "false",
+                    "RequiresInputComboBox2": "false",
+                    "RequiresInputTextBox": "true"
+                },
+                {
+                    "UniqueId": "Group-1-Item-6",
+                    "Title": "Recall a page's content as HTML",
+                    "ImagePath": "Assets/LightGray.png",
+                    "Description": "First we get a paginated list of all pages and then return back the content of one of the selected pages as HTML",
+                    "RequiresInputComboBox1": "true",
+                    "RequiresInputComboBox2": "false",
+                    "RequiresInputTextBox": "false"
+                }
+            ]
+        },
+        {
+            "UniqueId": "Group-2",
+            "Title": "Manage Notebooks and Sections",
+            "ImagePath": "Assets/MediumGray.png",
+            "Description": "Examples of how to use the HTTP GET and POST verbs to manage notebooks and sections using the OneNote API",
+            "Items": [
+                {
+                    "UniqueId": "Group-2-Item-0",
+                    "Title": "Get Notebooks and Sections using $expand",
+                    "ImagePath": "Assets/MediumGray.png",
+                    "Description": "This is one example to demonstrate how the $expand query parameter can be used to return all notebooks and their descendant sections, sectionGroups in one roundtrip. In this case we are going to make a GET request on ~/notebooks?$expand=sections,sectionGroups($expand=sections)",
+                    "RequiresInputComboBox1": "false",
+                    "RequiresInputComboBox2": "false",
+                    "RequiresInputTextBox": "false"
+                },
+                {
+                    "UniqueId": "Group-2-Item-1",
+                    "Title": "List of all Notebooks",
+                    "ImagePath": "Assets/DarkGray.png",
+                    "Description": "Queries for all notebooks in OneNote and returns a list",
+                    "RequiresInputComboBox1": "false",
+                    "RequiresInputComboBox2": "false",
+                    "RequiresInputTextBox": "false"
+                },
+                {
+                    "UniqueId": "Group-2-Item-2",
+                    "Title": "Metadata of a specific notebook",
+                    "ImagePath": "Assets/LightGray.png",
+                    "Description": "Following the previous example, first we get a list of all notebooks and then query the metadata for one of the selected notebooks. Please select a specific notebook from the drop-down below",
+                    "RequiresInputComboBox1": "true",
+                    "RequiresInputComboBox2": "false",
+                    "RequiresInputTextBox": "false"
+                },
+                {
+                    "UniqueId": "Group-2-Item-3",
+                    "Title": "List of all Sections",
+                    "ImagePath": "Assets/DarkGray.png",
+                    "Description": "Queries for all sections under all notebooks in OneNote and returns a list",
+                    "RequiresInputComboBox1": "false",
+                    "RequiresInputComboBox2": "false",
+                    "RequiresInputTextBox": "false"
+                },
+                {
+                    "UniqueId": "Group-2-Item-4",
+                    "Title": "Metadata of a specific section",
+                    "ImagePath": "Assets/LightGray.png",
+                    "Description": "Following the previous example, first we get a list of all sections and then query the metadata for one of the selected sections. Please select a specific section from the drop-down below",
+                    "RequiresInputComboBox1": "true",
+                    "RequiresInputComboBox2": "false",
+                    "RequiresInputTextBox": "false"
+                },
+                {
+                    "UniqueId": "Group-2-Item-5",
+                    "Title": "List of all SectionGroups",
+                    "ImagePath": "Assets/MediumGray.png",
+                    "Description": "Queries for all sectionGroups under all notebooks in OneNote and returns a list. SectionGroups are not very common, so you may see 0 results",
+                    "RequiresInputComboBox1": "false",
+                    "RequiresInputComboBox2": "false",
+                    "RequiresInputTextBox": "false"
+                },
+                {
+                    "UniqueId": "Group-2-Item-6",
+                    "Title": "Notebooks with a specific name",
+                    "ImagePath": "Assets/LightGray.png",
+                    "Description": "Query for a list of all notebooks with a given name. This example shows how to use the '$filter=name eq '<term>' query parameter. Please enter the case-sensitive full notebook name to look for in the TextBox below",
+                    "RequiresInputComboBox1": "false",
+                    "RequiresInputComboBox2": "false",
+                    "RequiresInputTextBox": "true"
+                },
+                {
+                    "UniqueId": "Group-2-Item-7",
+                    "Title": "Notebooks shared by others",
+                    "ImagePath": "Assets/MediumGray.png",
+                    "Description": "Query for a list of all notebooks where the current user is not an Owner (i.e. the notebooks are owned by someone else and were shared with the current user with either a Reader or Contributor access level). This example shows how to use the '$filter=userRole ne Microsoft.OneNote.Api.UserRole'Owner'' query parameter and will return non-zero results only if the current user has access to shared notebooks",
+                    "RequiresInputComboBox1": "false",
+                    "RequiresInputComboBox2": "false",
+                    "RequiresInputTextBox": "false"
+                },
+                {
+                    "UniqueId": "Group-2-Item-8",
+                    "Title": "Sorted list of notebooks with selected metadata",
+                    "ImagePath": "Assets/DarkGray.png",
+                    "Description": "Get a sorted list of notebooks using the $orderBy=name asc query parameter and only specific metadata in the response using the $select=id,name query parameter. $orderBy can be used to specify your custom sort order",
+                    "RequiresInputComboBox1": "false",
+                    "RequiresInputComboBox2": "false",
+                    "RequiresInputTextBox": "false"
+                },
+                {
+                    "UniqueId": "Group-2-Item-9",
+                    "Title": "List of all Sections under a specific notebook",
+                    "ImagePath": "Assets/MediumGray.png",
+                    "Description": "First we get a list of all notebooks and then query for a list of all sections under one of the selected notebooks. Please select a specific notebook from the drop-down below",
+                    "RequiresInputComboBox1": "true",
+                    "RequiresInputComboBox2": "false",
+                    "RequiresInputTextBox": "false"
+                },
+                {
+                    "UniqueId": "Group-2-Item-10",
+                    "Title": "Sections with a specific name",
+                    "ImagePath": "Assets/DarkGray.png",
+                    "Description": "Query for a list of all sections with a given name. This example shows how to use the '$filter=name eq '<term>' query parameter. Please enter the case-sensitive full section name to look for in the TextBox below",
+                    "RequiresInputComboBox1": "false",
+                    "RequiresInputComboBox2": "false",
+                    "RequiresInputTextBox": "true"
+                },
+                {
+                    "UniqueId": "Group-2-Item-11",
+                    "Title": "Create a new notebook",
+                    "ImagePath": "Assets/LightGray.png",
+                    "Description": "Create a new blank notebook. Please enter the new notebook's name in the TextBox below",
+                    "RequiresInputComboBox1": "false",
+                    "RequiresInputComboBox2": "false",
+                    "RequiresInputTextBox": "true"
+                },
+                {
+                    "UniqueId": "Group-2-Item-12",
+                    "Title": "Create a new section",
+                    "ImagePath": "Assets/MediumGray.png",
+                    "Description": "First we get a list of all notebooks and then create a new blank section under one of the selected notebooks. Please select a specific notebook from the drop-down below and also enter the new section's name in the TextBox below",
+                    "RequiresInputComboBox1": "true",
+                    "RequiresInputComboBox2": "false",
+                    "RequiresInputTextBox": "true"
+                }
+            ]
+        },
+        {
+            "UniqueId": "Group-3",
+            "Title": "Update Pages",
+            "ImagePath": "Assets/LightGray.png",
+            "Description": "Examples of how to use the HTTP PATCH verb to update the contents of a specific page",
+            "Items": [
+                {
+                    "UniqueId": "Group-3-Item-1",
+                    "Title": "Item Title: 1",
+                    "ImagePath": "Assets/MediumGray.png",
+                    "Description": "Item Description: Pellentesque porta, mauris quis interdum vehicula, urna sapien ultrices velit, nec venenatis dui odio in augue. Cras posuere, enim a cursus convallis, neque turpis malesuada erat, ut adipiscing neque tortor ac erat.",
+                    "RequiresInputComboBox1": "false",
+                    "RequiresInputComboBox2": "false",
+                    "RequiresInputTextBox": "false"
+                },
+                {
+                    "UniqueId": "Group-3-Item-2",
+                    "Title": "Item Title: 2",
+                    "ImagePath": "Assets/DarkGray.png",
+                    "Description": "Item Description: Pellentesque porta, mauris quis interdum vehicula, urna sapien ultrices velit, nec venenatis dui odio in augue. Cras posuere, enim a cursus convallis, neque turpis malesuada erat, ut adipiscing neque tortor ac erat.",
+                    "RequiresInputComboBox1": "false",
+                    "RequiresInputComboBox2": "false",
+                    "RequiresInputTextBox": "false"
+                },
+                {
+                    "UniqueId": "Group-3-Item-3",
+                    "Title": "Item Title: 3",
+                    "ImagePath": "Assets/LightGray.png",
+                    "Description": "Item Description: Pellentesque porta, mauris quis interdum vehicula, urna sapien ultrices velit, nec venenatis dui odio in augue. Cras posuere, enim a cursus convallis, neque turpis malesuada erat, ut adipiscing neque tortor ac erat.",
+                    "RequiresInputComboBox1": "false",
+                    "RequiresInputComboBox2": "false",
+                    "RequiresInputTextBox": "false"
+                },
+                {
+                    "UniqueId": "Group-3-Item-4",
+                    "Title": "Item Title: 4",
+                    "ImagePath": "Assets/DarkGray.png",
+                    "Description": "Item Description: Pellentesque porta, mauris quis interdum vehicula, urna sapien ultrices velit, nec venenatis dui odio in augue. Cras posuere, enim a cursus convallis, neque turpis malesuada erat, ut adipiscing neque tortor ac erat.",
+                    "RequiresInputComboBox1": "false",
+                    "RequiresInputComboBox2": "false",
+                    "RequiresInputTextBox": "false"
+                },
+                {
+                    "UniqueId": "Group-3-Item-5",
+                    "Title": "Item Title: 5",
+                    "ImagePath": "Assets/MediumGray.png",
+                    "Description": "Item Description: Pellentesque porta, mauris quis interdum vehicula, urna sapien ultrices velit, nec venenatis dui odio in augue. Cras posuere, enim a cursus convallis, neque turpis malesuada erat, ut adipiscing neque tortor ac erat.",
+                    "RequiresInputComboBox1": "false",
+                    "RequiresInputComboBox2": "false",
+                    "RequiresInputTextBox": "false"
+                }
+            ]
+        }
+    ]
+}
