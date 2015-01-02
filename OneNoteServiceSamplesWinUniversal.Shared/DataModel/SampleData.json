@@ -309,51 +309,6 @@
             "ImagePath": "Assets/LightGray.png",
             "Description": "Examples of how to use the HTTP PATCH verb to update the contents of a specific page",
             "Items": [
-                {
-                    "UniqueId": "Group-3-Item-1",
-                    "Title": "Item Title: 1",
-                    "ImagePath": "Assets/MediumGray.png",
-                    "Description": "Item Description: Pellentesque porta, mauris quis interdum vehicula, urna sapien ultrices velit, nec venenatis dui odio in augue. Cras posuere, enim a cursus convallis, neque turpis malesuada erat, ut adipiscing neque tortor ac erat.",
-                    "RequiresInputComboBox1": "false",
-                    "RequiresInputComboBox2": "false",
-                    "RequiresInputTextBox": "false"
-                },
-                {
-                    "UniqueId": "Group-3-Item-2",
-                    "Title": "Item Title: 2",
-                    "ImagePath": "Assets/DarkGray.png",
-                    "Description": "Item Description: Pellentesque porta, mauris quis interdum vehicula, urna sapien ultrices velit, nec venenatis dui odio in augue. Cras posuere, enim a cursus convallis, neque turpis malesuada erat, ut adipiscing neque tortor ac erat.",
-                    "RequiresInputComboBox1": "false",
-                    "RequiresInputComboBox2": "false",
-                    "RequiresInputTextBox": "false"
-                },
-                {
-                    "UniqueId": "Group-3-Item-3",
-                    "Title": "Item Title: 3",
-                    "ImagePath": "Assets/LightGray.png",
-                    "Description": "Item Description: Pellentesque porta, mauris quis interdum vehicula, urna sapien ultrices velit, nec venenatis dui odio in augue. Cras posuere, enim a cursus convallis, neque turpis malesuada erat, ut adipiscing neque tortor ac erat.",
-                    "RequiresInputComboBox1": "false",
-                    "RequiresInputComboBox2": "false",
-                    "RequiresInputTextBox": "false"
-                },
-                {
-                    "UniqueId": "Group-3-Item-4",
-                    "Title": "Item Title: 4",
-                    "ImagePath": "Assets/DarkGray.png",
-                    "Description": "Item Description: Pellentesque porta, mauris quis interdum vehicula, urna sapien ultrices velit, nec venenatis dui odio in augue. Cras posuere, enim a cursus convallis, neque turpis malesuada erat, ut adipiscing neque tortor ac erat.",
-                    "RequiresInputComboBox1": "false",
-                    "RequiresInputComboBox2": "false",
-                    "RequiresInputTextBox": "false"
-                },
-                {
-                    "UniqueId": "Group-3-Item-5",
-                    "Title": "Item Title: 5",
-                    "ImagePath": "Assets/MediumGray.png",
-                    "Description": "Item Description: Pellentesque porta, mauris quis interdum vehicula, urna sapien ultrices velit, nec venenatis dui odio in augue. Cras posuere, enim a cursus convallis, neque turpis malesuada erat, ut adipiscing neque tortor ac erat.",
-                    "RequiresInputComboBox1": "false",
-                    "RequiresInputComboBox2": "false",
-                    "RequiresInputTextBox": "false"
-                }
             ]
         }
     ]
