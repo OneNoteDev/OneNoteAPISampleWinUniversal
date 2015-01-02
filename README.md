@@ -90,7 +90,7 @@ After you've setup your development tools, and installed the prerequisites liste
 
 1. Download the repo as a ZIP file to your local computer, and extract the files. Or, clone the repository into a local copy of Git.
 2. Open the project (.sln file) in Visual Studio.
-3. It is highly recommended that you get your own client ID string and copy it into the file under [.../OneNoteServiceSamplesWinUniversal.Shared/OneNoteApi/Auth.cs](https://github.com/OneNoteDev/OneNoteAPISampleWinUniversal/blob/master/OneNoteServiceSamplesWinUniversal.Shared/OneNoteApi/Auth.cs) (~line 54).
+3. It is highly recommended that you get your own client ID string and copy it into the file under [.../OneNoteServiceSamplesWinUniversal.Shared/OneNoteApi/Auth.cs](https://github.com/OneNoteDev/OneNoteAPISampleWinUniversal/blob/master/OneNoteServiceSamplesWinUniversal.Shared/OneNoteApi/Auth.cs#L54) (~line 54).
 4. Build and run the app (F5). 
 
    (If your copy of NuGet is up-to-date, it should automatically 
@@ -98,8 +98,8 @@ update the packages. If you get package-not-found errors, update NuGet and rebui
 should fix it.)
 
 5. To use this Code Sample in your own app, be sure to:
-    * As the developer, you'll need to [have a Microsoft account and get a client ID string](http://msdn.microsoft.com/EN-US/library/office/dn575426.aspx) so your app can authenticate. Get a client ID string and copy it into the file under [.../OneNoteServiceSamplesWinUniversal.Shared/OneNoteApi/Auth.cs](https://github.com/OneNoteDev/OneNoteAPISampleWinUniversal/blob/master/OneNoteServiceSamplesWinUniversal.Shared/OneNoteApi/Auth.cs) (~line 54).
-    * Use the least permissable scopes by editing [.../OneNoteServiceSamplesWinUniversal.Shared/OneNoteApi/Auth.cs](https://github.com/OneNoteDev/OneNoteAPISampleWinUniversal/blob/master/OneNoteServiceSamplesWinUniversal.Shared/OneNoteApi/Auth.cs) (~line 61).
+    * As the developer, you'll need to [have a Microsoft account and get a client ID string](http://msdn.microsoft.com/EN-US/library/office/dn575426.aspx) so your app can authenticate. Get a client ID string and copy it into the file under [.../OneNoteServiceSamplesWinUniversal.Shared/OneNoteApi/Auth.cs](https://github.com/OneNoteDev/OneNoteAPISampleWinUniversal/blob/master/OneNoteServiceSamplesWinUniversal.Shared/OneNoteApi/Auth.cs#L54) (~line 54).
+    * Use the least permissable scopes by editing [.../OneNoteServiceSamplesWinUniversal.Shared/OneNoteApi/Auth.cs](https://github.com/OneNoteDev/OneNoteAPISampleWinUniversal/blob/master/OneNoteServiceSamplesWinUniversal.Shared/OneNoteApi/Auth.cs#L61) (~line 61).
     * [Create an app package and use appropriate certificates](http://docs.oasis-open.org/odata/odata/v4.0/os/part1-protocol/odata-v4.0-os-part1-protocol.html)
 
 ### Version Info
