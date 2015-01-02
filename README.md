@@ -58,7 +58,7 @@ The following aspects of the API are covered in this sample. You can find additi
     * PATCH an existing page and prepend new content to it
     * PATCH an existing page and replace an existing image/attachment with a new one
 
-If you wish to ignore the app UI/design and directly get to the code that interacts with the OneNote API, you can find them  under the .../OneNoteServiceSamplesWinUniversal.Shared/OneNoteApi folder. 
+**If you wish to ignore the app UI/design and directly get to the part that interacts with the OneNote API, you can find the code under the [OneNoteServiceSamplesWinUniversal.Shared/OneNoteApi](https://github.com/OneNoteDev/OneNoteAPISampleWinUniversal/tree/master/OneNoteServiceSamplesWinUniversal.Shared/OneNoteApi) folder**. 
 
 ### Prerequisites
 
@@ -90,7 +90,7 @@ After you've setup your development tools, and installed the prerequisites liste
 
 1. Download the repo as a ZIP file to your local computer, and extract the files. Or, clone the repository into a local copy of Git.
 2. Open the project in Visual Studio.
-3. Get a client ID string and copy it into the file .../OneNoteServiceSamplesWinUniversal.Shared/OneNoteApi/Auth.cs (~line 54).
+3. Get a client ID string and copy it into the file under [.../OneNoteServiceSamplesWinUniversal.Shared/OneNoteApi/Auth.cs](https://github.com/OneNoteDev/OneNoteAPISampleWinUniversal/blob/master/OneNoteServiceSamplesWinUniversal.Shared/OneNoteApi/Auth.cs) (~line 54).
 4. Build and run the app (F5). 
 
    (If your copy of NuGet is up-to-date, it should automatically 
@@ -99,8 +99,10 @@ should fix it.)
 
 5. Sign in to your Microsoft account in the running app.
 6. Allow the app to exercise the desired OneNote API call.
-7. If you wish to use the code sample in your own app, be sure to [Create an app package and use appropriate certificates](http://docs.oasis-open.org/odata/odata/v4.0/os/part1-protocol/odata-v4.0-os-part1-protocol.html)
- 
+7. If you wish to use the code sample in your own app, be sure to:
+    * [Create an app package and use appropriate certificates](http://docs.oasis-open.org/odata/odata/v4.0/os/part1-protocol/odata-v4.0-os-part1-protocol.html)
+     * Use the least permissable scopes by editing [.../OneNoteServiceSamplesWinUniversal.Shared/OneNoteApi/Auth.cs](https://github.com/OneNoteDev/OneNoteAPISampleWinUniversal/blob/master/OneNoteServiceSamplesWinUniversal.Shared/OneNoteApi/Auth.cs) (~line 61).
+
 ### Version Info
 
 This is the initial public release for this code sample.
