@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <StoreAssociation xmlns="http://schemas.microsoft.com/appx/2010/storeassociation">
-  <Publisher>CN=94FE62AB-AC59-4B0D-9301-442909611863</Publisher>
-  <PublisherDisplayName>Dipak Boyed</PublisherDisplayName>
+  <Publisher>CN=CF305860-B4CC-424F-BA5E-D9E5B721F831</Publisher>
+  <PublisherDisplayName>OneNoteSamples_MSFT</PublisherDisplayName>
   <GeneratePackageHash>http://www.w3.org/2001/04/xmlenc#sha256</GeneratePackageHash>
   <SupportedLocales>
     <Language Code="af" InMinimumRequirementSet="true" />
@@ -184,13 +184,15 @@
     <Language Code="vi-vn" InMinimumRequirementSet="true" />
   </SupportedLocales>
   <ProductReservedInfo>
-    <MainPackageIdentityName>58611DipakBoyed.OneNoteAPIWindowsUniversalSample</MainPackageIdentityName>
+    <MainPackageIdentityName>4553OneNoteSamplesMSFT.OneNoteAPISamplesUniversal</MainPackageIdentityName>
     <ReservedNames>
-      <ReservedName>OneNoteAPI Windows Universal Sample</ReservedName>
+      <ReservedName>OneNoteAPISamplesUniversal</ReservedName>
     </ReservedNames>
   </ProductReservedInfo>
   <AccountPackageIdentityNames>
-    <MainPackageIdentityName>58611DipakBoyed.OneNoteOrganizer</MainPackageIdentityName>
+    <MainPackageIdentityName>4553OneNoteSamplesMSFT.gigNotes</MainPackageIdentityName>
+    <MainPackageIdentityName>4553OneNoteSamplesMSFT.OneNoteServiceSamples</MainPackageIdentityName>
+    <MainPackageIdentityName>4553OneNoteSamplesMSFT.TestHtml</MainPackageIdentityName>
   </AccountPackageIdentityNames>
-  <PackageInfoList LandingUrl="https://dev.windowsphone.com/AppSubmission/AssociationLanding?windowsProductId=dd3cb817-2cc4-4356-ab7e-7f497d2daeda" />
+  <PackageInfoList LandingUrl="https://dev.windowsphone.com/AppSubmission/AssociationLanding?windowsProductId=e7815148-a1bf-462d-b1e7-db8cc0438b71" />
 </StoreAssociation>

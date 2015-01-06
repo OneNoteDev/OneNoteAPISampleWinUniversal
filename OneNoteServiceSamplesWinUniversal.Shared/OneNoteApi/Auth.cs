@@ -51,7 +51,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi
 
 		// TODO: Replace the below ClientId with your app's ClientId.
 		// For more info, see: http://msdn.microsoft.com/en-us/library/office/dn575426(v=office.15).aspx
-		private const string ClientId = "000000004C1239E4";
+		private const string ClientId = "000000004011CF40";
 
 		// OneNote APIs support multiple OAuth scopes.
 		// As a guideline, always choose the least permissible 'office.onenote*' scope that your app needs.

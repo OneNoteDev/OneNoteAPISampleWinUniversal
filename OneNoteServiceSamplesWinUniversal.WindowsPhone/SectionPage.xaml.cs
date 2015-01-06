@@ -96,11 +96,7 @@ namespace OneNoteServiceSamplesWinUniversal
         private void ItemView_ItemClick(object sender, ItemClickEventArgs e)
         {
             var itemId = ((SampleDataItem)e.ClickedItem).UniqueId;
-            if (!Frame.Navigate(typeof(ItemPage), itemId))
-            {
-                var resourceLoader = ResourceLoader.GetForCurrentView("Resources");
-                throw new Exception(resourceLoader.GetString("NavigationFailedExceptionMessage"));
-            }
+	        Frame.Navigate(typeof (ItemPage), itemId);
         }
 
         #region NavigationHelper registration
