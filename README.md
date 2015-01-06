@@ -37,7 +37,7 @@ The following aspects of the API are covered in this sample. You can find additi
     *  [GET metadata for a specific page](http://dev.onenote.com/docs#/reference/get-pages/betapagesid/get)
     *  [GET pages with title containing a specifc substring using the $filter query parameter and contains method](http://dev.onenote.com/docs#/reference/get-pages/betapagesfilterorderbyselecttopskipsearch/get)
     *  [GET pages using OData v4 query parameters like $skip and $top](http://dev.onenote.com/docs#/reference/get-pages/betapagesfilterorderbyselecttopskipsearch/get)
-        * [OData v4]((http://docs.oasis-open.org/odata/odata/v4.0/os/part1-protocol/odata-v4.0-os-part1-protocol.html)
+        * [OData v4](http://docs.oasis-open.org/odata/odata/v4.0/os/part1-protocol/odata-v4.0-os-part1-protocol.html)
     *  [GET a sorted list of pages using the $orderBy query parameter](http://dev.onenote.com/docs#/reference/get-pages/betapagesfilterorderbyselecttopskipsearch/get)
     *  [GET selected metadata for pages using the $select query parameter](http://dev.onenote.com/docs#/reference/get-pages/betapagesfilterorderbyselecttopskipsearch/get)
     *  [GET pages containing the matching search term using the search query parameter](http://dev.onenote.com/docs#/reference/get-pages/betapagesfilterorderbyselecttopskipsearch/get)
@@ -79,7 +79,7 @@ automatically at build time; if not, make sure your NuGet package manager
 is up-to-date. You can learn more about the packages we used at the links below.
     * [Newtonsoft Json.NET package](http://newtonsoft.com/) provides Json parsing utilities.
 
-**Accounts**
+### Accounts
 
 * As the developer, you'll need to [have a Microsoft account and get a client ID string](http://msdn.microsoft.com/EN-US/library/office/dn575426.aspx) so your app can authenticate.
 
@@ -96,10 +96,10 @@ After you've setup your development tools, and installed the prerequisites liste
 
 If you get any build or deployment errors related to the Publisher of the app, be sure to [Create an app package and use appropriate certificates](http://msdn.microsoft.com/en-us/library/windows/apps/xaml/hh975357.aspx)
 
-To use this Code Sample in your own app, be sure to:
-    * As the developer, you'll need to [have a Microsoft account and get a client ID string](http://msdn.microsoft.com/EN-US/library/office/dn575426.aspx) so your app can authenticate. Get a client ID string and copy it into the file under [.../OneNoteServiceSamplesWinUniversal.Shared/OneNoteApi/Auth.cs](https://github.com/OneNoteDev/OneNoteAPISampleWinUniversal/blob/master/OneNoteServiceSamplesWinUniversal.Shared/OneNoteApi/Auth.cs#L54) (~line 54).
-    * Use the least permissable scopes by editing [.../OneNoteServiceSamplesWinUniversal.Shared/OneNoteApi/Auth.cs](https://github.com/OneNoteDev/OneNoteAPISampleWinUniversal/blob/master/OneNoteServiceSamplesWinUniversal.Shared/OneNoteApi/Auth.cs#L61) (~line 61).
-    * [Create an app package and use appropriate certificates](http://msdn.microsoft.com/en-us/library/windows/apps/xaml/hh975357.aspx)
+**To use this Code Sample in your own app, be sure to do the following:**
+* As the developer, you'll need to [have a Microsoft account and get a client ID string](http://msdn.microsoft.com/EN-US/library/office/dn575426.aspx) so your app can authenticate. Get a client ID string and copy it into the file under [.../OneNoteServiceSamplesWinUniversal.Shared/OneNoteApi/Auth.cs](https://github.com/OneNoteDev/OneNoteAPISampleWinUniversal/blob/master/OneNoteServiceSamplesWinUniversal.Shared/OneNoteApi/Auth.cs#L54) (~line 54).
+* Use the least permissable scopes by editing [.../OneNoteServiceSamplesWinUniversal.Shared/OneNoteApi/Auth.cs](https://github.com/OneNoteDev/OneNoteAPISampleWinUniversal/blob/master/OneNoteServiceSamplesWinUniversal.Shared/OneNoteApi/Auth.cs#L61) (~line 61).
+* [Create an app package and use appropriate certificates](http://msdn.microsoft.com/en-us/library/windows/apps/xaml/hh975357.aspx)
 
 ### Version Info
 
