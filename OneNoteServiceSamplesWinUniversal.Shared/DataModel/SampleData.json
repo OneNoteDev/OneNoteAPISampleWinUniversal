@@ -307,8 +307,17 @@
             "UniqueId": "Group-3",
             "Title": "Update Pages",
             "ImagePath": "Assets/LightGray.png",
-            "Description": "Examples of how to use the HTTP PATCH verb to update the contents of a specific page",
+            "Description": "Coming soon: Examples of how to use the HTTP PATCH verb to update the contents of a specific page",
             "Items": [
+                {
+                    "UniqueId": "Group-3-Item-0",
+                    "Title": "Coming soon",
+                    "ImagePath": "Assets/MediumGray.png",
+                    "Description": "",
+                    "RequiresInputComboBox1": "false",
+                    "RequiresInputComboBox2": "false",
+                    "RequiresInputTextBox": "false"
+                }
             ]
         }
     ]
