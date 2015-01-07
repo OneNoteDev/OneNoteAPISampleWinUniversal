@@ -1,6 +1,6 @@
 ﻿<local:SharedBasePage
+	x:Name="pageRoot"
     x:Class="OneNoteServiceSamplesWinUniversal.ItemPage"
-    DataContext="{Binding DefaultViewModel.Item, RelativeSource={RelativeSource Self}}"
     d:DataContext="{Binding Groups[0].Items[0], Source={d:DesignData Source=../OneNoteServiceSamplesWinUniversal.Shared/DataModel/SampleData.json, Type=data:SampleDataSource}}"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -32,7 +32,7 @@
         </ResourceDictionary>
     </Page.Resources>
     
-    <Grid x:Name="LayoutRoot" Background="{ThemeResource BackgroundImageBrush}">
+    <Grid x:Name="LayoutRoot" Background="{ThemeResource BackgroundImageBrush}" DataContext="{Binding Item}">
         <Grid.ChildrenTransitions>
             <TransitionCollection>
                 <EntranceThemeTransition/>
@@ -72,7 +72,7 @@
             <StackPanel Orientation="Horizontal" Grid.Row="2">
                 <Button x:Name="RunButton" Margin="0,0,0,0" Click="Button_Click">Run</Button>
             </StackPanel>
-            <Grid Grid.Row="3" x:Name="OutputRegionGrid">
+            <Grid Grid.Row="3" x:Name="OutputRegionGrid" DataContext="{Binding ElementName=pageRoot, Path=Model}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
@@ -85,15 +85,15 @@
                     <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0" Grid.Row="0" TextAlignment="Left" VerticalAlignment="Center">User:</TextBlock>
-                <TextBlock Grid.Column="1" Grid.Row="0" x:Name="AuthUserName" Margin="10,0,0,0" HorizontalAlignment="Left" TextAlignment="Left" VerticalAlignment="Center"/>
+                <TextBlock Grid.Column="1" Grid.Row="0" x:Name="AuthUserName"  Text="{Binding AuthUserName}" Margin="10,0,0,0" HorizontalAlignment="Left" TextAlignment="Left" VerticalAlignment="Center"/>
                 <TextBlock Grid.Column="0" Grid.Row="1"  TextAlignment="Left" VerticalAlignment="Center">Response:</TextBlock>
                 <TextBlock Grid.Column="1" Grid.Row="1" x:Name="ResponseTextBox" Margin="10,0,0,0" HorizontalAlignment="Left" TextAlignment="Left" VerticalAlignment="Center"/>
                 <TextBlock Grid.Column="0" Grid.Row="2" x:Name="ResponseListTextBlock" Visibility="Collapsed">List of items in response:</TextBlock>
-                <ComboBox Grid.Column="1" Grid.Row="2" x:Name="ResponseListBox" SelectionChanged="ResponseListBox_OnSelectionChanged" ItemsSource="{Binding}" Visibility="Collapsed" Margin="10,0,0,0">
+                <ComboBox Grid.Column="1"  SelectedItem="{Binding SelectedResponse, Mode=TwoWay}" ItemsSource="{Binding ResponseList}" Grid.Row="2" x:Name="ResponseListBox" Visibility="{Binding IsResponseListAvailable}" Margin="10,0,0,0">
                 </ComboBox>
-                <HyperlinkButton Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" x:Name="ClientLinkLaunchButton" Content="OneNote client link" HorizontalAlignment="Left" VerticalAlignment="Center" Click="ClientLinkLaunchButton_OnClickLinkLaunchButton_Click" DataContext="{Binding}"/>
+                <HyperlinkButton Visibility="{Binding IsResponseListAvailable}" Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" x:Name="ClientLinkLaunchButton" Content="OneNote client link" HorizontalAlignment="Left" VerticalAlignment="Center" Tag="{Binding OneNoteClientUrl}" Click="ClientLinkLaunchButton_OnClickLinkLaunchButton_Click"/>
                 <TextBlock Grid.Column="0" Grid.Row="4" TextAlignment="Left" VerticalAlignment="Center">Body:</TextBlock>
-                <TextBox Grid.Column="1" Grid.Row="4" x:Name="ResponseBodyTextBox" Margin="0,0,10,10" IsReadOnly="True" TextWrapping="Wrap" AcceptsReturn="True"></TextBox>
+                <TextBox Text="{Binding Body}" Grid.Column="1" Grid.Row="4" x:Name="ResponseBodyTextBox" Margin="0,0,10,10" IsReadOnly="True" TextWrapping="Wrap" AcceptsReturn="True"></TextBox>
             </Grid>
         </Grid>
     </Grid>

@@ -13,6 +13,7 @@ using Windows.UI.Xaml.Navigation;
 using OneNoteServiceSamplesWinUniversal.Common;
 using OneNoteServiceSamplesWinUniversal.Data;
 using OneNoteServiceSamplesWinUniversal.OneNoteApi;
+using OneNoteServiceSamplesWinUniversal.DataModel;
 
 // The Universal Hub Application project template is documented at http://go.microsoft.com/fwlink/?LinkID=391955
 
@@ -24,12 +25,12 @@ namespace OneNoteServiceSamplesWinUniversal
 	public sealed partial class ItemPage : SharedBasePage
 	{
 		private readonly NavigationHelper _navigationHelper;
-		private readonly ObservableDictionary _defaultViewModel = new ObservableDictionary();
+        private readonly ItemPageModel _model = new ItemPageModel();
 
 		public ItemPage()
 		{
 			InitializeComponent();
-
+            DataContext = Model;
 			_navigationHelper = new NavigationHelper(this);
 			_navigationHelper.LoadState += NavigationHelper_LoadState;
 			_navigationHelper.SaveState += NavigationHelper_SaveState;
@@ -43,13 +44,10 @@ namespace OneNoteServiceSamplesWinUniversal
 			get { return _navigationHelper; }
 		}
 
-		/// <summary>
-		/// Gets the view model for this <see cref="Page"/>. This can be changed to a strongly typed view model.
-		/// </summary>
-		public ObservableDictionary DefaultViewModel
-		{
-			get { return _defaultViewModel; }
-		}
+        public ItemPageModel Model
+        {
+            get { return _model; }
+        }
 
 		/// <summary>
 		/// Populates the page with content passed during navigation.  Any saved state is also
@@ -65,8 +63,8 @@ namespace OneNoteServiceSamplesWinUniversal
 		private async void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
 		{
 			var item = await SampleDataSource.GetItemAsync((string)e.NavigationParameter);
-			DefaultViewModel["Item"] = item;
-			InputSelectionPanel2.Visibility = (item.RequiresInputComboBox2) ? Visibility.Visible : Visibility.Collapsed;
+            Model.Item = item;
+            InputSelectionPanel2.Visibility = (item.RequiresInputComboBox2) ? Visibility.Visible : Visibility.Collapsed;
 			InputTextBox.Visibility = (item.RequiresInputTextBox) ? Visibility.Visible : Visibility.Collapsed;
 			if (item.RequiresInputComboBox1)
 			{
@@ -110,8 +108,8 @@ namespace OneNoteServiceSamplesWinUniversal
 		protected async override void OnNavigatedTo(NavigationEventArgs e)
 		{
 			_navigationHelper.OnNavigatedTo(e);
-			await SetOutputResponseControlsState(false);
-		}
+            Model.AuthUserName = await Auth.GetUserName();
+        }
 
 		protected override void OnNavigatedFrom(NavigationEventArgs e)
 		{
@@ -121,7 +119,7 @@ namespace OneNoteServiceSamplesWinUniversal
 		private async void Button_Click(object sender, RoutedEventArgs e)
 		{
 			RunButton.IsEnabled = false;
-			var item = (SampleDataItem)DataContext;
+            SampleDataItem item = Model.Item;
 
 			await ExecuteApiAction(false, item);
 			RunButton.IsEnabled = true;
@@ -129,8 +127,7 @@ namespace OneNoteServiceSamplesWinUniversal
 
 		private async Task ExecuteApiAction(bool debug, SampleDataItem item)
 		{
-			await SetOutputResponseControlsState(false);
-			await ClearResponseFields();
+            Model.ApiResponse = null;
 
 			string requiredSelectedId = null;
 			if (item.RequiresInputComboBox1)
@@ -171,32 +168,8 @@ namespace OneNoteServiceSamplesWinUniversal
 				}
 			}
 
-			var response =
-				await SampleDataSource.ExecuteApi(item.UniqueId, debug, requiredSelectedId, requiredInputText);
-			await SetOutputResponseControlsState(true);
-			ApiBaseResponse apiBaseResponse;
-			List<ApiBaseResponse> list = response as List<ApiBaseResponse>;
-			if (list != null)
-			{
-				ResponseListTextBlock.Visibility = Visibility.Visible;
-				ResponseListBox.Visibility = Visibility.Visible;
-				ResponseListBox.ItemsSource = response;
-				ResponseListBox.SelectedIndex = 0;
-				apiBaseResponse = list[0];
-			}
-			else
-			{
-				ResponseListTextBlock.Visibility = Visibility.Collapsed;
-				ResponseListBox.Visibility = Visibility.Collapsed;
-				apiBaseResponse = response as ApiBaseResponse;
-				SetResponseLinks(apiBaseResponse);
-			}
-			if (apiBaseResponse != null)
-			{
-				ResponseTextBox.Text = ((int)apiBaseResponse.StatusCode) + " - " + apiBaseResponse.StatusCode.ToString();
-				ResponseBodyTextBox.Text = apiBaseResponse.Body;
-				AuthUserName.Text = await Auth.GetUserName();
-			}
+            Model.ApiResponse = await SampleDataSource.ExecuteApi(item.UniqueId, debug, requiredSelectedId, requiredInputText);
+            Model.AuthUserName = await Auth.GetUserName();
 		}
 
 		private void SetResponseLinks(ApiBaseResponse apiBaseResponse)
@@ -234,22 +207,6 @@ namespace OneNoteServiceSamplesWinUniversal
 			await Yield();
 		}
 
-		/// <summary>
-		/// Empty the response UI fields and allow the UI to refresh.
-		/// </summary>
-		private async Task ClearResponseFields()
-		{
-			var textBoxesInOutputGrid = OutputRegionGrid.Children.OfType<TextBox>();
-			foreach (var child in textBoxesInOutputGrid)
-			{
-				child.Text = string.Empty;
-			}
-			ResponseListTextBlock.Visibility = Visibility.Collapsed;
-			ResponseListBox.Visibility = Visibility.Collapsed;
-			ResponseListBox.ItemsSource = null;
-			await Yield();
-		}
-
 		private void InputTextBox_OnGotFocus(object sender, RoutedEventArgs e)
 		{
 			//Clear the section hint if that was the existing value
@@ -273,7 +230,7 @@ namespace OneNoteServiceSamplesWinUniversal
 		private async void ClientLinkLaunchButton_OnClickLinkLaunchButton_Click(object sender, RoutedEventArgs e)
 		{
 			Uri uri;
-			string link = ClientLinkLaunchButton.DataContext as string;
+			string link = ClientLinkLaunchButton.Tag as string;
 			if (Uri.TryCreate(link, UriKind.Absolute, out uri))
 			{
 				await Launcher.LaunchUriAsync(uri);
