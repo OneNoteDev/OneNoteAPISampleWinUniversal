@@ -51,7 +51,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Notebooks
 	///  client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 	///  client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await Auth.GetAuthToken());
 	///  var getMessage = new HttpRequestMessage(HttpMethod.Get, "https://www.onenote.com/api/v1.0/notebooks");
-	///  HttpResponseMessage response = await client.SendAsync(createMessage);
+	///  HttpResponseMessage response = await client.SendAsync(getMessage);
 	/// </code>
 	public static class GetNotebooksExample
 	{
@@ -81,9 +81,9 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Notebooks
 				await Auth.GetAuthToken());
 
 			// Prepare an HTTP GET request to the Notebooks endpoint
-			var createMessage = new HttpRequestMessage(HttpMethod.Get, @"https://www.onenote.com/api/v1.0/notebooks");
+			var getMessage = new HttpRequestMessage(HttpMethod.Get, @"https://www.onenote.com/api/v1.0/notebooks");
 
-			HttpResponseMessage response = await client.SendAsync(createMessage);
+			HttpResponseMessage response = await client.SendAsync(getMessage);
 
 			return await TranslateListOfNotebooksResponse(response);
 		}
@@ -115,10 +115,10 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Notebooks
 				await Auth.GetAuthToken());
 
 			// Prepare an HTTP GET request to the Notebooks endpoint
-			var createMessage = new HttpRequestMessage(HttpMethod.Get,
+			var getMessage = new HttpRequestMessage(HttpMethod.Get,
 				String.Format(@"https://www.onenote.com/api/v1.0/notebooks?$filter=name eq '{0}'", WebUtility.UrlEncode(nameFilterString)));
 
-			HttpResponseMessage response = await client.SendAsync(createMessage);
+			HttpResponseMessage response = await client.SendAsync(getMessage);
 
 			return await TranslateListOfNotebooksResponse(response);
 		}
@@ -152,10 +152,10 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Notebooks
 				await Auth.GetAuthToken());
 
 			// Prepare an HTTP GET request to the Notebooks endpoint
-			var createMessage = new HttpRequestMessage(HttpMethod.Get,
+			var getMessage = new HttpRequestMessage(HttpMethod.Get,
 				@"https://www.onenote.com/api/v1.0/notebooks?$filter=userRole ne Microsoft.OneNote.Api.UserRole'Owner'");
 
-			HttpResponseMessage response = await client.SendAsync(createMessage);
+			HttpResponseMessage response = await client.SendAsync(getMessage);
 
 			return await TranslateListOfNotebooksResponse(response);
 		}
@@ -188,12 +188,12 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Notebooks
 				await Auth.GetAuthToken());
 
 			// Prepare an HTTP GET request to the Notebooks endpoint
-			var createMessage = new HttpRequestMessage(HttpMethod.Get,
+			var getMessage = new HttpRequestMessage(HttpMethod.Get,
 				String.Format(@"https://www.onenote.com/api/v1.0/notebooks?$select={0}&$orderby={1}",
 					WebUtility.UrlEncode(selectFieldNames),
 					WebUtility.UrlEncode(orderByFieldName)));
 
-			HttpResponseMessage response = await client.SendAsync(createMessage);
+			HttpResponseMessage response = await client.SendAsync(getMessage);
 
 			return await TranslateListOfNotebooksResponse(response);
 		}
@@ -224,10 +224,10 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Notebooks
 				await Auth.GetAuthToken());
 
 			// Prepare an HTTP GET request to the Notebooks endpoint
-			var createMessage = new HttpRequestMessage(HttpMethod.Get,
+			var getMessage = new HttpRequestMessage(HttpMethod.Get,
 				String.Format(@"https://www.onenote.com/api/v1.0/notebooks?$expand=sections,sectionGroups($expand=sections)"));
 
-			HttpResponseMessage response = await client.SendAsync(createMessage);
+			HttpResponseMessage response = await client.SendAsync(getMessage);
 
 			return await TranslateListOfNotebooksResponse(response);
 		}
@@ -263,9 +263,9 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Notebooks
 				await Auth.GetAuthToken());
 
 			// Prepare an HTTP GET request to the Notebooks endpoint
-			var createMessage = new HttpRequestMessage(HttpMethod.Get, @"https://www.onenote.com/api/v1.0/notebooks/" + notebookId);
+			var getMessage = new HttpRequestMessage(HttpMethod.Get, @"https://www.onenote.com/api/v1.0/notebooks/" + notebookId);
 
-			HttpResponseMessage response = await client.SendAsync(createMessage);
+			HttpResponseMessage response = await client.SendAsync(getMessage);
 
 			return await TranslateNotebookResponse(response);
 		}

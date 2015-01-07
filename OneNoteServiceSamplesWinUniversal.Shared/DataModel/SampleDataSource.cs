@@ -199,6 +199,8 @@ namespace OneNoteServiceSamplesWinUniversal.Data
 					return await GetPagesExample.SearchAllPages(debug, requiredInputText);
 				case "Group-1-Item-6":
 					return await GetPagesExample.GetASpecificPageContent(debug, requiredSelectedId);
+                case "Group-1-Item-7":
+                    return await GetPagesExample.GetAllPagesUnderASpecificSectionId(debug, requiredSelectedId);
 				case "Group-2-Item-0":
 					return await GetNotebooksExample.GetAllNotebooksExpand(debug);
 				case "Group-2-Item-1":
@@ -234,6 +236,7 @@ namespace OneNoteServiceSamplesWinUniversal.Data
 			switch (uniqueId)
 			{
 				case "Group-0-Item-10":
+                case "Group-1-Item-7":
 					return await GetNotebooksExample.GetAllNotebooksExpand(false);
 				case "Group-1-Item-1":
 					return await GetPagesExample.GetAllPages(false);

@@ -55,7 +55,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 	///  client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 	///  client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await Auth.GetAuthToken());
 	///  var getMessage = new HttpRequestMessage(HttpMethod.Get, "https://www.onenote.com/api/beta/pages");
-	///  HttpResponseMessage response = await client.SendAsync(createMessage);
+	///  HttpResponseMessage response = await client.SendAsync(getMessage);
 	/// </code>
 	public static class GetPagesExample
 	{
@@ -84,9 +84,9 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 				await Auth.GetAuthToken());
 
 			// Prepare an HTTP GET request to the Pages endpoint
-			var createMessage = new HttpRequestMessage(HttpMethod.Get, @"https://www.onenote.com/api/beta/pages");
+			var getMessage = new HttpRequestMessage(HttpMethod.Get, @"https://www.onenote.com/api/beta/pages");
 
-			HttpResponseMessage response = await client.SendAsync(createMessage);
+			HttpResponseMessage response = await client.SendAsync(getMessage);
 
 			return await TranslateListOfPagesResponse(response);
 		}
@@ -118,9 +118,9 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 				await Auth.GetAuthToken());
 
 			// Prepare an HTTP GET request to the Pages endpoint
-			var createMessage = new HttpRequestMessage(HttpMethod.Get, String.Format(@"https://www.onenote.com/api/beta/pages?$skip={0}&$top={1}", skipCount, topCount));
+			var getMessage = new HttpRequestMessage(HttpMethod.Get, String.Format(@"https://www.onenote.com/api/beta/pages?$skip={0}&$top={1}", skipCount, topCount));
 
-			HttpResponseMessage response = await client.SendAsync(createMessage);
+			HttpResponseMessage response = await client.SendAsync(getMessage);
 
 			return await TranslateListOfPagesResponse(response);
 		}
@@ -153,10 +153,10 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 				await Auth.GetAuthToken());
 
 			// Prepare an HTTP GET request to the Pages endpoint
-			var createMessage = new HttpRequestMessage(HttpMethod.Get,
+			var getMessage = new HttpRequestMessage(HttpMethod.Get,
 				String.Format(@"https://www.onenote.com/api/beta/pages?$filter=contains(title,'{0}')", WebUtility.UrlEncode(titleFilterString)));
 
-			HttpResponseMessage response = await client.SendAsync(createMessage);
+            HttpResponseMessage response = await client.SendAsync(getMessage);
 
 			return await TranslateListOfPagesResponse(response);
 		}
@@ -189,12 +189,12 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 				await Auth.GetAuthToken());
 
 			// Prepare an HTTP GET request to the Pages endpoint
-			var createMessage = new HttpRequestMessage(HttpMethod.Get,
+			var getMessage = new HttpRequestMessage(HttpMethod.Get,
 				String.Format(@"https://www.onenote.com/api/beta/pages?$select={0}&$orderby={1}",
 					WebUtility.UrlEncode(selectFieldNames),
 					WebUtility.UrlEncode(orderByFieldName)));
 
-			HttpResponseMessage response = await client.SendAsync(createMessage);
+			HttpResponseMessage response = await client.SendAsync(getMessage);
 
 			return await TranslateListOfPagesResponse(response);
 		}
@@ -230,10 +230,10 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 				await Auth.GetAuthToken());
 
 			// Prepare an HTTP GET request to the Pages endpoint
-			var createMessage = new HttpRequestMessage(HttpMethod.Get,
+			var getMessage = new HttpRequestMessage(HttpMethod.Get,
 				String.Format(@"https://www.onenote.com/api/beta/pages?search={0}", WebUtility.UrlEncode(searchTerm)));
 
-			HttpResponseMessage response = await client.SendAsync(createMessage);
+			HttpResponseMessage response = await client.SendAsync(getMessage);
 
 			return await TranslateListOfPagesResponse(response);
 		}
@@ -268,9 +268,9 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 				await Auth.GetAuthToken());
 
 			// Prepare an HTTP GET request to the Pages endpoint
-			var createMessage = new HttpRequestMessage(HttpMethod.Get, @"https://www.onenote.com/api/beta/sections/" + sectionId + "/pages");
+			var getMessage = new HttpRequestMessage(HttpMethod.Get, @"https://www.onenote.com/api/beta/sections/" + sectionId + "/pages");
 
-			HttpResponseMessage response = await client.SendAsync(createMessage);
+            HttpResponseMessage response = await client.SendAsync(getMessage);
 
 			return await TranslateListOfPagesResponse(response);
 		}
@@ -306,9 +306,9 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 				await Auth.GetAuthToken());
 
 			// Prepare an HTTP GET request to the Pages endpoint
-			var createMessage = new HttpRequestMessage(HttpMethod.Get, @"https://www.onenote.com/api/beta/pages/" + pageId);
+			var getMessage = new HttpRequestMessage(HttpMethod.Get, @"https://www.onenote.com/api/beta/pages/" + pageId);
 
-			HttpResponseMessage response = await client.SendAsync(createMessage);
+            HttpResponseMessage response = await client.SendAsync(getMessage);
 
 			return await TranslatePageResponse(response);
 		}
@@ -344,9 +344,9 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 				await Auth.GetAuthToken());
 
 			// Prepare an HTTP GET request to the Pages endpoint
-			var createMessage = new HttpRequestMessage(HttpMethod.Get, @"https://www.onenote.com/api/beta/pages/" + pageId + "/content");
+			var getMessage = new HttpRequestMessage(HttpMethod.Get, @"https://www.onenote.com/api/beta/pages/" + pageId + "/content");
 
-			HttpResponseMessage response = await client.SendAsync(createMessage);
+			HttpResponseMessage response = await client.SendAsync(getMessage);
 
 			return await TranslatePageContentResponse(response);
 		}

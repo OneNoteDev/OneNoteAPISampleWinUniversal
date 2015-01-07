@@ -182,6 +182,16 @@
                     "RequiresInputComboBox1": "true",
                     "RequiresInputComboBox2": "false",
                     "RequiresInputTextBox": "false"
+                },
+                {
+                    "UniqueId": "Group-1-Item-7",
+                    "Title": "List all pages under a specific section",
+                    "Subtitle": "BETA",
+                    "ImagePath": "Assets/LightGray.png",
+                    "Description": "Queries for all the pages that belong to a specific section",
+                    "RequiresInputComboBox1": "true",
+                    "RequiresInputComboBox2": "true",
+                    "RequiresInputTextBox": "false"
                 }
             ]
         },
