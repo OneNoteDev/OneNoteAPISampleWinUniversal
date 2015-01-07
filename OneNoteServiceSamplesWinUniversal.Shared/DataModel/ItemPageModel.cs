@@ -225,7 +225,7 @@ namespace OneNoteServiceSamplesWinUniversal.DataModel
 			{
 				string clientUrl = string.Empty;
 
-				if (_selectedResponse != null)
+				if (_selectedResponse != null && _selectedResponse.Links != null)
 				{
 					clientUrl = _selectedResponse.Links.OneNoteClientUrl.Href;
 				}
@@ -240,7 +240,7 @@ namespace OneNoteServiceSamplesWinUniversal.DataModel
 			{
 				string webUrl = string.Empty;
 
-				if (_selectedResponse != null)
+				if (_selectedResponse != null && _selectedResponse.Links != null)
 				{
 					webUrl = _selectedResponse.Links.OneNoteWebUrl.Href;
 				}
