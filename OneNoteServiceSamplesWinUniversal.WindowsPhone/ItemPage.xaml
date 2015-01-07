@@ -88,13 +88,13 @@
                 <TextBlock Grid.Column="0" Grid.Row="0" TextAlignment="Left" VerticalAlignment="Center">User:</TextBlock>
                 <TextBlock Grid.Column="1" Grid.Row="0" x:Name="AuthUserName"  Text="{Binding AuthUserName}" Margin="10,0,0,0" HorizontalAlignment="Left" TextAlignment="Left" VerticalAlignment="Center"/>
                 <TextBlock Grid.Column="0" Grid.Row="1"  TextAlignment="Left" VerticalAlignment="Center">Response:</TextBlock>
-                <TextBlock Grid.Column="1" Grid.Row="1" x:Name="ResponseTextBox" Margin="10,0,0,0" HorizontalAlignment="Left" TextAlignment="Left" VerticalAlignment="Center"/>
+                <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding StatusCode}" x:Name="ResponseTextBox" Margin="10,0,0,0" HorizontalAlignment="Left" TextAlignment="Left" VerticalAlignment="Center"/>
                 <TextBlock Grid.Column="0" Grid.Row="2" x:Name="ResponseListTextBlock" Visibility="Collapsed">List of items in response:</TextBlock>
                 <ComboBox Grid.Column="1"  SelectedItem="{Binding SelectedResponse, Mode=TwoWay}" ItemsSource="{Binding ResponseList}" Grid.Row="2" x:Name="ResponseListBox" Visibility="{Binding IsResponseListAvailable}" Margin="10,0,0,0">
                 </ComboBox>
-                <HyperlinkButton Visibility="{Binding IsResponseListAvailable}" Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" x:Name="ClientLinkLaunchButton" Content="OneNote client link" HorizontalAlignment="Left" VerticalAlignment="Center" Tag="{Binding OneNoteClientUrl}" Click="ClientLinkLaunchButton_OnClickLinkLaunchButton_Click"/>
+                <HyperlinkButton Visibility="{Binding IsClientUrlAvailable}" Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" x:Name="ClientLinkLaunchButton" Content="OneNote client link" HorizontalAlignment="Left" VerticalAlignment="Center" Tag="{Binding OneNoteClientUrl}" Click="ClientLinkLaunchButton_OnClickLinkLaunchButton_Click"/>
                 <TextBlock Grid.Column="0" Grid.Row="4" TextAlignment="Left" VerticalAlignment="Center">Body:</TextBlock>
-                <TextBox Text="{Binding Body}" Grid.Column="1" Grid.Row="4" x:Name="ResponseBodyTextBox" Margin="0,0,10,10" IsReadOnly="True" TextWrapping="Wrap" AcceptsReturn="True"></TextBox>
+                <TextBox  Grid.Column="1" Grid.Row="4" Text="{Binding Body}"  x:Name="ResponseBodyTextBox" Margin="0,0,10,0" IsReadOnly="True" TextWrapping="Wrap" AcceptsReturn="True" VerticalAlignment="Stretch" FontSize="11" MaxHeight="400"></TextBox>
             </Grid>
         </Grid>
     </Grid>
