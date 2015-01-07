@@ -82,10 +82,13 @@
 					<RowDefinition Height="Auto"/>
 					<RowDefinition Height="Auto"/>
 				</Grid.RowDefinitions>
-				<TextBlock Grid.Row="0"  Text="{Binding Description}" Style="{StaticResource SubtitleTextBlockStyle}" Margin="0,0,0,20"/>
+				<StackPanel Grid.Row="0" Orientation="Vertical">
+					<TextBlock Text="{Binding Subtitle}" Style="{StaticResource SubtitleTextBlockStyle}" Margin="5,0,0,2"/>
+					<TextBlock Text="{Binding Description}" Style="{StaticResource SubtitleTextBlockStyle}" Margin="0,0,0,20"/>
+				</StackPanel>
 				<StackPanel Grid.Row="1" Orientation="Horizontal">
 					<StackPanel x:Name="InputSelectionPanel1" Orientation="Vertical" Width="Auto" Margin="0,0,20,0">
-					<TextBlock Text="Select an item from the drop-down to continue:" Style="{StaticResource SubtitleTextBlockStyle}" Margin="0,0,0,20"/>
+						<TextBlock Text="Select an item from the drop-down to continue:" Style="{StaticResource SubtitleTextBlockStyle}" Margin="0,0,0,20"/>
 						<ComboBox x:Name="InputComboBox1" ItemsSource="{Binding}" FlyoutBase.AttachedFlyout="{StaticResource InputComboBoxFlyout}" SelectionChanged="InputComboBox1_OnSelectionChanged"></ComboBox>
 					</StackPanel>
 					<StackPanel x:Name="InputSelectionPanel2" Orientation="Vertical" Width="Auto" Margin="10,0,20,0">

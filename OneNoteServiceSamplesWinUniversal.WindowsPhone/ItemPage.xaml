@@ -46,8 +46,9 @@
 
         <!-- Title Panel -->
         <StackPanel Orientation="Vertical" Margin="10,0,0,5">
-        <TextBlock Text="{Binding Title}" Style="{ThemeResource SubheaderTextBlockStyle}" CharacterSpacing="{ThemeResource PivotHeaderItemCharacterSpacing}" TextWrapping="Wrap"/>
-        <TextBlock Text="{Binding Description}" TextWrapping="Wrap"></TextBlock>
+            <TextBlock Text="{Binding Title}" Style="{ThemeResource SubheaderTextBlockStyle}" CharacterSpacing="{ThemeResource PivotHeaderItemCharacterSpacing}" TextWrapping="Wrap"/>
+            <TextBlock Text="{Binding Subtitle}" Margin="5,5,0,2"/>
+            <TextBlock Text="{Binding Description}" TextWrapping="Wrap"></TextBlock>
         </StackPanel>
 
         <Grid Grid.Row="1" Margin="10,0,10,0">
