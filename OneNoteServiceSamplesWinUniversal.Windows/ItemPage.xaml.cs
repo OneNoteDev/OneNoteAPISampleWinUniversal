@@ -17,20 +17,23 @@ using Windows.UI.Xaml.Navigation;
 
 // The Universal Hub Application project template is documented at http://go.microsoft.com/fwlink/?LinkID=391955
 using OneNoteServiceSamplesWinUniversal.OneNoteApi;
+using System.ComponentModel;
+using OneNoteServiceSamplesWinUniversal.DataModel;
 
 namespace OneNoteServiceSamplesWinUniversal
 {
 	/// <summary>
 	/// A page that displays details for a single item within a group.
 	/// </summary>
-	public sealed partial class ItemPage : SharedBasePage
+    public sealed partial class ItemPage : SharedBasePage
 	{
 		private readonly NavigationHelper _navigationHelper;
-		private readonly ObservableDictionary _defaultViewModel = new ObservableDictionary();
+        private readonly ItemPageModel _model = new ItemPageModel();
 
 		public ItemPage()
 		{
 			InitializeComponent();
+            DataContext = Model;
 			_navigationHelper = new NavigationHelper(this);
 			_navigationHelper.LoadState += NavigationHelper_LoadState;
 		}
@@ -43,13 +46,10 @@ namespace OneNoteServiceSamplesWinUniversal
 			get { return _navigationHelper; }
 		}
 
-		/// <summary>
-		/// Gets the DefaultViewModel. This can be changed to a strongly typed view model.
-		/// </summary>
-		public ObservableDictionary DefaultViewModel
-		{
-			get { return _defaultViewModel; }
-		}
+        public ItemPageModel Model
+        {
+            get { return _model; }
+        }
 
 		/// <summary>
 		/// Populates the page with content passed during navigation.  Any saved state is also
@@ -65,7 +65,7 @@ namespace OneNoteServiceSamplesWinUniversal
 		private async void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
 		{
 			var item = await SampleDataSource.GetItemAsync((string) e.NavigationParameter);
-			DefaultViewModel["Item"] = item;
+			Model.Item = item;
 			InputSelectionPanel2.Visibility = (item.RequiresInputComboBox2) ? Visibility.Visible : Visibility.Collapsed;
 			InputTextBox.Visibility = (item.RequiresInputTextBox) ? Visibility.Visible : Visibility.Collapsed;
 			if (item.RequiresInputComboBox1)
@@ -97,9 +97,7 @@ namespace OneNoteServiceSamplesWinUniversal
 		protected override async void OnNavigatedTo(NavigationEventArgs e)
 		{
 			_navigationHelper.OnNavigatedTo(e);
-			AuthStateButton.Content = AuthState;
-			AuthUserName.Text = await Auth.GetUserName();
-			await SetOutputResponseControlsState(false);
+            Model.AuthUserName = await Auth.GetUserName();
 		}
 
 		protected override void OnNavigatedFrom(NavigationEventArgs e)
@@ -109,56 +107,20 @@ namespace OneNoteServiceSamplesWinUniversal
 
 		#endregion
 
-		private string AuthState
-		{
-			get
-			{
-				if (Auth.IsSignedIn)
-					return "Sign Out";
-				else
-				{
-					return "Sign In";
-				}
-			}
-		}
-
-		private async void AuthStateButton_OnClick(object sender, RoutedEventArgs e)
-		{
-			AuthStateButton.IsEnabled = false;
-			if (Auth.IsSignedIn)
-			{
-				await Auth.SignOut();
-				AuthStateButton.Content = "Sign In";
-			}
-			else
-			{
-				if (!String.IsNullOrEmpty(await Auth.GetAuthToken()))
-				{
-					AuthStateButton.Content = "Sign Out";
-				}
-			}
-			AuthUserName.Text = await Auth.GetUserName();
-			AuthStateButton.IsEnabled = true;
-		}
-
 		private async void Button_Click(object sender, RoutedEventArgs e)
 		{
 			var button = sender as Button;
 			bool debug = button != null && button.Name.Equals("DebugButton");
-			var item = (SampleDataItem) ItemPageGrid.DataContext;
+			SampleDataItem item = Model.Item;
 
 			await ExecuteApiAction(debug, item);
-			if (!String.IsNullOrEmpty(await Auth.GetAuthToken()))
-			{
-				AuthStateButton.Content = "Sign Out";
-			}
-			AuthUserName.Text = await Auth.GetUserName();
+            await Auth.GetAuthToken();
+            Model.AuthUserName = await Auth.GetUserName();
 		}
 
 		private async Task ExecuteApiAction(bool debug, SampleDataItem item)
 		{
-			await SetOutputResponseControlsState(false);
-			await ClearResponseFields();
+            Model.ApiResponse = null;
 
 			string requiredSelectedId = null;
 			if (item.RequiresInputComboBox1)
@@ -199,41 +161,8 @@ namespace OneNoteServiceSamplesWinUniversal
 				}
 			}
 
-			var response =
-				await SampleDataSource.ExecuteApi(item.UniqueId, debug, requiredSelectedId, requiredInputText);
-			await SetOutputResponseControlsState(true);
-			ApiBaseResponse apiBaseResponse;
-			List<ApiBaseResponse> list = response as List<ApiBaseResponse>;
-			if (list != null)
-			{
-				ResponseListTextBlock.Visibility = Visibility.Visible;
-				ResponseListBox.Visibility = Visibility.Visible;
-				ResponseListBox.ItemsSource = response;
-				ResponseListBox.SelectedIndex = 0;
-				apiBaseResponse = list[0];
-			}
-			else
-			{
-				ResponseListTextBlock.Visibility = Visibility.Collapsed;
-				ResponseListBox.Visibility = Visibility.Collapsed;
-				apiBaseResponse = response as ApiBaseResponse;
-				SetResponseLinks(apiBaseResponse);
-			}
-			if (apiBaseResponse != null)
-			{
-				ResponseTextBox.Text = ((int)apiBaseResponse.StatusCode) +" - " + apiBaseResponse.StatusCode.ToString();
-				ResponseBodyTextBox.Text = apiBaseResponse.Body;
-			}
-		}
-
-		private void SetResponseLinks(ApiBaseResponse apiBaseResponse)
-		{
-			if (apiBaseResponse != null && apiBaseResponse.Links != null)
-			{
-				ClientLinkTextBox.Text = apiBaseResponse.Links.OneNoteClientUrl.Href;
-				WebLinkTextBox.Text = apiBaseResponse.Links.OneNoteWebUrl.Href;
-			}
-		}
+			Model.ApiResponse = await SampleDataSource.ExecuteApi(item.UniqueId, debug, requiredSelectedId, requiredInputText);
+        }
 
 		/// <summary>
 		/// Yield the thread of operation to the dispatcher to allow UI updates to happen.
@@ -247,35 +176,6 @@ namespace OneNoteServiceSamplesWinUniversal
 		private static IAsyncAction Yield()
 		{
 			return CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => { });
-		}
-
-		/// <summary>
-		/// Update the enabled states of the output response UI controls and allow the UI to refresh.
-		/// </summary>
-		private async Task SetOutputResponseControlsState(bool enabled)
-		{
-			var childrenOfOutputGrid = OutputRegionGrid.Children.OfType<Control>();
-			foreach (var child in childrenOfOutputGrid)
-			{
-				child.IsEnabled = enabled;
-			}
-			await Yield();
-		}
-
-		/// <summary>
-		/// Empty the response UI fields and allow the UI to refresh.
-		/// </summary>
-		private async Task ClearResponseFields()
-		{
-			var textBoxesInOutputGrid = OutputRegionGrid.Children.OfType<TextBox>();
-			foreach (var child in textBoxesInOutputGrid)
-			{
-				child.Text = string.Empty;
-			}
-			ResponseListTextBlock.Visibility = Visibility.Collapsed;
-			ResponseListBox.Visibility = Visibility.Collapsed;
-			ResponseListBox.ItemsSource = null;
-			await Yield();
 		}
 
 		private void InputTextBox_OnGotFocus(object sender, RoutedEventArgs e)
@@ -315,15 +215,6 @@ namespace OneNoteServiceSamplesWinUniversal
 			}
 		}
 
-		private void ResponseListBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
-		{
-			var comboBox = sender as ComboBox;
-			if (comboBox != null && comboBox.SelectedItem != null)
-			{
-				SetResponseLinks(comboBox.SelectedItem as ApiBaseResponse);
-			}
-		}
-
 		private void InputComboBox1_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
 			if (InputSelectionPanel2.Visibility == Visibility.Visible)
@@ -339,5 +230,5 @@ namespace OneNoteServiceSamplesWinUniversal
 				}
 			}
 		}
-	}
+    }
 }
