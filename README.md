@@ -66,7 +66,7 @@ The following aspects of the API are covered in this sample. You can find additi
     *   Client: Windows 8.1 OR 
     *   Server: Windows Server 2012 R2 
     *   Phone: Windows Phone 8.1 (developer unlocked phone for device testing. Alternatively emulators can be used)
-* [Visual Studio 2013 Update 2 or later](http://www.visualstudio.com/en-us/downloads). 
+* [Visual Studio 2013 Update 4 or later](http://www.visualstudio.com/en-us/downloads). 
 
 Be sure you enable the Windows Phone SDK when you install Visual Studio. 
 If you don't, you will need to uninstall and re-install Visual Studio to get those features.
