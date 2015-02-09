@@ -116,9 +116,8 @@
                 {
                     "UniqueId": "Group-1-Item-0",
                     "Title": "List of all pages",
-                    "Subtitle": "BETA",
                     "ImagePath": "Assets/DarkGray.png",
-                    "Description": "Queries for all pages in OneNote and returns a paginated list. By default, paging returns the first 20 pages ordered by created time descending (default sort order). The @odata.nextLink in the Response or $skip and $top query parameters can be used to retrieve the next set of pages",
+                    "Description": "Queries for all pages in OneNote and returns a paginated list. By default, paging returns the first 20 pages ordered by last modified time descending (default sort order). The @odata.nextLink in the Response or $skip and $top query parameters can be used to retrieve the next set of pages",
                     "RequiresInputComboBox1": "false",
                     "RequiresInputComboBox2": "false",
                     "RequiresInputTextBox": "false"
@@ -126,7 +125,6 @@
                 {
                     "UniqueId": "Group-1-Item-1",
                     "Title": "Metadata of a specific page",
-                    "Subtitle": "BETA",
                     "ImagePath": "Assets/MediumGray.png",
                     "Description": "Following the previous example, first we get a paginated list of all pages and then query the metadata for one of the selected pages. Please select a specific page from the drop-down below",
                     "RequiresInputComboBox1": "true",
@@ -136,7 +134,6 @@
                 {
                     "UniqueId": "Group-1-Item-2",
                     "Title": "Pages with a specific title",
-                    "Subtitle": "BETA",
                     "ImagePath": "Assets/LightGray.png",
                     "Description": "Query for a paginated list of pages that contain a given title substring. This example shows how to use the $filter=contains(title, '<term>') query parameter. Please enter a case-sensitive title substring in the TextBox below.",
                     "RequiresInputComboBox1": "false",
@@ -146,7 +143,6 @@
                 {
                     "UniqueId": "Group-1-Item-3",
                     "Title": "Pages query with $skip and $top params",
-                    "Subtitle": "BETA",
                     "ImagePath": "Assets/MediumGray.png",
                     "Description": "Since the list of pages returned is paginated, this example shows how to use the $skip=20&$top=3 query parameters to get up to 3 additional pages after the first 20 pages",
                     "RequiresInputComboBox1": "false",
@@ -156,7 +152,6 @@
                 {
                     "UniqueId": "Group-1-Item-4",
                     "Title": "Sorted list of pages with selected metadata",
-                    "Subtitle": "BETA",
                     "ImagePath": "Assets/LightGray.png",
                     "Description": "Get a sorted list of pages using the $orderBy=title asc query parameter and only specific metadata in the response using the $select=id,title query parameter. $orderBy can be used to specify your custom sort order",
                     "RequiresInputComboBox1": "false",
@@ -166,7 +161,6 @@
                 {
                     "UniqueId": "Group-1-Item-5",
                     "Title": "Search all pages",
-                    "Subtitle": "BETA",
                     "ImagePath": "Assets/DarkGray.png",
                     "Description": "Search all pages and return the paginated list of matching pages that contain the given search term (case-insensitive search)",
                     "RequiresInputComboBox1": "false",
@@ -176,7 +170,6 @@
                 {
                     "UniqueId": "Group-1-Item-6",
                     "Title": "Recall a page's content as HTML",
-                    "Subtitle": "BETA",
                     "ImagePath": "Assets/LightGray.png",
                     "Description": "First we get a paginated list of all pages and then return back the content of one of the selected pages as HTML",
                     "RequiresInputComboBox1": "true",
@@ -186,7 +179,6 @@
                 {
                     "UniqueId": "Group-1-Item-7",
                     "Title": "List all pages under a specific section",
-                    "Subtitle": "BETA",
                     "ImagePath": "Assets/LightGray.png",
                     "Description": "Queries for all the pages that belong to a specific section",
                     "RequiresInputComboBox1": "true",

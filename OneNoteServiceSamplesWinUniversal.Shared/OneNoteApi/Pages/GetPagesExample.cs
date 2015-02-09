@@ -33,16 +33,15 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 	/// <summary>
 	/// Class to show a selection of examples for getting page meta data or content via HTTP GET to the OneNote API
 	/// - Getting a page info is represented via the GET HTTP verb.
-	/// - Getting meta data for ALL pages under ALL notebooks/sections the user has is represented by the Uri: https://www.onenote.com/api/beta/pages
-	///    - Getting meta data for pages under ALL notebooks/sections but with filters applied is represented by the Uri: https://www.onenote.com/api/beta/pages?$filter=...
-    /// - Searching for text content in pages under ALL notebooks/sections is represented by the Uri: https://www.onenote.com/api/beta/pages?search={searchterm} 
-	/// - Getting meta data for ALL pages under a given section is represented by the Uri: https://www.onenote.com/api/beta/sections/{sectionId}/pages
-	/// - Getting meta data for a specific page is represented by the Uri: https://www.onenote.com/api/beta/pages/{pageId}
-	/// - Getting access to the content (aka data) in a given page is represented by the Uri: https://www.onenote.com/api/beta/pages/{pageId}/content
+	/// - Getting meta data for ALL pages under ALL notebooks/sections the user has is represented by the Uri: https://www.onenote.com/api/v1.0/pages
+	///    - Getting meta data for pages under ALL notebooks/sections but with filters applied is represented by the Uri: https://www.onenote.com/api/v1.0/pages?$filter=...
+    /// - Searching for text content in pages under ALL notebooks/sections is represented by the Uri: https://www.onenote.com/api/v1.0/pages?search={searchterm} 
+	/// - Getting meta data for ALL pages under a given section is represented by the Uri: https://www.onenote.com/api/v1.0/sections/{sectionId}/pages
+	/// - Getting meta data for a specific page is represented by the Uri: https://www.onenote.com/api/v1.0/pages/{pageId}
+	/// - Getting access to the content (aka data) in a given page is represented by the Uri: https://www.onenote.com/api/v1.0/pages/{pageId}/content
     /// For more info, see http://dev.onenote.com/docs
 	/// </summary>
 	/// <remarks>
-	/// NOTE: These APIs are in Beta mode. Hence are API Uris in this class target the 'beta' version (instead of the 'v1.0' version).
 	/// NOTE: Our APIs support OData-style querying so you can use query params like $filter, $orderby, $top, $skip, $select etc.
 	/// For more info, see http://www.odata.org/getting-started/basic-tutorial/
 	/// NOTE: It is not the goal of this code sample to produce well re-factored, elegant code.
@@ -54,12 +53,12 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 	///  var client = new HttpClient();
 	///  client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 	///  client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await Auth.GetAuthToken());
-	///  var getMessage = new HttpRequestMessage(HttpMethod.Get, "https://www.onenote.com/api/beta/pages");
+	///  var getMessage = new HttpRequestMessage(HttpMethod.Get, "https://www.onenote.com/api/v1.0/pages");
 	///  HttpResponseMessage response = await client.SendAsync(getMessage);
 	/// </code>
 	public static class GetPagesExample
 	{
-		#region Examples of GET https://www.onenote.com/api/beta/pages AND query params
+		#region Examples of GET https://www.onenote.com/api/v1.0/pages AND query params
 
 		/// <summary>
 		/// Get meta data for ALL pages under ALL of the user's notebooks/sections
@@ -84,7 +83,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 				await Auth.GetAuthToken());
 
 			// Prepare an HTTP GET request to the Pages endpoint
-			var getMessage = new HttpRequestMessage(HttpMethod.Get, @"https://www.onenote.com/api/beta/pages");
+			var getMessage = new HttpRequestMessage(HttpMethod.Get, @"https://www.onenote.com/api/v1.0/pages");
 
 			HttpResponseMessage response = await client.SendAsync(getMessage);
 
@@ -98,7 +97,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 		/// <param name="skipCount">the number of first 1..n pages to skip</param>
 		/// <param name="topCount">the total number of pages to return after the skipCount</param>
 		/// <returns>The converted HTTP response message</returns>
-		/// <example>https://www.onenote.com/api/beta/pages?$skip=20&$top=10
+		/// <example>https://www.onenote.com/api/v1.0/pages?$skip=20&$top=10
 		/// returns pages 21 to 30 (by skipping the first 20 pages). Default page count returned is 100.</example>
 		public static async Task<List<ApiBaseResponse>> GetAllPagesWithSkipAndTopQueryParams(bool debug, int skipCount, int topCount)
 		{
@@ -118,7 +117,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 				await Auth.GetAuthToken());
 
 			// Prepare an HTTP GET request to the Pages endpoint
-			var getMessage = new HttpRequestMessage(HttpMethod.Get, String.Format(@"https://www.onenote.com/api/beta/pages?$skip={0}&$top={1}", skipCount, topCount));
+			var getMessage = new HttpRequestMessage(HttpMethod.Get, String.Format(@"https://www.onenote.com/api/v1.0/pages?$skip={0}&$top={1}", skipCount, topCount));
 
 			HttpResponseMessage response = await client.SendAsync(getMessage);
 
@@ -132,7 +131,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 		/// <param name="debug">Run the code under the debugger</param>
 		/// <param name="titleFilterString">substring to search for in page titles</param>
 		/// <returns>The converted HTTP response message</returns>
-		/// <example>https://www.onenote.com/api/beta/pages?$filter=contains(title,'API')
+		/// <example>https://www.onenote.com/api/v1.0/pages?$filter=contains(title,'API')
 		///  returns all pages with title containing the case-sensitive substring 'API'</example>
 		public static async Task<List<ApiBaseResponse>> GetAllPagesWithTitleContainsFilterQueryParams(bool debug,
 			string titleFilterString)
@@ -154,7 +153,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 
 			// Prepare an HTTP GET request to the Pages endpoint
 			var getMessage = new HttpRequestMessage(HttpMethod.Get,
-				String.Format(@"https://www.onenote.com/api/beta/pages?$filter=contains(title,'{0}')", WebUtility.UrlEncode(titleFilterString)));
+				String.Format(@"https://www.onenote.com/api/v1.0/pages?$filter=contains(title,'{0}')", WebUtility.UrlEncode(titleFilterString)));
 
             HttpResponseMessage response = await client.SendAsync(getMessage);
 
@@ -168,7 +167,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 		/// <param name="orderByFieldName">the field that is used to order the results</param>
 		/// <param name="selectFieldNames">meta data fields to return in the response</param>
 		/// <returns>The converted HTTP response message</returns>
-		/// <example>https://www.onenote.com/api/beta/pages?$select=id,title&$orderby=title%20asc
+		/// <example>https://www.onenote.com/api/v1.0/pages?$select=id,title&$orderby=title%20asc
 		/// returns only the id and title meta data values sorting the result alphabetically by title in ascending order</example>
 		public static async Task<List<ApiBaseResponse>> GetAllPagesWithOrderByAndSelectQueryParams(bool debug,
 			string orderByFieldName, string selectFieldNames)
@@ -190,7 +189,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 
 			// Prepare an HTTP GET request to the Pages endpoint
 			var getMessage = new HttpRequestMessage(HttpMethod.Get,
-				String.Format(@"https://www.onenote.com/api/beta/pages?$select={0}&$orderby={1}",
+				String.Format(@"https://www.onenote.com/api/v1.0/pages?$select={0}&$orderby={1}",
 					WebUtility.UrlEncode(selectFieldNames),
 					WebUtility.UrlEncode(orderByFieldName)));
 
@@ -201,7 +200,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 
 		#endregion
 
-		#region Examples of Search GET https://www.onenote.com/api/beta/pages?search={searchTerm}
+		#region Examples of Search GET https://www.onenote.com/api/v1.0/pages?search={searchTerm}
 
 		/// <summary>
 		/// Search ALL pages containing the (full-text) search term under ALL of the user's notebooks/sections.
@@ -210,7 +209,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 		/// <param name="debug">Run the code under the debugger</param>
 		/// <param name="searchTerm">string to search for</param>
 		/// <returns>The converted HTTP response message</returns>
-		/// <example>https://www.onenote.com/api/beta/pages?search=cat
+		/// <example>https://www.onenote.com/api/v1.0/pages?search=cat
 		///  returns all pages containing the case-insensitive string 'cat'</example>
 		public static async Task<List<ApiBaseResponse>> SearchAllPages(bool debug, string searchTerm)
 		{
@@ -231,7 +230,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 
 			// Prepare an HTTP GET request to the Pages endpoint
 			var getMessage = new HttpRequestMessage(HttpMethod.Get,
-				String.Format(@"https://www.onenote.com/api/beta/pages?search={0}", WebUtility.UrlEncode(searchTerm)));
+				String.Format(@"https://www.onenote.com/api/v1.0/pages?search={0}", WebUtility.UrlEncode(searchTerm)));
 
 			HttpResponseMessage response = await client.SendAsync(getMessage);
 
@@ -239,7 +238,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 		}
 		#endregion
 
-		#region Example of GET https://www.onenote.com/api/beta/sections/{sectionId}/pages
+		#region Example of GET https://www.onenote.com/api/v1.0/sections/{sectionId}/pages
 
 		/// <summary>
 		/// Get meta data for ALL pages under a given section
@@ -268,7 +267,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 				await Auth.GetAuthToken());
 
 			// Prepare an HTTP GET request to the Pages endpoint
-			var getMessage = new HttpRequestMessage(HttpMethod.Get, @"https://www.onenote.com/api/beta/sections/" + sectionId + "/pages");
+			var getMessage = new HttpRequestMessage(HttpMethod.Get, @"https://www.onenote.com/api/v1.0/sections/" + sectionId + "/pages");
 
             HttpResponseMessage response = await client.SendAsync(getMessage);
 
@@ -277,7 +276,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 
 		#endregion
 
-		#region Example of GET https://www.onenote.com/api/beta/pages/{pageId}
+		#region Example of GET https://www.onenote.com/api/v1.0/pages/{pageId}
 
 		/// <summary>
 		/// Get meta data for a specific page
@@ -306,7 +305,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 				await Auth.GetAuthToken());
 
 			// Prepare an HTTP GET request to the Pages endpoint
-			var getMessage = new HttpRequestMessage(HttpMethod.Get, @"https://www.onenote.com/api/beta/pages/" + pageId);
+			var getMessage = new HttpRequestMessage(HttpMethod.Get, @"https://www.onenote.com/api/v1.0/pages/" + pageId);
 
             HttpResponseMessage response = await client.SendAsync(getMessage);
 
@@ -315,7 +314,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 
 		#endregion
 
-		#region Example of Page content recall: GET https://www.onenote.com/api/beta/pages/{pageId}/content 
+		#region Example of Page content recall: GET https://www.onenote.com/api/v1.0/pages/{pageId}/content 
 
 		/// <summary>
 		/// Get the content for a specific page
@@ -344,7 +343,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 				await Auth.GetAuthToken());
 
 			// Prepare an HTTP GET request to the Pages endpoint
-			var getMessage = new HttpRequestMessage(HttpMethod.Get, @"https://www.onenote.com/api/beta/pages/" + pageId + "/content");
+			var getMessage = new HttpRequestMessage(HttpMethod.Get, @"https://www.onenote.com/api/v1.0/pages/" + pageId + "/content");
 
 			HttpResponseMessage response = await client.SendAsync(getMessage);
 
