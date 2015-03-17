@@ -227,6 +227,8 @@ namespace OneNoteServiceSamplesWinUniversal.Data
 					return await PostNotebooksExample.CreateSimpleNotebook(debug, requiredInputText);
 				case "Group-2-Item-12":
 					return await PostSectionsExample.CreateSimpleSection(debug, requiredSelectedId, requiredInputText);
+				case "Group-3-Item-0":
+					return await PatchPagesExample.AppendToDefaultOutlineInPageContent(debug, requiredSelectedId);
 			}
 			return null;
 		}
@@ -250,6 +252,8 @@ namespace OneNoteServiceSamplesWinUniversal.Data
 					return await GetNotebooksExample.GetAllNotebooks(false);
 				case "Group-2-Item-12":
 					return await GetNotebooksExample.GetAllNotebooks(false);
+				case "Group-3-Item-0":
+					return await GetPagesExample.GetAllPages(false);
 
 			}
 			return null;

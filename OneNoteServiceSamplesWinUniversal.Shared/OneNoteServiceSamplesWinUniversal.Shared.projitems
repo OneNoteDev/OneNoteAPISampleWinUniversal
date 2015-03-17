@@ -24,6 +24,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)OneNoteApi\Notebooks\PostNotebooksExample.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)OneNoteApi\Pages\GetPagesExample.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)OneNoteApi\Pages\PageResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)OneNoteApi\Pages\PatchPagesExample.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)OneNoteApi\Pages\PostPagesExample.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)OneNoteApi\SectionGroups\GetSectionGroupsExample.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)OneNoteApi\Sections\GetSectionsExample.cs" />

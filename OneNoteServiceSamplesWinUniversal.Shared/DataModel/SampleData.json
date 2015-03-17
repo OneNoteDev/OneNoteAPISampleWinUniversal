@@ -316,15 +316,15 @@
             "UniqueId": "Group-3",
             "Title": "Update Pages",
             "ImagePath": "Assets/LightGray.png",
-            "Description": "Coming soon: Examples of how to use the HTTP PATCH verb to update the contents of a specific page",
+            "Description": "Examples of how to use the HTTP PATCH verb to update the contents of a specific page",
             "Items": [
                 {
                     "UniqueId": "Group-3-Item-0",
-                    "Title": "Coming soon",
+                    "Title": "Append to the end of the default outline in the page",
                     "Subtitle": "BETA",
                     "ImagePath": "Assets/MediumGray.png",
-                    "Description": "",
-                    "RequiresInputComboBox1": "false",
+                    "Description": "Add new trailing content to the default outline in an existing page",
+                    "RequiresInputComboBox1": "true",
                     "RequiresInputComboBox2": "false",
                     "RequiresInputTextBox": "false"
                 }
