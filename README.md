@@ -8,11 +8,11 @@ Created by Microsoft Corporation, 2014. Provided As-is without warranty. Tradema
 * This is a **newer and better** version of the previously released oneNote API [WinStore](https://github.com/OneNoteDev/OneNoteAPISampleWinStore) and [WinPhone](https://github.com/OneNoteDev/OneNoteAPISampleWinPhone) code samples. Use this code sample to build universal Windows 8.1 and above apps.
 * As of December 2014, This code sample contains examples of all shipped features as well as most of the beta features released by the OneNote API team.
 
-### API functionality demonstrated in this sample
-
 **If you wish to ignore the app UI/design and directly get to the part that interacts with the OneNote API, you can find the code under the [OneNoteServiceSamplesWinUniversal.Shared/OneNoteApi](https://github.com/OneNoteDev/OneNoteAPISampleWinUniversal/tree/master/OneNoteServiceSamplesWinUniversal.Shared/OneNoteApi) folder**. 
 
-The following aspects of the API are covered in this sample. You can find additional documentation at the links below.
+### OneDrive Authentication based API demonstrated in this sample
+
+You can find additional documentation at the links below.
 
 * [Authenticate the user using the OnlineIdAuthenticator API](http://msdn.microsoft.com/en-us/library/windows/apps/windows.security.authentication.onlineid.onlineidauthenticator.aspx)
     * In our previous [WinStore](https://github.com/OneNoteDev/OneNoteAPISampleWinStore) and [WinPhone](https://github.com/OneNoteDev/OneNoteAPISampleWinPhone) Code samples we demonstrated how to use the 
