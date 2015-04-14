@@ -10,7 +10,7 @@ Created by Microsoft Corporation, 2014. Provided As-is without warranty. Tradema
 
 **If you wish to ignore the app UI/design and directly get to the part that interacts with the OneNote API, you can find the code under the [OneNoteServiceSamplesWinUniversal.Shared/OneNoteApi](https://github.com/OneNoteDev/OneNoteAPISampleWinUniversal/tree/master/OneNoteServiceSamplesWinUniversal.Shared/OneNoteApi) folder**. 
 
-### OneDrive Authentication based API demonstrated in this sample
+### OneDrive based API
 
 You can find additional documentation at the links below.
 
@@ -59,6 +59,27 @@ You can find additional documentation at the links below.
 * Updates Pages (Coming soon):
     * Examples of [PATCH Pages](http://dev.onenote.com/docs#/reference/patch-pages) will be added soon.
 
+### O365 based API (beta)
+* Create Pages: 
+    * [POST simple HTML to a new OneNote QuickNotes page](http://msdn.microsoft.com/EN-US/library/office/dn575428.aspx)
+    * [POST multi-part message with image data included in the request](http://msdn.microsoft.com/EN-US/library/office/dn575432.aspx)
+    * POST page with a snapshot of an embedded web page HTML
+    * [POST page with a URL rendered as an image](http://msdn.microsoft.com/EN-US/library/office/dn575431.aspx)
+    * [POST page with a file attachment](http://msdn.microsoft.com/en-us/library/office/dn575436.aspx)
+    * [POST page with a PDF file rendered and attached](http://msdn.microsoft.com/EN-US/library/office/dn655137.aspx)
+    * POST page with note tags
+    * POST page with a business card automatically extracted from an image
+    * POST page with a recipe automatically extracted from a URL
+    * POST page with a product info automatically extracted from a URL
+    * [Extract the returned oneNoteClientURL and oneNoteWebURL links](http://msdn.microsoft.com/EN-US/library/office/dn575433.aspx)
+    * [POST page in a specific named section](http://msdn.microsoft.com/EN-US/library/office/dn672416.aspx)
+    * [POST page under a specific notebook and section](http://dev.onenote.com/docs#/reference/post-pages/v10sectionsidpages/post)
+* Manage Notebooks and Sections:
+    * [POST a new notebook](http://dev.onenote.com/docs#/reference/post-notebooks)
+    * [POST a new section under a specific notebook](http://dev.onenote.com/docs#/reference/post-sections)
+* Updates Pages:
+    * Examples of [PATCH Pages](http://dev.onenote.com/docs#/reference/patch-pages).
+
 ### Prerequisites
 
 **Tools and Libraries** you will need to download, install, and configure for your development environment. 
@@ -73,11 +94,16 @@ If you don't, you will need to uninstall and re-install Visual Studio to get tho
 
 * You can get a full list of tools needed to build Universal Windows app [here](http://dev.windows.com/en-us/develop/downloads)
 
+### O365 Prerequsuites
+* What you need to do is to go to Programs and Features, Turn on/off Windows features and then choose to add Windows Identity Foundation 3.5 to your system.
+
 * **NuGet packages** used in the sample. These are handled using the package 
 manager, as described in the setup instructions. These should update 
 automatically at build time; if not, make sure your NuGet package manager 
 is up-to-date. You can learn more about the packages we used at the links below.
     * [Newtonsoft Json.NET package](http://newtonsoft.com/) provides Json parsing utilities.
+    * [??? package](http://newtonsoft.com/) provides ??? utilities.
+    * [??? package](http://newtonsoft.com/) provides ??? utilities.
 
 ### Accounts
 

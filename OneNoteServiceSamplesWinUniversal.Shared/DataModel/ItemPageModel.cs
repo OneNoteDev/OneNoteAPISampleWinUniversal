@@ -51,7 +51,7 @@ namespace OneNoteServiceSamplesWinUniversal.DataModel
 			{
 				string title = "Sign In";
 
-				if (Auth.IsSignedIn)
+				if (Auth.IsSignedIn())
 				{
 					title = "Sign Out";
 				}
@@ -149,7 +149,7 @@ namespace OneNoteServiceSamplesWinUniversal.DataModel
 			{
 				string body = string.Empty;
 
-				if (_selectedResponse != null)
+				if (_selectedResponse != null && _selectedResponse.Body != null)
 				{
 					body = _selectedResponse.Body;
 				}

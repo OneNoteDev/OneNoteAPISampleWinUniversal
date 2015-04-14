@@ -67,9 +67,11 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 		/// Create a very simple page with some formatted text.
 		/// </summary>
 		/// <param name="debug">Run the code under the debugger</param>
+		/// <param name="provider"></param>
+		/// <param name="apiRoute"></param>
 		/// <remarks>Create page using a single part text/html content type</remarks>
 		/// <returns>The converted HTTP response message</returns>
-		public static async Task<ApiBaseResponse> CreateSimplePage(bool debug)
+		public static async Task<ApiBaseResponse> CreateSimplePage(bool debug, AuthProvider provider, string apiRoute)
 		{
 			if (debug)
 			{
@@ -83,8 +85,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 			client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
 			// Not adding the Authentication header would produce an unauthorized call and the API will return a 401
-			client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer",
-				await Auth.GetAuthToken());
+			client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await Auth.GetAuthToken(provider));
 
 			string date = GetDate();
 			string simpleHtml = "<html>" +
@@ -100,7 +101,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 
 			// Prepare an HTTP POST request to the Pages endpoint
 			// The request body content type is text/html
-			var createMessage = new HttpRequestMessage(HttpMethod.Post, @"https://www.onenote.com/api/v1.0/pages")
+			var createMessage = new HttpRequestMessage(HttpMethod.Post, apiRoute + "pages")
 			{
 				Content = new StringContent(simpleHtml, Encoding.UTF8, "text/html")
 			};
@@ -114,9 +115,11 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 		/// Create a page with an image on it.
 		/// </summary>
 		/// <param name="debug">Run the code under the debugger</param>
+		/// <param name="provider"></param>
+		/// <param name="apiRoute"></param>
 		/// <remarks>Create page using a multipart/form-data content type</remarks>
 		/// <returns>The converted HTTP response message</returns>
-		public static async Task<ApiBaseResponse> CreatePageWithImage(bool debug)
+		public static async Task<ApiBaseResponse> CreatePageWithImage(bool debug, AuthProvider provider, string apiRoute)
 		{
 			if (debug)
 			{
@@ -131,7 +134,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 
 			// Not adding the Authentication header would produce an unauthorized call and the API will return a 401
 			client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer",
-				await Auth.GetAuthToken());
+				await Auth.GetAuthToken(provider));
 
 			const string imagePartName = "image1";
 			string date = GetDate();
@@ -152,7 +155,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 			using (var imageContent = new StreamContent(await GetBinaryStream("assets\\Logo.jpg")))
 			{
 				imageContent.Headers.ContentType = new MediaTypeHeaderValue("image/jpeg");
-				var createMessage = new HttpRequestMessage(HttpMethod.Post, @"https://www.onenote.com/api/v1.0/pages")
+				var createMessage = new HttpRequestMessage(HttpMethod.Post, apiRoute + "pages")
 				{
 					Content = new MultipartFormDataContent
 					{
@@ -172,9 +175,11 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 		/// Create a page with a file attachment
 		/// </summary>
 		/// <param name="debug">Determines whether to execute this method under the debugger</param>
+		/// <param name="provider"></param>
+		/// <param name="apiRoute"></param>
 		/// <remarks>Create page using a multipart/form-data content type</remarks>
 		/// <returns>The converted HTTP response message</returns>
-		public static async Task<ApiBaseResponse> CreatePageWithAttachedFile(bool debug)
+		public static async Task<ApiBaseResponse> CreatePageWithAttachedFile(bool debug, AuthProvider provider, string apiRoute)
 		{
 			if (debug)
 			{
@@ -189,7 +194,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 
 			// Not adding the Authentication header would produce an unauthorized call and the API will return a 401
 			client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer",
-				await Auth.GetAuthToken());
+				await Auth.GetAuthToken(provider));
 
 			const string attachmentPartName = "pdfattachment1";
 			string attachmentRequestHtml = "<html>" +
@@ -210,7 +215,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 			using (var attachmentContent = new StreamContent(await GetBinaryStream("assets\\attachment.pdf")))
 			{
 				attachmentContent.Headers.ContentType = new MediaTypeHeaderValue("application/pdf");
-				var createMessage = new HttpRequestMessage(HttpMethod.Post, @"https://www.onenote.com/api/v1.0/pages")
+				var createMessage = new HttpRequestMessage(HttpMethod.Post, apiRoute + "pages")
 				{
 					Content = new MultipartFormDataContent
 					{
@@ -228,9 +233,11 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 		/// Create a page with an image of an embedded web page on it.
 		/// </summary>
 		/// <param name="debug">Run the code under the debugger</param>
+		/// <param name="provider"></param>
+		/// <param name="apiRoute"></param>
 		/// <remarks>Create page using a multipart/form-data content type</remarks>
 		/// <returns>The converted HTTP response message</returns>
-		public static async Task<ApiBaseResponse> CreatePageWithEmbeddedWebPage(bool debug)
+		public static async Task<ApiBaseResponse> CreatePageWithEmbeddedWebPage(bool debug, AuthProvider provider, string apiRoute)
 		{
 			if (debug)
 			{
@@ -245,7 +252,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 
 			// Not adding the Authentication header would produce an unauthorized call and the API will return a 401
 			client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer",
-				await Auth.GetAuthToken());
+				await Auth.GetAuthToken(provider));
 
 			const string embeddedPartName = "embedded1";
 			const string embeddedWebPage =
@@ -276,7 +283,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 								"</body>" +
 								"</html>";
 
-			var createMessage = new HttpRequestMessage(HttpMethod.Post, @"https://www.onenote.com/api/v1.0/pages")
+			var createMessage = new HttpRequestMessage(HttpMethod.Post, apiRoute + "pages")
 			{
 				Content = new MultipartFormDataContent
 				{
@@ -294,9 +301,11 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 		/// Create a page with an image of a URL on it.
 		/// </summary>
 		/// <param name="debug">Run the code under the debugger</param>
+		/// <param name="provider"></param>
+		/// <param name="apiRoute"></param>
 		/// <remarks>Create page using a multipart/form-data content type</remarks>
 		/// <returns>The converted HTTP response message</returns>
-		public static async Task<ApiBaseResponse> CreatePageWithUrl(bool debug)
+		public static async Task<ApiBaseResponse> CreatePageWithUrl(bool debug, AuthProvider provider, string apiRoute)
 		{
 			if (debug)
 			{
@@ -311,7 +320,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 
 			// Not adding the Authentication header would produce an unauthorized call and the API will return a 401
 			client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer",
-				await Auth.GetAuthToken());
+				await Auth.GetAuthToken(provider));
 
 			string date = GetDate();
 			string simpleHtml = @"<html>" +
@@ -325,7 +334,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 								"</body>" +
 								"</html>";
 
-			var createMessage = new HttpRequestMessage(HttpMethod.Post, @"https://www.onenote.com/api/v1.0/pages")
+			var createMessage = new HttpRequestMessage(HttpMethod.Post, apiRoute + "pages")
 			{
 				Content = new StringContent(simpleHtml, Encoding.UTF8, "text/html")
 			};
@@ -340,9 +349,11 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 		/// http://blogs.msdn.com/b/onenotedev/archive/2014/10/17/announcing-tag-support.aspx
 		/// </summary>
 		/// <param name="debug">Run the code under the debugger</param>
+		/// <param name="provider"></param>
+		/// <param name="apiRoute"></param>
 		/// <remarks>Create page using a multipart/form-data content type</remarks>
 		/// <returns>The converted HTTP response message</returns>
-		public static async Task<ApiBaseResponse> CreatePageWithNoteTags(bool debug)
+		public static async Task<ApiBaseResponse> CreatePageWithNoteTags(bool debug, AuthProvider provider, string apiRoute)
 		{
 			if (debug)
 			{
@@ -357,7 +368,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 
 			// Not adding the Authentication header would produce an unauthorized call and the API will return a 401
 			client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer",
-				await Auth.GetAuthToken());
+				await Auth.GetAuthToken(provider));
 
 			string date = GetDate();
 			string simpleHtml = @"<html>" +
@@ -411,7 +422,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 								"</body>" +
 								"</html>";
 
-			var createMessage = new HttpRequestMessage(HttpMethod.Post, @"https://www.onenote.com/api/v1.0/pages")
+			var createMessage = new HttpRequestMessage(HttpMethod.Post, apiRoute + "pages")
 			{
 				Content = new StringContent(simpleHtml, Encoding.UTF8, "text/html")
 			};
@@ -429,9 +440,11 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 		/// Currently we can extract business cards from images and recipes, product info from urls.
 		/// </summary>
 		/// <param name="debug">Run the code under the debugger</param>
+		/// <param name="provider"></param>
+		/// <param name="apiRoute"></param>
 		/// <remarks>Create page using a multipart/form-data content type</remarks>
 		/// <returns>The converted HTTP response message</returns>
-		public static async Task<ApiBaseResponse> CreatePageWithAutoExtractBusinessCard(bool debug)
+		public static async Task<ApiBaseResponse> CreatePageWithAutoExtractBusinessCard(bool debug, AuthProvider provider, string apiRoute)
 		{
 			if (debug)
 			{
@@ -446,7 +459,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 
 			// Not adding the Authentication header would produce an unauthorized call and the API will return a 401
 			client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer",
-				await Auth.GetAuthToken());
+				await Auth.GetAuthToken(provider));
 
 			const string imagePartName = "image1";
 			string date = GetDate();
@@ -470,7 +483,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 			using (var imageContent = new StreamContent(await GetBinaryStream("assets\\BizCard.png")))
 			{
 				imageContent.Headers.ContentType = new MediaTypeHeaderValue("image/jpeg");
-				var createMessage = new HttpRequestMessage(HttpMethod.Post, @"https://www.onenote.com/api/v1.0/pages")
+				var createMessage = new HttpRequestMessage(HttpMethod.Post, apiRoute + "pages")
 				{
 					Content = new MultipartFormDataContent
 					{
@@ -492,9 +505,11 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 		/// Currently we can extract business cards from images and recipes, product info from urls.
 		/// </summary>
 		/// <param name="debug">Run the code under the debugger</param>
+		/// <param name="provider"></param>
+		/// <param name="apiRoute"></param>
 		/// <remarks>Create page using a multipart/form-data content type</remarks>
 		/// <returns>The converted HTTP response message</returns>
-		public static async Task<ApiBaseResponse> CreatePageWithAutoExtractRecipe(bool debug)
+		public static async Task<ApiBaseResponse> CreatePageWithAutoExtractRecipe(bool debug, AuthProvider provider, string apiRoute)
 		{
 			if (debug)
 			{
@@ -509,7 +524,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 
 			// Not adding the Authentication header would produce an unauthorized call and the API will return a 401
 			client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer",
-				await Auth.GetAuthToken());
+				await Auth.GetAuthToken(provider));
 
 			string date = GetDate();
 			string simpleHtml = "<html>" +
@@ -527,7 +542,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 			                    "</body>" +
 			                    "</html>";
 
-			var createMessage = new HttpRequestMessage(HttpMethod.Post, @"https://www.onenote.com/api/v1.0/pages")
+			var createMessage = new HttpRequestMessage(HttpMethod.Post, apiRoute + "pages")
 			{
 				Content = new StringContent(simpleHtml, Encoding.UTF8, "text/html")
 			};
@@ -543,9 +558,11 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 		/// Currently we can extract business cards from images and recipes, product info from urls.
 		/// </summary>
 		/// <param name="debug">Run the code under the debugger</param>
+		/// <param name="provider"></param>
+		/// <param name="apiRoute"></param>
 		/// <remarks>Create page using a multipart/form-data content type</remarks>
 		/// <returns>The converted HTTP response message</returns>
-		public static async Task<ApiBaseResponse> CreatePageWithAutoExtractProduct(bool debug)
+		public static async Task<ApiBaseResponse> CreatePageWithAutoExtractProduct(bool debug, AuthProvider provider, string apiRoute)
 		{
 			if (debug)
 			{
@@ -560,7 +577,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 
 			// Not adding the Authentication header would produce an unauthorized call and the API will return a 401
 			client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer",
-				await Auth.GetAuthToken());
+				await Auth.GetAuthToken(provider));
 
 			string date = GetDate();
 			string simpleHtml = "<html>" +
@@ -578,7 +595,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 			                    "</body>" +
 			                    "</html>";
 
-			var createMessage = new HttpRequestMessage(HttpMethod.Post, @"https://www.onenote.com/api/v1.0/pages")
+			var createMessage = new HttpRequestMessage(HttpMethod.Post, apiRoute + "pages")
 			{
 				Content = new StringContent(simpleHtml, Encoding.UTF8, "text/html")
 			};
@@ -599,7 +616,9 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 		/// </summary>
 		/// <param name="debug">Run the code under the debugger</param>
 		/// <param name="sectionName">name of the section (in the default notebook) where the page will be created.
-		/// If the section doesn't exist, this page create call will implicitly create the named section.</param>
+		///     If the section doesn't exist, this page create call will implicitly create the named section.</param>
+		/// <param name="provider"></param>
+		/// <param name="apiRoute"></param>
 		/// <remarks>Create page using a single part text/html content type.
 		/// This is a quick way to specify a custom sectionName that your app can save pages to.
 		/// It uses the optional 'sectionName' query param in the pages endpoint.
@@ -608,7 +627,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 		/// NOTE: Using this approach, you can still create pages with ALL the different contents shown in examples above.
 		/// </remarks>
 		/// <returns>The converted HTTP response message</returns>
-		public static async Task<ApiBaseResponse> CreateSimplePageInAGivenSectionName(bool debug, string sectionName)
+		public static async Task<ApiBaseResponse> CreateSimplePageInAGivenSectionName(bool debug, string sectionName, AuthProvider provider, string apiRoute)
 		{
 			if (debug)
 			{
@@ -623,7 +642,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 
 			// Not adding the Authentication header would produce an unauthorized call and the API will return a 401
 			client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer",
-				await Auth.GetAuthToken());
+				await Auth.GetAuthToken(provider));
 
 			string date = GetDate();
 			string simpleHtml = "<html>" +
@@ -639,7 +658,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 
 			// Prepare an HTTP POST request to the Pages endpoint
 			// The request body content type is text/html
-			var createMessage = new HttpRequestMessage(HttpMethod.Post, @"https://www.onenote.com/api/v1.0/pages?sectionName=" + WebUtility.UrlEncode(sectionName))
+			var createMessage = new HttpRequestMessage(HttpMethod.Post, apiRoute + "pages?sectionName=" + WebUtility.UrlEncode(sectionName))
 			{
 				Content = new StringContent(simpleHtml, Encoding.UTF8, "text/html")
 			};
@@ -658,12 +677,14 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 		/// </summary>
 		/// <param name="debug">Run the code under the debugger</param>
 		/// <param name="sectionId">Id of the section under which the page will be created</param>
+		/// <param name="provider"></param>
+		/// <param name="apiRoute"></param>
 		/// <remarks>Create page using a single part text/html content type.
 		/// The sectionId can be fetched by querying the user's sections (e.g. GET https://www.onenote.com/api/v1.0/sections ).
 		/// NOTE: Using this approach, you can still create pages with ALL the different contents shown in examples above.
 		/// </remarks>
 		/// <returns>The converted HTTP response message</returns>
-		public static async Task<ApiBaseResponse> CreateSimplePageInAGivenSectionId(bool debug, string sectionId)
+		public static async Task<ApiBaseResponse> CreateSimplePageInAGivenSectionId(bool debug, string sectionId, AuthProvider provider, string apiRoute)
 		{
 			if (debug)
 			{
@@ -678,7 +699,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 
 			// Not adding the Authentication header would produce an unauthorized call and the API will return a 401
 			client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer",
-				await Auth.GetAuthToken());
+				await Auth.GetAuthToken(provider));
 
 			string date = GetDate();
 			string simpleHtml = "<html>" +
@@ -694,7 +715,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 
 			// Prepare an HTTP POST request to the Pages endpoint
 			// The request body content type is text/html
-			var createMessage = new HttpRequestMessage(HttpMethod.Post, @"https://www.onenote.com/api/v1.0/sections/" + sectionId + "/pages")
+			var createMessage = new HttpRequestMessage(HttpMethod.Post, apiRoute + "sections/" + sectionId + "/pages")
 			{
 				Content = new StringContent(simpleHtml, Encoding.UTF8, "text/html")
 			};

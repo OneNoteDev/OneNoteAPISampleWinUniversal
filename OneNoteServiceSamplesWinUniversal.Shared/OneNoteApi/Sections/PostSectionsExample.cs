@@ -63,9 +63,11 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Sections
 		/// <param name="debug">Run the code under the debugger</param>
 		/// <param name="notebookId">parent notebook's Id</param>
 		/// <param name="sectionName">name of the section to create</param>
+		/// <param name="provider"></param>
+		/// <param name="apiRoute"></param>
 		/// <remarks>Create section using a application/json content type</remarks>
 		/// <returns>The converted HTTP response message</returns>
-		public static async Task<ApiBaseResponse> CreateSimpleSection(bool debug, string notebookId, string sectionName)
+		public static async Task<ApiBaseResponse> CreateSimpleSection(bool debug, string notebookId, string sectionName, AuthProvider provider, string apiRoute)
 		{
 			if (debug)
 			{
@@ -80,7 +82,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Sections
 
 			// Not adding the Authentication header would produce an unauthorized call and the API will return a 401
 			client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer",
-				await Auth.GetAuthToken());
+				await Auth.GetAuthToken(provider));
 
 			// Prepare an HTTP POST request to the Sections endpoint
 			// The request body content type is application/json and require a name property

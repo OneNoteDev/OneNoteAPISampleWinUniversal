@@ -62,9 +62,11 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Notebooks
 		/// </summary>
 		/// <param name="debug">Run the code under the debugger</param>
 		/// <param name="notebookName"></param>
+		/// <param name="provider"></param>
+		/// <param name="apiRoute"></param>
 		/// <remarks>Create notebook using a application/json content type</remarks>
 		/// <returns>The converted HTTP response message</returns>
-		public static async Task<ApiBaseResponse> CreateSimpleNotebook(bool debug, string notebookName)
+		public static async Task<ApiBaseResponse> CreateSimpleNotebook(bool debug, string notebookName, AuthProvider provider, string apiRoute)
 		{
 			if (debug)
 			{
@@ -79,11 +81,11 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Notebooks
 
 			// Not adding the Authentication header would produce an unauthorized call and the API will return a 401
 			client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer",
-				await Auth.GetAuthToken());
+				await Auth.GetAuthToken(provider));
 
 			// Prepare an HTTP POST request to the Notebooks endpoint
 			// The request body content type is application/json and require a name property
-			var createMessage = new HttpRequestMessage(HttpMethod.Post, @"https://www.onenote.com/api/v1.0/notebooks")
+			var createMessage = new HttpRequestMessage(HttpMethod.Post, apiRoute + "notebooks")
 			{
 				Content = new StringContent("{ name : '" + WebUtility.UrlEncode(notebookName) + "' }", Encoding.UTF8, "application/json")
 			};

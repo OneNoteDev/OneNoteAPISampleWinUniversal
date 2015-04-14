@@ -16,6 +16,7 @@ namespace OneNoteServiceSamplesWinUniversal
 	public sealed partial class HubPage : SharedBasePage
 	{
 		private readonly NavigationHelper _navigationHelper;
+		private HubContext _hubContext;
 		private readonly ObservableDictionary _defaultViewModel = new ObservableDictionary();
 
 		public HubPage()
@@ -98,8 +99,8 @@ namespace OneNoteServiceSamplesWinUniversal
 		/// <param name="e">Defaults about the click event.</param>
 		private void ItemView_ItemClick(object sender, ItemClickEventArgs e)
 		{
-			var itemId = ((SampleDataItem)e.ClickedItem).UniqueId;
-			Frame.Navigate(typeof(ItemPage), itemId);
+			_hubContext.ItemId = ((SampleDataItem)e.ClickedItem).UniqueId;
+			Frame.Navigate(typeof(ItemPage), _hubContext);
 		}
 
 		#region NavigationHelper registration

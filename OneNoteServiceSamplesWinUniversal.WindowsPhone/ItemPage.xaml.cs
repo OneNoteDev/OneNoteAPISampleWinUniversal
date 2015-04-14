@@ -68,7 +68,7 @@ namespace OneNoteServiceSamplesWinUniversal
 			InputTextBox.Visibility = (item.RequiresInputTextBox) ? Visibility.Visible : Visibility.Collapsed;
 			if (item.RequiresInputComboBox1)
 			{
-				var response = await SampleDataSource.ExecuteApiPrereq(item.UniqueId);
+				var response = await SampleDataSource.ExecuteApiPrereq(item.UniqueId, Auth.GetAuthToken(_navigationHelper.Provider).Result);
 				if (response is List<ApiBaseResponse>)
 				{
 					InputComboBox1.ItemsSource = response;
@@ -168,7 +168,7 @@ namespace OneNoteServiceSamplesWinUniversal
 				}
 			}
 
-            Model.ApiResponse = await SampleDataSource.ExecuteApi(item.UniqueId, debug, requiredSelectedId, requiredInputText);
+            Model.ApiResponse = await SampleDataSource.ExecuteApi(item.UniqueId, debug, requiredSelectedId, requiredInputText, Auth.GetAuthToken(_navigationHelper.Provider).Result);
             Model.AuthUserName = await Auth.GetUserName();
 		}
 

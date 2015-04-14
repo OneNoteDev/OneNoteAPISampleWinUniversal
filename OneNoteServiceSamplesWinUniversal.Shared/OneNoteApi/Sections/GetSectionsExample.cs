@@ -51,7 +51,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Sections
 	/// <code>
 	///  var client = new HttpClient();
 	///  client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-	///  client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await Auth.GetAuthToken());
+	///  client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await Auth.GetAuthprovider());
 	///  var getMessage = new HttpRequestMessage(HttpMethod.Get, "https://www.onenote.com/api/v1.0/sections");
 	///  HttpResponseMessage response = await client.SendAsync(createMessage);
 	/// </code>
@@ -64,8 +64,10 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Sections
 		/// This include the user's sections as well as sections shared with this user by others.
 		/// </summary>
 		/// <param name="debug">Run the code under the debugger</param>
+		/// <param name="provider"></param>
+		/// <param name="apiRoute"></param>
 		/// <returns>The converted HTTP response message</returns>
-		public static async Task<List<ApiBaseResponse>> GetAllSections(bool debug)
+		public static async Task<List<ApiBaseResponse>> GetAllSections(bool debug, AuthProvider provider, string apiRoute)
 		{
 			if (debug)
 			{
@@ -80,10 +82,10 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Sections
 
 			// Not adding the Authentication header would produce an unauthorized call and the API will return a 401
 			client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer",
-				await Auth.GetAuthToken());
+				await Auth.GetAuthToken(provider));
 
 			// Prepare an HTTP GET request to the Sections endpoint
-			var createMessage = new HttpRequestMessage(HttpMethod.Get, @"https://www.onenote.com/api/v1.0/sections");
+			var createMessage = new HttpRequestMessage(HttpMethod.Get, apiRoute + "sections");
 
 			HttpResponseMessage response = await client.SendAsync(createMessage);
 
@@ -96,10 +98,12 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Sections
 		/// </summary>
 		/// <param name="debug">Run the code under the debugger</param>
 		/// <param name="nameFilterString">search for the given section name</param>
+		/// <param name="provider"></param>
+		/// <param name="apiRoute"></param>
 		/// <returns>The converted HTTP response message</returns>
 		/// <example>https://www.onenote.com/api/v1.0/sections?$filter=name%20eq%20'API' 
 		///  returns all sections with name equals (case-sensitive) 'API'</example>
-		public static async Task<List<ApiBaseResponse>> GetAllSectionsWithNameMatchingFilterQueryParam(bool debug, string nameFilterString)
+		public static async Task<List<ApiBaseResponse>> GetAllSectionsWithNameMatchingFilterQueryParam(bool debug, string nameFilterString, AuthProvider provider, string apiRoute)
 		{
 			if (debug)
 			{
@@ -114,11 +118,11 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Sections
 
 			// Not adding the Authentication header would produce an unauthorized call and the API will return a 401
 			client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer",
-				await Auth.GetAuthToken());
+				await Auth.GetAuthToken(provider));
 
 			// Prepare an HTTP GET request to the Sections endpoint
 			var createMessage = new HttpRequestMessage(HttpMethod.Get,
-				String.Format(@"https://www.onenote.com/api/v1.0/sections?$filter=name eq '{0}'", WebUtility.UrlEncode(nameFilterString)));
+				String.Format(apiRoute + "sections?$filter=name eq '{0}'", WebUtility.UrlEncode(nameFilterString)));
 
 			HttpResponseMessage response = await client.SendAsync(createMessage);
 
@@ -134,11 +138,13 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Sections
 		/// </summary>
 		/// <param name="debug">Run the code under the debugger</param>
 		/// <param name="notebookId">Id of the parent notebook</param>
+		/// <param name="provider"></param>
+		/// <param name="apiRoute"></param>
 		/// <remarks>  The notebookId can be fetched from an earlier GET/POST response of Notebooks endpoint (e.g. GET https://www.onenote.com/api/v1.0/notebooks ).
 		/// NOTE: Using this approach, you can still query sections with ALL the different params shown in examples above.
 		/// </remarks>
 		/// <returns>The converted HTTP response message</returns>
-		public static async Task<List<ApiBaseResponse>> GetSectionsUnderASpecificNotebook(bool debug, string notebookId)
+		public static async Task<List<ApiBaseResponse>> GetSectionsUnderASpecificNotebook(bool debug, string notebookId, AuthProvider provider, string apiRoute)
 		{
 			if (debug)
 			{
@@ -153,10 +159,10 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Sections
 
 			// Not adding the Authentication header would produce an unauthorized call and the API will return a 401
 			client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer",
-				await Auth.GetAuthToken());
+				await Auth.GetAuthToken(provider));
 
 			// Prepare an HTTP GET request to the Sections endpoint
-			var createMessage = new HttpRequestMessage(HttpMethod.Get, @"https://www.onenote.com/api/v1.0/notebooks/" + notebookId + "/sections");
+			var createMessage = new HttpRequestMessage(HttpMethod.Get, apiRoute + "notebooks/" + notebookId + "/sections");
 
 			HttpResponseMessage response = await client.SendAsync(createMessage);
 
@@ -172,11 +178,12 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Sections
 		/// </summary>
 		/// <param name="debug">Run the code under the debugger</param>
 		/// <param name="sectionGroupId">Id of the sectionGroup for which the meta data is returned</param>
+		/// <param name="apiRoute"></param>
 		/// <remarks>  The sectionGroupId can be fetched from an earlier GET/POST response of SectionGroups endpoint (e.g. GET https://www.onenote.com/api/v1.0/sectiongroups ).
 		/// NOTE: Using this approach, you can still query sections with ALL the different params shown in examples above.
 		/// </remarks>
 		/// <returns>The converted HTTP response message</returns>
-		public static async Task<List<ApiBaseResponse>> GetSectionsUnderASpecificSectionGroup(bool debug, string sectionGroupId)
+		public static async Task<List<ApiBaseResponse>> GetSectionsUnderASpecificSectionGroup(bool debug, string sectionGroupId, string apiRoute)
 		{
 			if (debug)
 			{
@@ -194,7 +201,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Sections
 				await Auth.GetAuthToken());
 
 			// Prepare an HTTP GET request to the Sections endpoint
-			var createMessage = new HttpRequestMessage(HttpMethod.Get, @"https://www.onenote.com/api/v1.0/sectionGroups/" + sectionGroupId + "/sections");
+			var createMessage = new HttpRequestMessage(HttpMethod.Get, apiRoute + "sectionGroups/" + sectionGroupId + "/sections");
 
 			HttpResponseMessage response = await client.SendAsync(createMessage);
 
@@ -210,11 +217,13 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Sections
 		/// </summary>
 		/// <param name="debug">Run the code under the debugger</param>
 		/// <param name="sectionId">Id of the section for which the meta data is returned</param>
+		/// <param name="provider"></param>
+		/// <param name="apiRoute"></param>
 		/// <remarks>  The sectionId can be fetched from an earlier GET/POST response of Sections/Notebooks/SectionGroups endpoint (e.g. GET https://www.onenote.com/api/v1.0/sections ).
 		/// NOTE: Using this approach, you can still query sections with ALL the different params shown in examples above.
 		/// </remarks>
 		/// <returns>The converted HTTP response message</returns>
-		public static async Task<ApiBaseResponse> GetASpecificSection(bool debug, string sectionId)
+		public static async Task<ApiBaseResponse> GetASpecificSection(bool debug, string sectionId, AuthProvider provider, string apiRoute)
 		{
 			if (debug)
 			{
@@ -229,10 +238,10 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Sections
 
 			// Not adding the Authentication header would produce an unauthorized call and the API will return a 401
 			client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer",
-				await Auth.GetAuthToken());
+				await Auth.GetAuthToken(provider));
 
 			// Prepare an HTTP GET request to the Sections endpoint
-			var createMessage = new HttpRequestMessage(HttpMethod.Get, @"https://www.onenote.com/api/v1.0/sections/" + sectionId);
+			var createMessage = new HttpRequestMessage(HttpMethod.Get, apiRoute + "sections/" + sectionId);
 
 			HttpResponseMessage response = await client.SendAsync(createMessage);
 

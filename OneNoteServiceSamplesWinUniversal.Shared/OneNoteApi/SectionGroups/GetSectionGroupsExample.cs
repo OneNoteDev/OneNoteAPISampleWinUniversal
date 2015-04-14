@@ -63,8 +63,10 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.SectionGroups
 		/// Get info for ALL  of the user's sectionGroups
 		/// </summary>
 		/// <param name="debug">Run the code under the debugger</param>
+		/// <param name="provider"></param>
+		/// <param name="apiRoute"></param>
 		/// <returns>The converted HTTP response message</returns>
-		public static async Task<List<ApiBaseResponse>> GetAllSectionGroups(bool debug)
+		public static async Task<List<ApiBaseResponse>> GetAllSectionGroups(bool debug, AuthProvider provider, string apiRoute)
 		{
 			if (debug)
 			{
@@ -79,7 +81,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.SectionGroups
 
 			// Not adding the Authentication header would produce an unauthorized call and the API will return a 401
 			client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer",
-				await Auth.GetAuthToken());
+				await Auth.GetAuthToken(provider));
 
 			// Prepare an HTTP GET request to the sectionGroups endpoint
 			var createMessage = new HttpRequestMessage(HttpMethod.Get, @"https://www.onenote.com/api/v1.0/sectionGroups");

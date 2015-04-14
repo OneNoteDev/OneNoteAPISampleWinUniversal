@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Windows.Data.Json;
 using Windows.Storage;
+using OneNoteServiceSamplesWinUniversal.OneNoteApi;
 using OneNoteServiceSamplesWinUniversal.OneNoteApi.Notebooks;
 using OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages;
 using OneNoteServiceSamplesWinUniversal.OneNoteApi.SectionGroups;
@@ -47,6 +49,7 @@ namespace OneNoteServiceSamplesWinUniversal.Data
 		public bool RequiresInputComboBox1 { get; private set; }
 		public bool RequiresInputComboBox2 { get; private set; }
 		public bool RequiresInputTextBox { get; private set; }
+
 		public override string ToString()
 		{
 			return this.Title;
@@ -87,9 +90,18 @@ namespace OneNoteServiceSamplesWinUniversal.Data
 	/// </summary>
 	public sealed class SampleDataSource
 	{
+		private const string BetaMeRoute = "beta/me/notes";
+		private const string ConsumerRoute = "v1.0";
 		private static SampleDataSource _sampleDataSource = new SampleDataSource();
-
 		private ObservableCollection<SampleDataGroup> _groups = new ObservableCollection<SampleDataGroup>();
+
+
+		private static string ApiEndPoint(AuthProvider provider = AuthProvider.WindowsLiveId)
+		{
+			return string.Format(CultureInfo.InvariantCulture, "https://www.onenote.com/api/{0}/", provider == AuthProvider.O365 ? BetaMeRoute : ConsumerRoute);
+
+		}
+
 		public ObservableCollection<SampleDataGroup> Groups
 		{
 			get { return this._groups; }
@@ -159,101 +171,103 @@ namespace OneNoteServiceSamplesWinUniversal.Data
 			}
 		}
 
-		public static async Task<object> ExecuteApi(string uniqueId, bool debug, string requiredSelectedId, string requiredInputText)
+		public static async Task<object> ExecuteApi(string uniqueId, bool debug, string requiredSelectedId, string requiredInputText, AuthProvider provider)
 		{
+			var apiEndPoint = ApiEndPoint(provider);
 			switch (uniqueId)
 			{
 				case "Group-0-Item-0":
-				   return await PostPagesExample.CreateSimplePage(debug);
+					return await PostPagesExample.CreateSimplePage(debug, provider, apiEndPoint);
 				case "Group-0-Item-1":
-					return await PostPagesExample.CreatePageWithImage(debug);
+					return await PostPagesExample.CreatePageWithImage(debug, provider, apiEndPoint);
 				case "Group-0-Item-2":
-					return await PostPagesExample.CreatePageWithEmbeddedWebPage(debug);
+					return await PostPagesExample.CreatePageWithEmbeddedWebPage(debug, provider, apiEndPoint);
 				case "Group-0-Item-3":
-					return await PostPagesExample.CreatePageWithUrl(debug);
+					return await PostPagesExample.CreatePageWithUrl(debug, provider, apiEndPoint);
 				case "Group-0-Item-4":
-					return await PostPagesExample.CreatePageWithAttachedFile(debug);
+					return await PostPagesExample.CreatePageWithAttachedFile(debug, provider, apiEndPoint);
 				case "Group-0-Item-5":
-					return await PostPagesExample.CreatePageWithNoteTags(debug);
+					return await PostPagesExample.CreatePageWithNoteTags(debug, provider, apiEndPoint);
 				case "Group-0-Item-6":
-					return await PostPagesExample.CreatePageWithAutoExtractBusinessCard(debug);
+					return await PostPagesExample.CreatePageWithAutoExtractBusinessCard(debug, provider, apiEndPoint);
 				case "Group-0-Item-7":
-					return await PostPagesExample.CreatePageWithAutoExtractRecipe(debug);
+					return await PostPagesExample.CreatePageWithAutoExtractRecipe(debug, provider, apiEndPoint);
 				case "Group-0-Item-8":
-					return await PostPagesExample.CreatePageWithAutoExtractProduct(debug);
+					return await PostPagesExample.CreatePageWithAutoExtractProduct(debug, provider, apiEndPoint);
 				case "Group-0-Item-9":
-					return await PostPagesExample.CreateSimplePageInAGivenSectionName(debug, requiredInputText);
+					return await PostPagesExample.CreateSimplePageInAGivenSectionName(debug, requiredInputText, provider, apiEndPoint);
 				case "Group-0-Item-10":
-					return await PostPagesExample.CreateSimplePageInAGivenSectionId(debug, requiredSelectedId);
+					return await PostPagesExample.CreateSimplePageInAGivenSectionId(debug, requiredSelectedId, provider, apiEndPoint);
 				case "Group-1-Item-0":
-					return await GetPagesExample.GetAllPages(debug);
+					return await GetPagesExample.GetAllPages(debug, provider, apiEndPoint);
 				case "Group-1-Item-1":
-					return await GetPagesExample.GetASpecificPageMetadata(debug, requiredSelectedId);
+					return await GetPagesExample.GetASpecificPageMetadata(debug, requiredSelectedId, provider, apiEndPoint);
 				case "Group-1-Item-2":
-					return await GetPagesExample.GetAllPagesWithTitleContainsFilterQueryParams(debug, requiredInputText);
+					return await GetPagesExample.GetAllPagesWithTitleContainsFilterQueryParams(debug, requiredInputText, provider, apiEndPoint);
 				case "Group-1-Item-3":
-					return await GetPagesExample.GetAllPagesWithSkipAndTopQueryParams(debug, 20, 3);
+					return await GetPagesExample.GetAllPagesWithSkipAndTopQueryParams(debug, 20, 3, provider, apiEndPoint);
 				case "Group-1-Item-4":
-					return await GetPagesExample.GetAllPagesWithOrderByAndSelectQueryParams(debug, "title asc", "id,title");
+					return await GetPagesExample.GetAllPagesWithOrderByAndSelectQueryParams(debug, "title asc", "id,title", provider, apiEndPoint);
 				case "Group-1-Item-5":
-					return await GetPagesExample.SearchAllPages(debug, requiredInputText);
+					return await GetPagesExample.SearchAllPages(debug, requiredInputText, provider, apiEndPoint);
 				case "Group-1-Item-6":
-					return await GetPagesExample.GetASpecificPageContent(debug, requiredSelectedId);
+					return await GetPagesExample.GetASpecificPageContent(debug, requiredSelectedId, provider, apiEndPoint);
                 case "Group-1-Item-7":
-                    return await GetPagesExample.GetAllPagesUnderASpecificSectionId(debug, requiredSelectedId);
+					return await GetPagesExample.GetAllPagesUnderASpecificSectionId(debug, requiredSelectedId, provider, apiEndPoint);
 				case "Group-2-Item-0":
-					return await GetNotebooksExample.GetAllNotebooksExpand(debug);
+					return await GetNotebooksExample.GetAllNotebooksExpand(debug, provider, apiEndPoint);
 				case "Group-2-Item-1":
-					return await GetNotebooksExample.GetAllNotebooks(debug);
+					return await GetNotebooksExample.GetAllNotebooks(debug, provider, apiEndPoint);
 				case "Group-2-Item-2":
-					return await GetNotebooksExample.GetASpecificNotebook(debug, requiredSelectedId);
+					return await GetNotebooksExample.GetASpecificNotebook(debug, requiredSelectedId, provider, apiEndPoint);
 				case "Group-2-Item-3":
-					return await GetSectionsExample.GetAllSections(debug);
+					return await GetSectionsExample.GetAllSections(debug, provider, apiEndPoint);
 				case "Group-2-Item-4":
-					return await GetSectionsExample.GetASpecificSection(debug, requiredSelectedId);
+					return await GetSectionsExample.GetASpecificSection(debug, requiredSelectedId, provider, apiEndPoint);
 				case "Group-2-Item-5":
-					return await GetSectionGroupsExample.GetAllSectionGroups(debug);
+					return await GetSectionGroupsExample.GetAllSectionGroups(debug, provider, apiEndPoint);
 				case "Group-2-Item-6":
-					return await GetNotebooksExample.GetAllNotebooksWithNameMatchingFilterQueryParam(debug, requiredInputText);
+					return await GetNotebooksExample.GetAllNotebooksWithNameMatchingFilterQueryParam(debug, requiredInputText, provider, apiEndPoint);
 				case "Group-2-Item-7":
-					return await GetNotebooksExample.GetAllNotebooksWithUserRoleAsNotOwnerFilterQueryParam(debug);
+					return await GetNotebooksExample.GetAllNotebooksWithUserRoleAsNotOwnerFilterQueryParam(debug, provider, apiEndPoint);
 				case "Group-2-Item-8":
-					return await GetNotebooksExample.GetAllNotebooksWithOrderByAndSelectQueryParams(debug, "name asc", "id,name");
+					return await GetNotebooksExample.GetAllNotebooksWithOrderByAndSelectQueryParams(debug, "name asc", "id,name", provider, apiEndPoint);
 				case "Group-2-Item-9":
-					return await GetSectionsExample.GetSectionsUnderASpecificNotebook(debug, requiredSelectedId);
+					return await GetSectionsExample.GetSectionsUnderASpecificNotebook(debug, requiredSelectedId, provider, apiEndPoint);
 				case "Group-2-Item-10":
-					return await GetSectionsExample.GetAllSectionsWithNameMatchingFilterQueryParam(debug, requiredInputText);
+					return await GetSectionsExample.GetAllSectionsWithNameMatchingFilterQueryParam(debug, requiredInputText, provider, apiEndPoint);
 				case "Group-2-Item-11":
-					return await PostNotebooksExample.CreateSimpleNotebook(debug, requiredInputText);
+					return await PostNotebooksExample.CreateSimpleNotebook(debug, requiredInputText, provider, apiEndPoint);
 				case "Group-2-Item-12":
-					return await PostSectionsExample.CreateSimpleSection(debug, requiredSelectedId, requiredInputText);
+					return await PostSectionsExample.CreateSimpleSection(debug, requiredSelectedId, requiredInputText, provider, apiEndPoint);
 				case "Group-3-Item-0":
-					return await PatchPagesExample.AppendToDefaultOutlineInPageContent(debug, requiredSelectedId);
+					return await PatchPagesExample.AppendToDefaultOutlineInPageContent(debug, requiredSelectedId, provider, apiEndPoint);
 			}
 			return null;
 		}
 
-		public static async Task<object> ExecuteApiPrereq(string uniqueId)
+		public static async Task<object> ExecuteApiPrereq(string uniqueId, AuthProvider provider)
 		{
+			var apiEndPoint = ApiEndPoint(provider);
 			switch (uniqueId)
 			{
 				case "Group-0-Item-10":
                 case "Group-1-Item-7":
-					return await GetNotebooksExample.GetAllNotebooksExpand(false);
+					return await GetNotebooksExample.GetAllNotebooksExpand(false, provider, apiEndPoint);
 				case "Group-1-Item-1":
-					return await GetPagesExample.GetAllPages(false);
+					return await GetPagesExample.GetAllPages(false, provider, apiEndPoint);
 				case "Group-1-Item-6":
-					return await GetPagesExample.GetAllPages(false);
+					return await GetPagesExample.GetAllPages(false, provider, apiEndPoint);
 				case "Group-2-Item-2":
-					return await GetNotebooksExample.GetAllNotebooks(false);
+					return await GetNotebooksExample.GetAllNotebooks(false, provider, apiEndPoint);
 				case "Group-2-Item-4":
-					return await GetSectionsExample.GetAllSections(false);
+					return await GetSectionsExample.GetAllSections(false, provider, apiEndPoint);
 				case "Group-2-Item-9":
-					return await GetNotebooksExample.GetAllNotebooks(false);
+					return await GetNotebooksExample.GetAllNotebooks(false, provider, apiEndPoint);
 				case "Group-2-Item-12":
-					return await GetNotebooksExample.GetAllNotebooks(false);
+					return await GetNotebooksExample.GetAllNotebooks(false, provider, apiEndPoint);
 				case "Group-3-Item-0":
-					return await GetPagesExample.GetAllPages(false);
+					return await GetPagesExample.GetAllPages(false, provider, apiEndPoint);
 
 			}
 			return null;

@@ -4,11 +4,17 @@ using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
+using OneNoteServiceSamplesWinUniversal.OneNoteApi;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace OneNoteServiceSamplesWinUniversal
 {
+	public struct HubContext
+	{
+		public string ItemId;
+		public AuthProvider Provider;
+	}
     /// <summary>
     /// An empty base page that contains shared elements (e.g. BottomAppBar) that all other pages can use.
     /// All other pages in this project derive from this shared base page and inherit shared UI elements like
@@ -20,6 +26,7 @@ namespace OneNoteServiceSamplesWinUniversal
     /// </remarks>
     public partial class SharedBasePage
     {
+	    protected static HubContext UserData;
         public SharedBasePage()
         {
             InitializeComponent();
