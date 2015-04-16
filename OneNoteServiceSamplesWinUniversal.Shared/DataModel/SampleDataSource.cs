@@ -91,14 +91,25 @@ namespace OneNoteServiceSamplesWinUniversal.Data
 	public sealed class SampleDataSource
 	{
 		private const string BetaMeRoute = "beta/me/notes";
-		private const string ConsumerRoute = "v1.0";
+		private const string ConsumerRoute = "v1.0/me/notes";
 		private static SampleDataSource _sampleDataSource = new SampleDataSource();
 		private ObservableCollection<SampleDataGroup> _groups = new ObservableCollection<SampleDataGroup>();
 
+		private static string TargetDomain(bool productionReady = true)
+		{
+			// TODO : change default to true when scopes reach production tenants
+			if (productionReady)
+			{
+				return "www.onenote.com";
+			}
 
+			return "edog.onenote.com";
+		}
 		private static string ApiEndPoint(AuthProvider provider = AuthProvider.WindowsLiveId)
 		{
-			return string.Format(CultureInfo.InvariantCulture, "https://www.onenote.com/api/{0}/", provider == AuthProvider.O365 ? BetaMeRoute : ConsumerRoute);
+			return string.Format(CultureInfo.InvariantCulture, "https://{0}/api/{1}/", 
+				provider == AuthProvider.WindowsLiveId? TargetDomain(productionReady: true): TargetDomain(), 
+				provider == AuthProvider.O365 ? BetaMeRoute : ConsumerRoute);
 
 		}
 
