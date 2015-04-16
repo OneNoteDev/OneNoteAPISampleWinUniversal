@@ -131,7 +131,9 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi
 				{
 					//look to see if we have an authentication context in cache already
 					//we would have gotten this when we authenticated previously
-					if (AuthenticationContext.TokenCache.ReadItems().Any(i => i.ExpiresOn > DateTimeOffset.UtcNow.UtcDateTime))
+					if (AuthenticationContext.TokenCache.ReadItems().Any(
+						i => i.ExpiresOn > DateTimeOffset.UtcNow.UtcDateTime &&
+						(i.IdentityProvider == "https://login.windows-ppe.net" || i.IdentityProvider == "https://login.windows.net")))
 					{
 						//re-bind AuthenticationContext to the authority source of the cached token.
 						//this is needed for the cache to work when asking for a token from that authority.
