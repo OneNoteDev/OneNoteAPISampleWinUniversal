@@ -36,11 +36,14 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi
 
 		// TODO: Replace the below ClientId with your app's ClientId.
 		// For more info, see: http://msdn.microsoft.com/en-us/library/office/dn575426(v=office.15).aspx
+		private const string ClientIdPpe = "d1b48acb-5ff2-4e43-b6a2-96e4e5ab7471"; // Gareth's tenant
+		private const string ClientIdProd = "172c4773-9607-480b-b94a-29c48d998080"; // Sharad's tenant
+
 		private static string ClientId 
 		{
 			get
 			{
-				return !ProductionReady ? "5db0f601-e60d-4759-b9c2-bb3d4921ee78" : "172c4773-9607-480b-b94a-29c48d998080"; 
+				return !ProductionReady ? ClientIdPpe : ClientIdProd; 
 			}
 		}
 
@@ -155,7 +158,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi
 					try
 					{
 						await SignOut();
-						authenticationResult = await AuthenticationContext.AcquireTokenAsync(ResourceUri, ClientId, new Uri(RedirectUri), PromptBehavior.Always);
+						authenticationResult = await AuthenticationContext.AcquireTokenAsync(ResourceUri, ClientId, new Uri(RedirectUri), PromptBehavior.Auto);
 
 						_accessToken = authenticationResult.AccessToken;
 						_refreshToken = authenticationResult.RefreshToken;
@@ -202,7 +205,6 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi
 
 		internal async static Task<string> GetUserName()
 		{
-			_authenticationResult = await GetAuthenticationResult();
 			return _authenticationResult != null ?(_authenticationResult.UserInfo != null ?_authenticationResult.UserInfo.GivenName: string.Empty ): string.Empty;
 		}
 
@@ -211,7 +213,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi
 		// Collateral used to refresh access token
 		private static DateTimeOffset _accessTokenExpiration;
 		private static string _refreshToken;
-		private static bool _productionReady = true;
+		private static bool _productionReady;// TODO: - when ready for production, set this to true by default
 
 		/// <summary>
 		///  Refreshes the live authentication access token if it is about to expire in next  5 minutes

@@ -111,7 +111,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi
 
 		internal static async Task<string> GetUserName()
 		{
-			var uri = new Uri(LiveApiMeUri + GetAuthToken());
+			var uri = new Uri(LiveApiMeUri + await GetAuthToken());
 			var client = new HttpClient();
 			var result = await client.GetAsync(uri);
 

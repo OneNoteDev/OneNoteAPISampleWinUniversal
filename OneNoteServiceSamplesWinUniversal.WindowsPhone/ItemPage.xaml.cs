@@ -68,7 +68,7 @@ namespace OneNoteServiceSamplesWinUniversal
 			InputTextBox.Visibility = (item.RequiresInputTextBox) ? Visibility.Visible : Visibility.Collapsed;
 			if (item.RequiresInputComboBox1)
 			{
-				var response = await SampleDataSource.ExecuteApiPrereq(item.UniqueId, Auth.GetAuthToken(_navigationHelper.Provider).Result);
+				var response = await SampleDataSource.ExecuteApiPrereq(item.UniqueId, Auth.GetAuthToken(UserData.Provider).Result);
 				if (response is List<ApiBaseResponse>)
 				{
 					InputComboBox1.ItemsSource = response;

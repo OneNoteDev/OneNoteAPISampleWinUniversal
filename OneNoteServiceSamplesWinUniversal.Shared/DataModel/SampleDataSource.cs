@@ -95,7 +95,7 @@ namespace OneNoteServiceSamplesWinUniversal.Data
 		private static SampleDataSource _sampleDataSource = new SampleDataSource();
 		private ObservableCollection<SampleDataGroup> _groups = new ObservableCollection<SampleDataGroup>();
 
-		private static string TargetDomain(bool productionReady = true)
+		private static string TargetDomain(bool productionReady = false)
 		{
 			// TODO : change default to true when scopes reach production tenants
 			if (productionReady)

@@ -113,8 +113,9 @@ namespace OneNoteServiceSamplesWinUniversal
 		}
 
 
-		private void ToggleSwitch_Toggled(object sender, RoutedEventArgs e)
+		private async void ToggleSwitch_Toggled(object sender, RoutedEventArgs e)
 		{
+			await Auth.SignOut(UserData.Provider);
 			UserData.Provider = toggleSwitch.IsOn ? AuthProvider.O365 : AuthProvider.WindowsLiveId;
 		}
 	}

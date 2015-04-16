@@ -50,8 +50,6 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi
 			}
 			else
 			{
-				// TODO : set this to true when the scopes become available in production tenants
-				O365Auth.ProductionReady = false;
 				return await O365Auth.GetAuthToken();
 			}
 		}
