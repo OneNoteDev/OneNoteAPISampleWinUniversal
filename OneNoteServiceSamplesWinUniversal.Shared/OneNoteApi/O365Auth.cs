@@ -36,14 +36,14 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi
 
 		// TODO: Replace the below ClientId with your app's ClientId.
 		// For more info, see: http://msdn.microsoft.com/en-us/library/office/dn575426(v=office.15).aspx
-		private const string ClientIdPpe = "d1b48acb-5ff2-4e43-b6a2-96e4e5ab7471"; // Gareth's tenant
-		private const string ClientIdProd = "172c4773-9607-480b-b94a-29c48d998080"; // Sharad's tenant
+		private const string ClientIdPpe = "d1b48acb-5ff2-4e43-b6a2-96e4e5ab7471"; // PPE (Gareth's) tenant
+		private const string ClientIdProd = "172c4773-9607-480b-b94a-29c48d998080"; // Production (Sharad's) tenant
 
 		private static string ClientId 
 		{
 			get
 			{
-				return !ProductionReady ? ClientIdPpe : ClientIdProd; 
+				return !TargetProduction ? ClientIdPpe : ClientIdProd; 
 			}
 		}
 
@@ -59,36 +59,36 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi
 		{
 			get
 			{
-				return !ProductionReady ? AuthContextUrlPpe : AuthContextUrlProduction;
+				return !TargetProduction ? AuthContextUrlPpe : AuthContextUrlProduction;
 			}
 		}
 
-		private const string ResourceUriProd = "https://sharmas.sharepoint.com";
+		private const string ResourceUriProd = "https://onenote.com"; //"https://sharmas.sharepoint.com";
 		private const string ResourceUriPpe = "https://onenote.com";
 		private static string ResourceUri
 		{
 			get
 			{
-				return GetResourceHost(!ProductionReady ? ResourceUriPpe : ResourceUriProd);
+				return GetResourceHost(!TargetProduction ? ResourceUriPpe : ResourceUriProd);
 			}
 		}
 
-		private const string RedirectUriProd = "http://TodoListClient";
+		private const string RedirectUriProd = "https://localhost"; //"http://TodoListClient";
 		private const string RedirectUriPpe = "https://localhost";
 
 		private static string RedirectUri
 		{
 			get
 			{
-				return !ProductionReady ? RedirectUriPpe : RedirectUriProd;
+				return !TargetProduction ? RedirectUriPpe : RedirectUriProd;
 			}
 		}
 
 
-		internal static bool ProductionReady
+		internal static bool TargetProduction
 		{
-			get { return _productionReady; }
-			set { _productionReady = value; }
+			get { return _targetProduction; }
+			set { _targetProduction = value; }
 		}
 
 		/// <summary>
@@ -123,7 +123,6 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi
 		internal static async Task<AuthenticationResult> GetAuthenticationResult()
 		{
 			AuthenticationResult authenticationResult = null;
-
 
 			if (String.IsNullOrWhiteSpace(_accessToken))
 			{
@@ -215,7 +214,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi
 		// Collateral used to refresh access token
 		private static DateTimeOffset _accessTokenExpiration;
 		private static string _refreshToken;
-		private static bool _productionReady;// TODO: - when ready for production, set this to true by default
+		private static bool _targetProduction = true;// TODO: - when ready for production, set this to true by default
 
 		/// <summary>
 		///  Refreshes the live authentication access token if it is about to expire in next  5 minutes
