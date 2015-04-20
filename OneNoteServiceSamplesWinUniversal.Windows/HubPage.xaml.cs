@@ -56,6 +56,7 @@ namespace OneNoteServiceSamplesWinUniversal
 		{
 			var sampleDataGroups = await SampleDataSource.GetGroupsAsync();
 			DefaultViewModel["Groups"] = sampleDataGroups;
+			toggleSwitch.IsOn = UserData.Provider == AuthProvider.O365;
 		}
 
 		/// <summary>
