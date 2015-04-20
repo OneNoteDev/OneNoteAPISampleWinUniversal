@@ -32,11 +32,8 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi
 	{
 		private static AuthenticationResult _authenticationResult;
 		private static AuthenticationContext _authenticationContext;
-		private static string _accessToken;
 
 		// Collateral used to refresh access token
-		private static DateTimeOffset _accessTokenExpiration;
-		private static string _refreshToken;
 		private static bool _targetProduction = true;
 
 		// TODO: Replace the below ClientId with your app's ClientId.
@@ -52,7 +49,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi
 			}
 		}
 
-	// OneNote APIs support multiple O365 scopes for OneNote entity.
+		// OneNote APIs support multiple O365 scopes for OneNote entity.
 		// As a guideline, always choose the least permissible scope that your app needs.
 		// Since this code sample demonstrates multiple aspects of the APIs, it uses the most
 		// permissible scope.
@@ -88,7 +85,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi
 		internal static async Task<string> GetAuthToken()
 		{
 			await GetAuthenticationResult();
-			return _accessToken;
+			return AccessToken;
 		}
 
 		internal static AuthenticationContext AuthContext
@@ -100,6 +97,11 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi
 			}
 			set { _authenticationContext = value; }
 		}
+
+		internal static string AccessToken
+		{
+			get { return _authenticationResult != null ? _authenticationResult.AccessToken : string.Empty; }
+		}
 		/// <summary>
 		/// Gets a valid authentication token. Also refreshes the access token if it has expired.
 		/// </summary>
@@ -110,14 +112,16 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi
 		internal static async Task<AuthenticationResult> GetAuthenticationResult()
 		{
 
-			if (String.IsNullOrWhiteSpace(_accessToken))
+			if (String.IsNullOrEmpty(AccessToken))
 			{
 				try
 				{
 					//look to see if we have an authentication context in cache already
 					//we would have gotten this when we authenticated previously
 					var cachedItem = AuthContext.TokenCache.ReadItems().First(
-						i => (i.IdentityProvider == "https://login.windows-ppe.net" || i.IdentityProvider == "https://login.windows.net"));
+						i => (i.IdentityProvider == "https://login.windows-ppe.net" || 
+						i.IdentityProvider == "https://login.windows.net"));
+
 					if (cachedItem != null)
 					{
 						//re-bind AuthenticationContext to the authority source of the cached token.
@@ -127,9 +131,6 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi
 						//try to get the AccessToken silently using the resourceId that was passed in
 						//and the client ID of the application.
 						_authenticationResult = await AuthContext.AcquireTokenSilentAsync(GetResourceHost(ResourceUri), ClientId);
-
-						_accessToken = _authenticationResult.AccessToken;
-						_refreshToken = _authenticationResult.RefreshToken;
 						RefreshAuthTokenIfNeeded().Wait();
 					}
 				}
@@ -145,9 +146,6 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi
 				{
 					_authenticationResult =
 						await AuthContext.AcquireTokenAsync(GetResourceHost(ResourceUri), ClientId, new Uri(RedirectUri), PromptBehavior.Always);
-
-					_accessToken = _authenticationResult.AccessToken;
-					_refreshToken = _authenticationResult.RefreshToken;
 				}
 				catch (Exception)
 				{
@@ -170,17 +168,17 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi
 		internal static async Task SignOut()
 #pragma warning restore 1998
 		{
-			if (IsSignedIn && _authenticationResult != null && _authenticationResult.UserInfo != null && !string.IsNullOrEmpty(_authenticationResult.UserInfo.UniqueId))
+			if (IsSignedIn && _authenticationResult != null && _authenticationResult.UserInfo != null && 
+				!string.IsNullOrEmpty(_authenticationResult.UserInfo.UniqueId))
 			{
 				_authenticationContext.TokenCache.Clear();
-				_accessToken = null;
-
+				_authenticationResult = null;
 			}
 		}
 
 		internal static bool IsSignedIn
 		{
-			get { return _authenticationResult != null && _accessToken != null; }
+			get { return !string.IsNullOrEmpty(AccessToken); }
 		}
 
 		internal async static Task<string> GetUserName()
@@ -197,7 +195,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi
 		/// </summary>
 		public static async Task RefreshAuthTokenIfNeeded(double minutes = 5)
 		{
-			if (DateTimeOffset.Now.UtcDateTime.AddMinutes(minutes) > _accessTokenExpiration)
+			if (_authenticationResult != null && DateTimeOffset.Now.UtcDateTime.AddMinutes(minutes) > _authenticationResult.ExpiresOn)
 			{
 				await AttemptAccessTokenRefresh();
 			}
@@ -210,9 +208,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi
 		/// <returns></returns>
 		public static async Task AttemptAccessTokenRefresh()
 		{
-			_authenticationResult = await AuthContext.AcquireTokenByRefreshTokenAsync(_refreshToken, ClientId);
-			_accessToken = _authenticationResult.AccessToken;
-			_accessTokenExpiration = _authenticationResult.ExpiresOn;
+			_authenticationResult = await AuthContext.AcquireTokenByRefreshTokenAsync(_authenticationResult.RefreshToken, ClientId);
 		}
 
 		#endregion
