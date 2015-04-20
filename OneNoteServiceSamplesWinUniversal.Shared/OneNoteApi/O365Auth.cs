@@ -117,8 +117,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi
 					//look to see if we have an authentication context in cache already
 					//we would have gotten this when we authenticated previously
 					var cachedItem = AuthContext.TokenCache.ReadItems().First(
-						i => i.ExpiresOn > DateTimeOffset.UtcNow.UtcDateTime &&
-						     (i.IdentityProvider == "https://login.windows-ppe.net" || i.IdentityProvider == "https://login.windows.net"));
+						i => (i.IdentityProvider == "https://login.windows-ppe.net" || i.IdentityProvider == "https://login.windows.net"));
 					if (cachedItem != null)
 					{
 						//re-bind AuthenticationContext to the authority source of the cached token.
@@ -131,6 +130,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi
 
 						_accessToken = _authenticationResult.AccessToken;
 						_refreshToken = _authenticationResult.RefreshToken;
+						RefreshAuthTokenIfNeeded().Wait();
 					}
 				}
 				catch (Exception)
@@ -143,9 +143,8 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi
 			{
 				try
 				{
-					await SignOut();
 					_authenticationResult =
-						await AuthContext.AcquireTokenAsync(ResourceUri, ClientId, new Uri(RedirectUri), PromptBehavior.Always);
+						await AuthContext.AcquireTokenAsync(GetResourceHost(ResourceUri), ClientId, new Uri(RedirectUri), PromptBehavior.Always);
 
 					_accessToken = _authenticationResult.AccessToken;
 					_refreshToken = _authenticationResult.RefreshToken;
@@ -156,10 +155,6 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi
 					if (Debugger.IsAttached)
 						Debugger.Break();
 				}
-			}
-			else
-			{
-				RefreshAuthTokenIfNeeded().Wait();
 			}
 
 			return _authenticationResult;
@@ -190,7 +185,9 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi
 
 		internal async static Task<string> GetUserName()
 		{
-			return _authenticationResult != null ?(_authenticationResult.UserInfo != null ?_authenticationResult.UserInfo.GivenName: string.Empty ): string.Empty;
+			return _authenticationResult != null ?
+			(_authenticationResult.UserInfo != null ?
+			_authenticationResult.UserInfo.GivenName  + " " + _authenticationResult.UserInfo.FamilyName: string.Empty ): string.Empty;
 		}
 
 		#region RefreshToken related code
