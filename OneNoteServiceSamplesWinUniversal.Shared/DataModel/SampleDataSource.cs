@@ -102,8 +102,8 @@ namespace OneNoteServiceSamplesWinUniversal.Data
 
 		private static string ApiEndPoint(AuthProvider provider = AuthProvider.WindowsLiveId)
 		{
-			return string.Format(CultureInfo.InvariantCulture, "https://{0}/api/{1}/", 
-				TargetDomain(), provider == AuthProvider.O365 ? BetaMeRoute : ConsumerRoute);
+			return string.Format(CultureInfo.InvariantCulture, "https://{0}/api/{1}/",
+				TargetDomain(O365Auth.TargetProduction), provider == AuthProvider.O365 ? BetaMeRoute : ConsumerRoute);
 
 		}
 
