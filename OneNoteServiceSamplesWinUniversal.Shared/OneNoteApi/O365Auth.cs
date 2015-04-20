@@ -84,8 +84,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi
 		/// <returns>valid authentication token</returns>
 		internal static async Task<string> GetAuthToken()
 		{
-			await GetAuthenticationResult();
-			return AccessToken;
+			return (await GetAuthenticationResult()).AccessToken;
 		}
 
 		internal static AuthenticationContext AuthContext
@@ -102,6 +101,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi
 		{
 			get { return _authenticationResult != null ? _authenticationResult.AccessToken : string.Empty; }
 		}
+
 		/// <summary>
 		/// Gets a valid authentication token. Also refreshes the access token if it has expired.
 		/// </summary>
@@ -140,7 +140,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi
 				}
 			}
 
-			if (_authenticationResult == null || string.IsNullOrEmpty(_authenticationResult.AccessToken))
+			if (string.IsNullOrEmpty(AccessToken))
 			{
 				try
 				{
@@ -164,14 +164,16 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi
 			return theHost.Scheme + "://" + theHost.Host + "/";
 		}
 
-#pragma warning disable 1998
 		internal static async Task SignOut()
-#pragma warning restore 1998
 		{
-			if (IsSignedIn && _authenticationResult != null && _authenticationResult.UserInfo != null && 
-				!string.IsNullOrEmpty(_authenticationResult.UserInfo.UniqueId))
+			await Task.Delay(0);
+
+			if (IsSignedIn)
 			{
-				_authenticationContext.TokenCache.Clear();
+				if (_authenticationContext != null)
+				{
+					_authenticationContext.TokenCache.Clear();
+				}
 				_authenticationResult = null;
 			}
 		}
@@ -183,6 +185,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi
 
 		internal async static Task<string> GetUserName()
 		{
+			await Task.Delay(0);
 			return _authenticationResult != null ?
 			(_authenticationResult.UserInfo != null ?
 			_authenticationResult.UserInfo.GivenName  + " " + _authenticationResult.UserInfo.FamilyName: string.Empty ): string.Empty;
