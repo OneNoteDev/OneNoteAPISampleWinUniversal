@@ -10,7 +10,7 @@ using OneNoteServiceSamplesWinUniversal.OneNoteApi;
 
 namespace OneNoteServiceSamplesWinUniversal
 {
-	public struct HubContext
+	public class HubContext
 	{
 		public string ItemId;
 		public AuthProvider Provider;
@@ -26,7 +26,7 @@ namespace OneNoteServiceSamplesWinUniversal
     /// </remarks>
     public partial class SharedBasePage
     {
-	    protected static HubContext UserData;
+	    protected static HubContext UserData = new HubContext();
         public SharedBasePage()
         {
             InitializeComponent();

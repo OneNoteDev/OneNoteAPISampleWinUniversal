@@ -64,7 +64,16 @@ namespace OneNoteServiceSamplesWinUniversal
 		/// session.  The state will be null the first time a page is visited.</param>
 		private async void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
 		{
-			 UserData.ItemId = (string) e.NavigationParameter;
+			var itemId = e.NavigationParameter as string;
+			if (itemId != null)
+			{
+				UserData.ItemId = itemId;
+			}
+			else
+			{
+				UserData = (HubContext) e.NavigationParameter;
+			}
+
 			var item = await SampleDataSource.GetItemAsync(UserData.ItemId);
 			Model.Item = item;
 			InputSelectionPanel2.Visibility = (item.RequiresInputComboBox2) ? Visibility.Visible : Visibility.Collapsed;
