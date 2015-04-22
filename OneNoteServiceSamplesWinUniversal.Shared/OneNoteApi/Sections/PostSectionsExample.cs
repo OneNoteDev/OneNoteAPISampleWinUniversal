@@ -86,7 +86,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Sections
 
 			// Prepare an HTTP POST request to the Sections endpoint
 			// The request body content type is application/json and require a name property
-			var createMessage = new HttpRequestMessage(HttpMethod.Post, @"https://www.onenote.com/api/v1.0/notebooks/" + notebookId + "/sections")
+			var createMessage = new HttpRequestMessage(HttpMethod.Post, apiRoute + @"notebooks/" + notebookId + "/sections")
 			{
 				Content = new StringContent("{ name : '" + WebUtility.UrlEncode(sectionName) + "' }", Encoding.UTF8, "application/json")
 			};

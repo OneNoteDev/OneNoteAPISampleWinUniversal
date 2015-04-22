@@ -95,7 +95,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi
 					//we would have gotten this when we authenticated previously
 					var allCachedItems = AuthContext.TokenCache.ReadItems();
 					var validCachedItems = allCachedItems
-									.Where(i=> i.ExpiresOn > DateTimeOffset.UtcNow && IsO365Token(i.IdentityProvider))
+									.Where(i => i.ExpiresOn > DateTimeOffset.UtcNow.UtcDateTime && IsO365Token(i.IdentityProvider))
 									.OrderByDescending(e=>e.ExpiresOn);
 					var cachedItem = validCachedItems.First();
 					if (cachedItem != null)

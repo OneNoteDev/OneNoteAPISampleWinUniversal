@@ -84,7 +84,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.SectionGroups
 				await Auth.GetAuthToken(provider));
 
 			// Prepare an HTTP GET request to the sectionGroups endpoint
-			var createMessage = new HttpRequestMessage(HttpMethod.Get, @"https://www.onenote.com/api/v1.0/sectionGroups");
+			var createMessage = new HttpRequestMessage(HttpMethod.Get, apiRoute + "sectionGroups");
 
 			HttpResponseMessage response = await client.SendAsync(createMessage);
 
