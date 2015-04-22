@@ -20,6 +20,7 @@
 using System;
 using System.Diagnostics;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 using Microsoft.IdentityModel.Clients.ActiveDirectory;
@@ -33,47 +34,21 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi
 		private static AuthenticationResult _authenticationResult;
 		private static AuthenticationContext _authenticationContext;
 
-		// Collateral used to refresh access token
-		private static bool _targetProduction = true;
-
 		// TODO: Replace the below ClientId with your app's ClientId.
 		// For more info, see: http://msdn.microsoft.com/en-us/library/office/dn575426(v=office.15).aspx
-		private const string ClientIdPpe = "d1b48acb-5ff2-4e43-b6a2-96e4e5ab7471"; // PPE (Gareth's) tenant
-		private const string ClientIdProd = "2bb5432a-93d1-4a3d-955e-e20c8d0e00e0"; // Production (Sharad's) tenant
-
-		private static string ClientId 
-		{
-			get
-			{
-				return !TargetProduction ? ClientIdPpe : ClientIdProd; 
-			}
-		}
+		private const string ClientId = "2bb5432a-93d1-4a3d-955e-e20c8d0e00e0"; // onebeta
 
 		// OneNote APIs support multiple O365 scopes for OneNote entity.
 		// As a guideline, always choose the least permissible scope that your app needs.
 		// Since this code sample demonstrates multiple aspects of the APIs, it uses the most
 		// permissible scope.
 
-		private const string AuthContextUrlProduction = "https://login.windows.net/Common";
-		private const string AuthContextUrlPpe = "https://login.windows-ppe.net/Common";
-
-		private static string AuthContextUrl
-		{
-			get
-			{
-				return !TargetProduction ? AuthContextUrlPpe : AuthContextUrlProduction;
-			}
-		}
+		private const string AuthContextUrl = "https://login.windows.net/Common";
 
 		private const string ResourceUri = "https://onenote.com";
 
+		// TODO: Replace the below RedirectUri with your app's RedirectUri.
 		private const string RedirectUri = "https://localhost";
-
-		internal static bool TargetProduction
-		{
-			get { return _targetProduction; }
-			set { _targetProduction = value; }
-		}
 
 		/// <summary>
 		/// Gets a valid authentication token. Also refreshes the access token if it has expired.
@@ -118,10 +93,11 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi
 				{
 					//look to see if we have an authentication context in cache already
 					//we would have gotten this when we authenticated previously
-					var cachedItem = AuthContext.TokenCache.ReadItems().First(
-						i => (i.IdentityProvider == "https://login.windows-ppe.net" || 
-						i.IdentityProvider == "https://login.windows.net"));
-
+					var allCachedItems = AuthContext.TokenCache.ReadItems();
+					var validCachedItems = allCachedItems
+									.Where(i=> i.ExpiresOn > DateTimeOffset.UtcNow && IsO365Token(i.IdentityProvider))
+									.OrderByDescending(e=>e.ExpiresOn);
+					var cachedItem = validCachedItems.First();
 					if (cachedItem != null)
 					{
 						//re-bind AuthenticationContext to the authority source of the cached token.
@@ -144,6 +120,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi
 			{
 				try
 				{
+					AuthContext.TokenCache.Clear();
 					_authenticationResult =
 						await AuthContext.AcquireTokenAsync(GetResourceHost(ResourceUri), ClientId, new Uri(RedirectUri), PromptBehavior.Always);
 				}
@@ -158,6 +135,11 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi
 			return _authenticationResult;
 		}
 
+		private static bool IsO365Token(string identityProvider)
+		{
+			Match result =  Regex.Match(identityProvider, "https://.*.windows.*.net/.*/");
+			return result.Success;
+		}
 		private static string GetResourceHost(string url)
 		{
 			Uri theHost = new Uri(url);

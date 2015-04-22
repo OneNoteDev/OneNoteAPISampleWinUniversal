@@ -95,15 +95,15 @@ namespace OneNoteServiceSamplesWinUniversal.Data
 		private static SampleDataSource _sampleDataSource = new SampleDataSource();
 		private ObservableCollection<SampleDataGroup> _groups = new ObservableCollection<SampleDataGroup>();
 
-		private static string TargetDomain(bool targetOneServiceProdEnvironment = true)
+		private static string TargetDomain()
 		{
-			return targetOneServiceProdEnvironment ? "www.onenote.com" : "edog.onenote.com";
+			return "www.onenote.com";
 		}
 
 		private static string ApiEndPoint(AuthProvider provider = AuthProvider.WindowsLiveId)
 		{
 			return string.Format(CultureInfo.InvariantCulture, "https://{0}/api/{1}/",
-				TargetDomain(O365Auth.TargetProduction), provider == AuthProvider.O365 ? BetaMeRoute : ConsumerRoute);
+				TargetDomain(), provider == AuthProvider.O365 ? BetaMeRoute : ConsumerRoute);
 
 		}
 
