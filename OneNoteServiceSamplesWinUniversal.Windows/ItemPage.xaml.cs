@@ -123,6 +123,8 @@ namespace OneNoteServiceSamplesWinUniversal
 			bool debug = button != null && button.Name.Equals("DebugButton");
 			SampleDataItem item = Model.Item;
 
+			UserData.TimeStamp = DateTime.UtcNow;
+			Model.UserData = UserData;
 			await ExecuteApiAction(debug, item);
 			Model.AuthUserName = await Auth.GetUserName(UserData.Provider);
 		}

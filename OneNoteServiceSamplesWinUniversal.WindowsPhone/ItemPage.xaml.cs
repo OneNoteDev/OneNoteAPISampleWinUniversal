@@ -167,7 +167,8 @@ namespace OneNoteServiceSamplesWinUniversal
 					return;
 				}
 			}
-
+			UserData.TimeStamp = DateTime.UtcNow;
+			Model.UserData = UserData;
             Model.ApiResponse = await SampleDataSource.ExecuteApi(item.UniqueId, debug, requiredSelectedId, requiredInputText, Auth.GetAuthToken(_navigationHelper.Provider).Result);
             Model.AuthUserName = await Auth.GetUserName();
 		}

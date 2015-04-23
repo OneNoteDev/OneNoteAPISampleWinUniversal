@@ -9,9 +9,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OneNoteServiceSamplesWinUni
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OneNoteServiceSamplesWinUniversal.WindowsPhone", "OneNoteServiceSamplesWinUniversal.WindowsPhone\OneNoteServiceSamplesWinUniversal.WindowsPhone.csproj", "{7310B814-9334-43BC-921C-735B66984A1D}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "OneNoteServiceSamplesWinUniversal.Shared", "OneNoteServiceSamplesWinUniversal.Shared\OneNoteServiceSamplesWinUniversal.Shared.shproj", "{556A67F3-BD06-49BE-AE69-E638D2D6A790}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		OneNoteServiceSamplesWinUniversal.Shared\OneNoteServiceSamplesWinUniversal.Shared.projitems*{7310b814-9334-43bc-921c-735b66984a1d}*SharedItemsImports = 4
+		OneNoteServiceSamplesWinUniversal.Shared\OneNoteServiceSamplesWinUniversal.Shared.projitems*{556a67f3-bd06-49be-ae69-e638d2d6a790}*SharedItemsImports = 13
 		OneNoteServiceSamplesWinUniversal.Shared\OneNoteServiceSamplesWinUniversal.Shared.projitems*{04b19d2e-1156-423e-8e90-524f91ee688f}*SharedItemsImports = 4
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -76,5 +79,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{04B19D2E-1156-423E-8E90-524F91EE688F} = {617E6D0F-972F-409A-AE75-3C85B5BE5899}
 		{7310B814-9334-43BC-921C-735B66984A1D} = {617E6D0F-972F-409A-AE75-3C85B5BE5899}
+		{556A67F3-BD06-49BE-AE69-E638D2D6A790} = {617E6D0F-972F-409A-AE75-3C85B5BE5899}
 	EndGlobalSection
 EndGlobal

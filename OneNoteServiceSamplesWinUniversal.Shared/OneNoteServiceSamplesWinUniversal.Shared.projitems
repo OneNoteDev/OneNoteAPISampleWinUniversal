@@ -18,6 +18,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)DataModel\ItemPageModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DataModel\SampleDataSource.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)OneNoteApi\ApiBaseResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)OneNoteApi\HttpUtils.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)OneNoteApi\O365Auth.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)OneNoteApi\LiveIdAuth.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)OneNoteApi\Auth.cs" />

@@ -93,8 +93,10 @@
                     <Button x:Name="DebugButton" Margin="20,20,0,20" Click="Button_Click">Debug</Button>
                 </StackPanel>
             </Grid>
-            <Grid x:Name="OutputRegionGrid" DataContext="{Binding ElementName=pageRoot, Path=Model}" Grid.ColumnSpan="2" Margin="730,0,0,0">
+            <Grid x:Name="OutputRegionGrid" DataContext="{Binding ElementName=pageRoot, Path=Model}" Grid.ColumnSpan="2" Margin="757,10,0,0">
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
@@ -102,24 +104,28 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto" MinWidth="176"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="Auto" MinWidth="92"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" Grid.Row="0"  TextAlignment="Left" VerticalAlignment="Center" Margin="20,20,0,5" Style="{StaticResource SubtitleTextBlockStyle}">Response:</TextBlock>
-                <TextBox Text="{Binding StatusCode}" IsEnabled="{Binding IsResponseAvailable}" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2" Margin="20,10,0,0" IsReadOnly="True" MaxWidth="300" HorizontalAlignment="Left"/>
-                <TextBlock Grid.Column="0" Grid.Row="1" TextAlignment="Left" VerticalAlignment="Center" Margin="20,20,0,5" Style="{StaticResource SubtitleTextBlockStyle}">Body:</TextBlock>
+                <TextBlock Grid.Column="0" Grid.Row="0"  TextAlignment="Left" VerticalAlignment="Center" Margin="20,20,0,5" Style="{StaticResource SubtitleTextBlockStyle}" Height="20">Response:</TextBlock>
+                <TextBox Text="{Binding StatusCode}" IsEnabled="{Binding IsResponseAvailable}" Grid.Column="1" Grid.Row="0" Margin="20,10,0,0" IsReadOnly="True" MaxWidth="300" HorizontalAlignment="Left" Width="182"/>
+                <TextBlock Grid.Column="0" Grid.Row="1" TextAlignment="Left" VerticalAlignment="Center" Margin="20,36,0,20" Style="{StaticResource SubtitleTextBlockStyle}" Height="20">Body:</TextBlock>
                 <Border BorderThickness="{Binding BodyBorderThikness}" BorderBrush="Gray" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Margin="20,10,10,0">
                     <TextBox Text="{Binding Body}" MaxHeight="400" x:Name="ResponseBody" ScrollViewer.VerticalScrollBarVisibility="Visible" IsEnabled="{Binding IsResponseAvailable}" IsReadOnly="True" TextWrapping="Wrap" AcceptsReturn="True" BorderThickness="0"/>
                 </Border>
-                <TextBlock Visibility="{Binding IsResponseListAvailable}" Grid.Column="0" Grid.Row="2" x:Name="ResponseListTextBlock" Margin="20,20,0,5" Style="{StaticResource SubtitleTextBlockStyle}">List of items in response:</TextBlock>
+                <TextBlock Visibility="{Binding IsResponseListAvailable}" Grid.Column="0" Grid.Row="2" x:Name="ResponseListTextBlock" Margin="13,20,7,5" Style="{StaticResource SubtitleTextBlockStyle}">List of items in response:</TextBlock>
                 <ComboBox SelectedItem="{Binding SelectedResponse, Mode=TwoWay}" Visibility="{Binding IsResponseListAvailable}" ItemsSource="{Binding ResponseList}" Grid.Column="1" Grid.Row="2" x:Name="ResponseListBox" Margin="20,10,0,0"></ComboBox>
-                <TextBlock Grid.Column="0" Grid.Row="3" TextAlignment="Left" VerticalAlignment="Center" Margin="20,20,0,5" Style="{StaticResource SubtitleTextBlockStyle}">OneNote client link:</TextBlock>
+                <TextBlock Grid.Column="0" Grid.Row="3" TextAlignment="Left" VerticalAlignment="Center" Margin="20,27,0,11" Style="{StaticResource SubtitleTextBlockStyle}" Height="20">OneNote client link:</TextBlock>
                 <TextBox Text="{Binding OneNoteClientUrl}" IsEnabled="{Binding IsResponseAvailable}" Grid.Column="1" Grid.Row="3" x:Name="ClientLinkTextBox"  Margin="20,10,0,0" IsReadOnly="True"/>
-                <Button IsEnabled="{Binding IsResponseAvailable}" Grid.Column="2" Grid.Row="3" x:Name="ClientLinkLaunchButton" Content="Launch" HorizontalAlignment="Left" Margin="10,20,10,0" VerticalAlignment="Top" Click="ClientLinkLaunchButton_OnClickLinkLaunchButton_Click"/>
-                <TextBlock Grid.Column="0" Grid.Row="4" TextAlignment="Left" VerticalAlignment="Center" Margin="20,20,0,5" Style="{StaticResource SubtitleTextBlockStyle}">OneNote web link:</TextBlock>
+                <Button IsEnabled="{Binding IsResponseAvailable}" Grid.Column="2" Grid.Row="3" x:Name="ClientLinkLaunchButton" Content="Launch" HorizontalAlignment="Left" Margin="10,20,0,0" VerticalAlignment="Top" Click="ClientLinkLaunchButton_OnClickLinkLaunchButton_Click" Height="38" Width="82"/>
+                <TextBlock Grid.Column="0" Grid.Row="4" TextAlignment="Left" VerticalAlignment="Center" Margin="20,27,0,11" Style="{StaticResource SubtitleTextBlockStyle}" Height="20">OneNote web link:</TextBlock>
                 <TextBox Text="{Binding OneNoteWebUrl}" IsEnabled="{Binding IsResponseAvailable}" Grid.Column="1" Grid.Row="4" x:Name="WebLinkTextBox" Margin="20,10,0,0" IsReadOnly="True"/>
-                <Button IsEnabled="{Binding IsResponseAvailable}" Grid.Column="2" Grid.Row="4" x:Name="WebLinkLaunchButton" Content="Launch" HorizontalAlignment="Left" Margin="10,20,10,0" VerticalAlignment="Top" Click="WebLinkLaunchButton_Click"/>
+                <Button IsEnabled="{Binding IsResponseAvailable}" Grid.Column="2" Grid.Row="4" x:Name="WebLinkLaunchButton" Content="Launch" HorizontalAlignment="Left" Margin="10,20,0,0" VerticalAlignment="Top" Click="WebLinkLaunchButton_Click" Height="38" Width="82"/>
+                <TextBlock Grid.Column="0" Grid.Row="5" TextAlignment="Left" VerticalAlignment="Center" Margin="20,27,0,11" Style="{StaticResource SubtitleTextBlockStyle}" Height="20">Correlation ID:</TextBlock>
+                <TextBox Text="{Binding CorrelationId}" IsEnabled="{Binding IsResponseAvailable}" Grid.Column="1" HorizontalAlignment="Left"  Grid.Row="5" x:Name="CorrelationIdTextBox" Margin="20,10,0,0" IsReadOnly="True" Width="321"/>
+                <TextBlock Grid.Column="0" Grid.Row="6" TextAlignment="Left" VerticalAlignment="Center" Margin="20,27,0,11" Style="{StaticResource SubtitleTextBlockStyle}" Height="20">Timestamp (UTC):</TextBlock>
+                <TextBox Text="{Binding TimeStamp}" IsEnabled="{Binding IsResponseAvailable}" Grid.Column="1" HorizontalAlignment="Left"  Grid.Row="6" x:Name="TimeStampTextBox" Margin="20,10,0,0" IsReadOnly="True" Width="321"/>
             </Grid>
         </Grid>
     </Grid>
