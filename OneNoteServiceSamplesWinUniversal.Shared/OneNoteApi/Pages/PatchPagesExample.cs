@@ -108,7 +108,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 
 			// Prepare an HTTP PATCH request to the Pages/{pageId}/content endpoint
 			// The request body content type is application/json
-			var createMessage = new HttpRequestMessage(new HttpMethod("PATCH"), apiRoute + pageId + "/content")
+			var createMessage = new HttpRequestMessage(new HttpMethod("PATCH"), apiRoute + "pages/" + pageId + "/content")
 			{
 				Content = new StringContent(appendRequestContent, Encoding.UTF8, "application/json")
 			};
