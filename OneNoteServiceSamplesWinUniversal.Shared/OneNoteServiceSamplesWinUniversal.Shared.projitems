@@ -25,6 +25,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)OneNoteApi\GenericEntityResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)OneNoteApi\Notebooks\GetNotebooksExample.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)OneNoteApi\Notebooks\PostNotebooksExample.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)OneNoteApi\Pages\DeletePageExample.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)OneNoteApi\Pages\GetPagesExample.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)OneNoteApi\Pages\PageResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)OneNoteApi\Pages\PatchPagesExample.cs" />

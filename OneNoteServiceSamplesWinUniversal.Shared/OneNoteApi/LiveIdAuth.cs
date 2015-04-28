@@ -84,7 +84,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi
 						_accessTokenExpiration = DateTimeOffset.UtcNow.AddMinutes(AccessTokenApproxExpiresInMinutes);
 					}
 				}
-				catch (Exception)
+				catch (Exception ex)
 				{
 					// Authentication failed
 					if (Debugger.IsAttached)

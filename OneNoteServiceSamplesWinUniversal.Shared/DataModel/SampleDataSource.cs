@@ -247,6 +247,8 @@ namespace OneNoteServiceSamplesWinUniversal.Data
 					return await PostSectionsExample.CreateSimpleSection(debug, requiredSelectedId, requiredInputText, provider, apiEndPoint);
 				case "Group-3-Item-0":
 					return await PatchPagesExample.AppendToDefaultOutlineInPageContent(debug, requiredSelectedId, provider, apiEndPoint);
+				case "Group-3-Item-1":
+					return await DeletePagesExample.DeletePage(debug, requiredSelectedId, provider, apiEndPoint);
 			}
 			return null;
 		}
@@ -272,6 +274,8 @@ namespace OneNoteServiceSamplesWinUniversal.Data
 				case "Group-2-Item-12":
 					return await GetNotebooksExample.GetAllNotebooks(false, provider, apiEndPoint);
 				case "Group-3-Item-0":
+					return await GetPagesExample.GetAllPages(false, provider, apiEndPoint);
+				case "Group-3-Item-1":
 					return await GetPagesExample.GetAllPages(false, provider, apiEndPoint);
 
 			}
