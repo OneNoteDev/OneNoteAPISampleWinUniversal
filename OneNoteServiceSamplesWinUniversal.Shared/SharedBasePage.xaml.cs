@@ -16,6 +16,7 @@ namespace OneNoteServiceSamplesWinUniversal
 		public AuthProvider Provider;
 		public DateTime TimeStamp { get; set; }
 		public string Verb { get; set; }
+		public bool UseBeta { get; set; }
 	}
     /// <summary>
     /// An empty base page that contains shared elements (e.g. BottomAppBar) that all other pages can use.

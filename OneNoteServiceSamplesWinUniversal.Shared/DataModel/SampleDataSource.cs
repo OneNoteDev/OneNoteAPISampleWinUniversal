@@ -100,10 +100,10 @@ namespace OneNoteServiceSamplesWinUniversal.Data
 			return "www.onenote.com";
 		}
 
-		private static string ApiEndPoint(AuthProvider provider = AuthProvider.WindowsLiveId)
+		private static string ApiEndPoint(bool useBeta)
 		{
 			return string.Format(CultureInfo.InvariantCulture, "https://{0}/api/{1}/",
-				TargetDomain(), provider == AuthProvider.O365 ? BetaMeRoute : ConsumerRoute);
+				TargetDomain(), useBeta ? BetaMeRoute : ConsumerRoute);
 
 		}
 
@@ -176,9 +176,9 @@ namespace OneNoteServiceSamplesWinUniversal.Data
 			}
 		}
 
-		public static async Task<object> ExecuteApi(string uniqueId, bool debug, string requiredSelectedId, string requiredInputText, AuthProvider provider)
+		public static async Task<object> ExecuteApi(string uniqueId, bool debug, string requiredSelectedId, string requiredInputText, AuthProvider provider, bool useBeta)
 		{
-			var apiEndPoint = ApiEndPoint(provider);
+			var apiEndPoint = ApiEndPoint(useBeta);
 			switch (uniqueId)
 			{
 				case "Group-0-Item-0":
@@ -245,13 +245,15 @@ namespace OneNoteServiceSamplesWinUniversal.Data
 					return await PostSectionsExample.CreateSimpleSection(debug, requiredSelectedId, requiredInputText, provider, apiEndPoint);
 				case "Group-3-Item-0":
 					return await PatchPagesExample.AppendToDefaultOutlineInPageContent(debug, requiredSelectedId, provider, apiEndPoint);
+				case "Group-3-Item-1":
+					return await DeletePagesExample.DeletePage(debug, requiredSelectedId, provider, apiEndPoint);
 			}
 			return null;
 		}
 
-		public static async Task<object> ExecuteApiPrereq(string uniqueId, AuthProvider provider)
+		public static async Task<object> ExecuteApiPrereq(string uniqueId, AuthProvider provider, bool useBeta)
 		{
-			var apiEndPoint = ApiEndPoint(provider);
+			var apiEndPoint = ApiEndPoint(useBeta);
 			switch (uniqueId)
 			{
 				case "Group-0-Item-0":
@@ -279,6 +281,8 @@ namespace OneNoteServiceSamplesWinUniversal.Data
 				case "Group-2-Item-12":
 					return await GetNotebooksExample.GetAllNotebooks(false, provider, apiEndPoint);
 				case "Group-3-Item-0":
+					return await GetPagesExample.GetAllPages(false, provider, apiEndPoint);
+				case "Group-3-Item-1":
 					return await GetPagesExample.GetAllPages(false, provider, apiEndPoint);
 
 			}
