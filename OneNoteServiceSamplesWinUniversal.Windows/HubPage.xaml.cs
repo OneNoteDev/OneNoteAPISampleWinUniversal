@@ -56,6 +56,8 @@ namespace OneNoteServiceSamplesWinUniversal
 		{
 			var sampleDataGroups = await SampleDataSource.GetGroupsAsync();
 			DefaultViewModel["Groups"] = sampleDataGroups;
+
+			UserData.Provider = AppSettings.GetProviderO365() ? AuthProvider.O365 : AuthProvider.WindowsLiveId;
 			toggleSwitch.IsOn = UserData.Provider == AuthProvider.O365;
 		}
 
@@ -118,6 +120,7 @@ namespace OneNoteServiceSamplesWinUniversal
 		{
 			var priorProviderSelection = UserData.Provider;
 			UserData.Provider = toggleSwitch.IsOn ? AuthProvider.O365 : AuthProvider.WindowsLiveId;
+			AppSettings.SetProviderO365(toggleSwitch.IsOn);
 
 			if (UserData.Provider != priorProviderSelection)
 			{
