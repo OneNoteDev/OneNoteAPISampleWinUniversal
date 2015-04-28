@@ -57,8 +57,12 @@ namespace OneNoteServiceSamplesWinUniversal
 			var sampleDataGroups = await SampleDataSource.GetGroupsAsync();
 			DefaultViewModel["Groups"] = sampleDataGroups;
 
-			UserData.Provider = AppSettings.GetProviderO365() ? AuthProvider.O365 : AuthProvider.WindowsLiveId;
-			toggleSwitch.IsOn = UserData.Provider == AuthProvider.O365;
+			// save our toggle switch states
+			UserData.Provider = AppSettings.GetProviderO365() ? AuthProvider.O365 : AuthProvider.MicrosoftAccount;
+			O365ToggleSwitch.IsOn = UserData.Provider == AuthProvider.O365;
+
+			UserData.UseBeta = AppSettings.GetUseBeta();
+			UseBetaToggleSwitch.IsOn = UserData.UseBeta;
 		}
 
 		/// <summary>
@@ -116,16 +120,23 @@ namespace OneNoteServiceSamplesWinUniversal
 		}
 
 
-		private async void ToggleSwitch_Toggled(object sender, RoutedEventArgs e)
+		private async void O365ToggleSwitch_Toggled(object sender, RoutedEventArgs e)
 		{
+			var toggleSwitch = (ToggleSwitch)sender;
 			var priorProviderSelection = UserData.Provider;
-			UserData.Provider = toggleSwitch.IsOn ? AuthProvider.O365 : AuthProvider.WindowsLiveId;
+			UserData.Provider = toggleSwitch.IsOn ? AuthProvider.O365 : AuthProvider.MicrosoftAccount;
 			AppSettings.SetProviderO365(toggleSwitch.IsOn);
 
 			if (UserData.Provider != priorProviderSelection)
 			{
 				await Auth.SignOut(UserData.Provider);
 			}
+		}
+
+		private void UseBetaToggleSwitch_Toggled(object sender, RoutedEventArgs e)
+		{
+			var toggleSwitch = (ToggleSwitch) sender;
+			AppSettings.SetUseBeta(toggleSwitch.IsOn);
 		}
 	}
 }
