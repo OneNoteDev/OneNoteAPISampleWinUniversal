@@ -67,6 +67,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 		/// Create a very simple page with some formatted text.
 		/// </summary>
 		/// <param name="debug">Run the code under the debugger</param>
+		/// <param name="sectionId"></param>
 		/// <param name="provider"></param>
 		/// <param name="apiRoute"></param>
 		/// <remarks>Create page using a single part text/html content type</remarks>
@@ -101,7 +102,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 
 			// Prepare an HTTP POST request to the Pages endpoint
 			// The request body content type is text/html
-			var createMessage = new HttpRequestMessage(HttpMethod.Post, apiRoute + "pages")
+			var createMessage = new HttpRequestMessage(HttpMethod.Post, apiRoute + "/pages")
 			{
 				Content = new StringContent(simpleHtml, Encoding.UTF8, "text/html")
 			};
@@ -115,11 +116,12 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 		/// Create a page with an image on it.
 		/// </summary>
 		/// <param name="debug">Run the code under the debugger</param>
+		/// <param name="sectionId"></param>
 		/// <param name="provider"></param>
 		/// <param name="apiRoute"></param>
 		/// <remarks>Create page using a multipart/form-data content type</remarks>
 		/// <returns>The converted HTTP response message</returns>
-		public static async Task<ApiBaseResponse> CreatePageWithImage(bool debug, AuthProvider provider, string apiRoute)
+		public static async Task<ApiBaseResponse> CreatePageWithImage(bool debug, string sectionId, AuthProvider provider, string apiRoute)
 		{
 			if (debug)
 			{
@@ -155,7 +157,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 			using (var imageContent = new StreamContent(await GetBinaryStream("assets\\Logo.jpg")))
 			{
 				imageContent.Headers.ContentType = new MediaTypeHeaderValue("image/jpeg");
-				var createMessage = new HttpRequestMessage(HttpMethod.Post, apiRoute + "pages")
+				var createMessage = new HttpRequestMessage(HttpMethod.Post, apiRoute + "sections/" + sectionId + "/pages")
 				{
 					Content = new MultipartFormDataContent
 					{
@@ -175,11 +177,12 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 		/// Create a page with a file attachment
 		/// </summary>
 		/// <param name="debug">Determines whether to execute this method under the debugger</param>
+		/// <param name="sectionId"></param>
 		/// <param name="provider"></param>
 		/// <param name="apiRoute"></param>
 		/// <remarks>Create page using a multipart/form-data content type</remarks>
 		/// <returns>The converted HTTP response message</returns>
-		public static async Task<ApiBaseResponse> CreatePageWithAttachedFile(bool debug, AuthProvider provider, string apiRoute)
+		public static async Task<ApiBaseResponse> CreatePageWithAttachedFile(bool debug, string sectionId, AuthProvider provider, string apiRoute)
 		{
 			if (debug)
 			{
@@ -215,7 +218,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 			using (var attachmentContent = new StreamContent(await GetBinaryStream("assets\\attachment.pdf")))
 			{
 				attachmentContent.Headers.ContentType = new MediaTypeHeaderValue("application/pdf");
-				var createMessage = new HttpRequestMessage(HttpMethod.Post, apiRoute + "pages")
+				var createMessage = new HttpRequestMessage(HttpMethod.Post, apiRoute + "sections/" + sectionId + "/pages")
 				{
 					Content = new MultipartFormDataContent
 					{
@@ -233,11 +236,12 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 		/// Create a page with an image of an embedded web page on it.
 		/// </summary>
 		/// <param name="debug">Run the code under the debugger</param>
+		/// <param name="sectionId"></param>
 		/// <param name="provider"></param>
 		/// <param name="apiRoute"></param>
 		/// <remarks>Create page using a multipart/form-data content type</remarks>
 		/// <returns>The converted HTTP response message</returns>
-		public static async Task<ApiBaseResponse> CreatePageWithEmbeddedWebPage(bool debug, AuthProvider provider, string apiRoute)
+		public static async Task<ApiBaseResponse> CreatePageWithEmbeddedWebPage(bool debug, string sectionId, AuthProvider provider, string apiRoute)
 		{
 			if (debug)
 			{
@@ -283,7 +287,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 								"</body>" +
 								"</html>";
 
-			var createMessage = new HttpRequestMessage(HttpMethod.Post, apiRoute + "pages")
+			var createMessage = new HttpRequestMessage(HttpMethod.Post, apiRoute + "sections/" + sectionId + "/pages")
 			{
 				Content = new MultipartFormDataContent
 				{
@@ -301,11 +305,12 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 		/// Create a page with an image of a URL on it.
 		/// </summary>
 		/// <param name="debug">Run the code under the debugger</param>
+		/// <param name="sectionId"></param>
 		/// <param name="provider"></param>
 		/// <param name="apiRoute"></param>
 		/// <remarks>Create page using a multipart/form-data content type</remarks>
 		/// <returns>The converted HTTP response message</returns>
-		public static async Task<ApiBaseResponse> CreatePageWithUrl(bool debug, AuthProvider provider, string apiRoute)
+		public static async Task<ApiBaseResponse> CreatePageWithUrl(bool debug, string sectionId, AuthProvider provider, string apiRoute)
 		{
 			if (debug)
 			{
@@ -334,7 +339,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 								"</body>" +
 								"</html>";
 
-			var createMessage = new HttpRequestMessage(HttpMethod.Post, apiRoute + "pages")
+			var createMessage = new HttpRequestMessage(HttpMethod.Post, apiRoute + "sections/" + sectionId + "/pages")
 			{
 				Content = new StringContent(simpleHtml, Encoding.UTF8, "text/html")
 			};
@@ -349,11 +354,12 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 		/// http://blogs.msdn.com/b/onenotedev/archive/2014/10/17/announcing-tag-support.aspx
 		/// </summary>
 		/// <param name="debug">Run the code under the debugger</param>
+		/// <param name="sectionId"></param>
 		/// <param name="provider"></param>
 		/// <param name="apiRoute"></param>
 		/// <remarks>Create page using a multipart/form-data content type</remarks>
 		/// <returns>The converted HTTP response message</returns>
-		public static async Task<ApiBaseResponse> CreatePageWithNoteTags(bool debug, AuthProvider provider, string apiRoute)
+		public static async Task<ApiBaseResponse> CreatePageWithNoteTags(bool debug, string sectionId, AuthProvider provider, string apiRoute)
 		{
 			if (debug)
 			{
@@ -422,7 +428,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 								"</body>" +
 								"</html>";
 
-			var createMessage = new HttpRequestMessage(HttpMethod.Post, apiRoute + "pages")
+			var createMessage = new HttpRequestMessage(HttpMethod.Post, apiRoute + "sections/" + sectionId + "/pages")
 			{
 				Content = new StringContent(simpleHtml, Encoding.UTF8, "text/html")
 			};
@@ -440,11 +446,12 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 		/// Currently we can extract business cards from images and recipes, product info from urls.
 		/// </summary>
 		/// <param name="debug">Run the code under the debugger</param>
+		/// <param name="sectionId"></param>
 		/// <param name="provider"></param>
 		/// <param name="apiRoute"></param>
 		/// <remarks>Create page using a multipart/form-data content type</remarks>
 		/// <returns>The converted HTTP response message</returns>
-		public static async Task<ApiBaseResponse> CreatePageWithAutoExtractBusinessCard(bool debug, AuthProvider provider, string apiRoute)
+		public static async Task<ApiBaseResponse> CreatePageWithAutoExtractBusinessCard(bool debug, string sectionId, AuthProvider provider, string apiRoute)
 		{
 			if (debug)
 			{
@@ -483,7 +490,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 			using (var imageContent = new StreamContent(await GetBinaryStream("assets\\BizCard.png")))
 			{
 				imageContent.Headers.ContentType = new MediaTypeHeaderValue("image/jpeg");
-				var createMessage = new HttpRequestMessage(HttpMethod.Post, apiRoute + "pages")
+				var createMessage = new HttpRequestMessage(HttpMethod.Post, apiRoute + "sections/" + sectionId + "/pages")
 				{
 					Content = new MultipartFormDataContent
 					{
@@ -505,11 +512,12 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 		/// Currently we can extract business cards from images and recipes, product info from urls.
 		/// </summary>
 		/// <param name="debug">Run the code under the debugger</param>
+		/// <param name="sectionId"></param>
 		/// <param name="provider"></param>
 		/// <param name="apiRoute"></param>
 		/// <remarks>Create page using a multipart/form-data content type</remarks>
 		/// <returns>The converted HTTP response message</returns>
-		public static async Task<ApiBaseResponse> CreatePageWithAutoExtractRecipe(bool debug, AuthProvider provider, string apiRoute)
+		public static async Task<ApiBaseResponse> CreatePageWithAutoExtractRecipe(bool debug, string sectionId, AuthProvider provider, string apiRoute)
 		{
 			if (debug)
 			{
@@ -542,7 +550,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 			                    "</body>" +
 			                    "</html>";
 
-			var createMessage = new HttpRequestMessage(HttpMethod.Post, apiRoute + "pages")
+			var createMessage = new HttpRequestMessage(HttpMethod.Post, apiRoute + "sections/" + sectionId + "/pages")
 			{
 				Content = new StringContent(simpleHtml, Encoding.UTF8, "text/html")
 			};
@@ -558,11 +566,12 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 		/// Currently we can extract business cards from images and recipes, product info from urls.
 		/// </summary>
 		/// <param name="debug">Run the code under the debugger</param>
+		/// <param name="sectionId"></param>
 		/// <param name="provider"></param>
 		/// <param name="apiRoute"></param>
 		/// <remarks>Create page using a multipart/form-data content type</remarks>
 		/// <returns>The converted HTTP response message</returns>
-		public static async Task<ApiBaseResponse> CreatePageWithAutoExtractProduct(bool debug, AuthProvider provider, string apiRoute)
+		public static async Task<ApiBaseResponse> CreatePageWithAutoExtractProduct(bool debug, string sectionId, AuthProvider provider, string apiRoute)
 		{
 			if (debug)
 			{
@@ -595,7 +604,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 			                    "</body>" +
 			                    "</html>";
 
-			var createMessage = new HttpRequestMessage(HttpMethod.Post, apiRoute + "pages")
+			var createMessage = new HttpRequestMessage(HttpMethod.Post, apiRoute + "sections/" + sectionId + "/pages")
 			{
 				Content = new StringContent(simpleHtml, Encoding.UTF8, "text/html")
 			};

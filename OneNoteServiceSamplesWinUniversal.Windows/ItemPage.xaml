@@ -65,8 +65,9 @@
                 <ColumnDefinition Width="800" />
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Grid Grid.Column="0" Margin="39,0,0,0">
+            <Grid Grid.Column="0" Margin="39,0,43,0">
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
@@ -81,14 +82,16 @@
                         <TextBlock Text="Select an item from the drop-down to continue:" Style="{StaticResource SubtitleTextBlockStyle}" Margin="0,0,0,20"/>
                         <ComboBox x:Name="InputComboBox1" ItemsSource="{Binding}" FlyoutBase.AttachedFlyout="{StaticResource InputComboBoxFlyout}" SelectionChanged="InputComboBox1_OnSelectionChanged"></ComboBox>
                     </StackPanel>
-                    <StackPanel x:Name="InputSelectionPanel2" Orientation="Vertical" Width="Auto" Margin="10,0,20,0">
+                </StackPanel>
+                <StackPanel Grid.Row="2" Orientation="Horizontal">
+                    <StackPanel x:Name="InputSelectionPanel2" Orientation="Vertical" Width="Auto" Margin="0,0,20,0">
                         <TextBlock Text="Select an item from the drop-down to continue:" Style="{StaticResource SubtitleTextBlockStyle}" Margin="0,0,0,20"/>
                         <ComboBox x:Name="InputComboBox2" FlyoutBase.AttachedFlyout="{StaticResource InputComboBoxFlyout}"></ComboBox>
                     </StackPanel>
                 </StackPanel>
-                <TextBox Grid.Row="2" x:Name="InputTextBox" Text="Enter required text here" GotFocus="InputTextBox_OnGotFocus" LostFocus="InputTextBox_OnLostFocus" Margin="0,20,300,20" FlyoutBase.AttachedFlyout="{StaticResource InputTextBoxFlyout}">
+                <TextBox Grid.Row="3" x:Name="InputTextBox" Text="Enter required text here" GotFocus="InputTextBox_OnGotFocus" LostFocus="InputTextBox_OnLostFocus" Margin="0,20,300,20" FlyoutBase.AttachedFlyout="{StaticResource InputTextBoxFlyout}">
                 </TextBox>
-                <StackPanel Orientation="Horizontal" Grid.Row="3">
+                <StackPanel Orientation="Horizontal" Grid.Row="4">
                     <Button x:Name="RunButton" Margin="0,20,0,20" Click="Button_Click">Run</Button>
                     <Button x:Name="DebugButton" Margin="20,20,0,20" Click="Button_Click">Debug</Button>
                 </StackPanel>
