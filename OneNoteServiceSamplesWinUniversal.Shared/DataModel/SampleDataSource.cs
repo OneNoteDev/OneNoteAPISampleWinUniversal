@@ -176,7 +176,8 @@ namespace OneNoteServiceSamplesWinUniversal.Data
 			}
 		}
 
-		public static async Task<object> ExecuteApi(string uniqueId, bool debug, string requiredSelectedId, string requiredInputText, AuthProvider provider, bool useBeta)
+		public static async Task<object> ExecuteApi(string uniqueId, bool debug, string requiredSelectedId, 
+												string requiredInputText, AuthProvider provider, bool useBeta)
 		{
 			var apiEndPoint = ApiEndPoint(useBeta);
 			switch (uniqueId)
