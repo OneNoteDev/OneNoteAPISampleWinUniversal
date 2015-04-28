@@ -327,6 +327,16 @@
                     "RequiresInputComboBox1": "true",
                     "RequiresInputComboBox2": "false",
                     "RequiresInputTextBox": "false"
+                },
+                {
+                    "UniqueId": "Group-3-Item-1",
+                    "Title": "Delete Page",
+                    "Subtitle": "BETA",
+                    "ImagePath": "Assets/LightGray.png",
+                    "Description": "Delete an existing page",
+                    "RequiresInputComboBox1": "true",
+                    "RequiresInputComboBox2": "false",
+                    "RequiresInputTextBox": "false"
                 }
             ]
         }
