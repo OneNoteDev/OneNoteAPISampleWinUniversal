@@ -57,7 +57,7 @@ namespace OneNoteServiceSamplesWinUniversal
 			var sampleDataGroups = await SampleDataSource.GetGroupsAsync();
 			DefaultViewModel["Groups"] = sampleDataGroups;
 
-			// save our toggle switch states
+			// load our toggle switch states
 			UserData.Provider = AppSettings.GetProviderO365() ? AuthProvider.O365 : AuthProvider.MicrosoftAccount;
 			O365ToggleSwitch.IsOn = UserData.Provider == AuthProvider.O365;
 
@@ -136,7 +136,8 @@ namespace OneNoteServiceSamplesWinUniversal
 		private void UseBetaToggleSwitch_Toggled(object sender, RoutedEventArgs e)
 		{
 			var toggleSwitch = (ToggleSwitch) sender;
-			AppSettings.SetUseBeta(toggleSwitch.IsOn);
+			UserData.UseBeta = toggleSwitch.IsOn;
+			AppSettings.SetUseBeta(UserData.UseBeta);
 		}
 	}
 }

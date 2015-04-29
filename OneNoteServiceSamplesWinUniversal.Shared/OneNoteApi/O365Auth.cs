@@ -67,7 +67,11 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi
 			get
 			{
 				//create a new authentication context for our app
+#if WINDOWS_PHONE_APP
+				return _authenticationContext ?? (_authenticationContext = AuthenticationContext.CreateAsync(AuthContextUrl).GetResults());
+#else
 				return _authenticationContext ?? (_authenticationContext = new AuthenticationContext(AuthContextUrl));
+#endif
 			}
 			set { _authenticationContext = value; }
 		}
@@ -102,7 +106,11 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi
 					{
 						//re-bind AuthenticationContext to the authority source of the cached token.
 						//this is needed for the cache to work when asking for a token from that authority.
+#if WINDOWS_PHONE_APP
+						AuthContext = AuthenticationContext.CreateAsync(cachedItem.Authority, true).GetResults();
+#else
 						AuthContext = new AuthenticationContext(cachedItem.Authority, true);
+#endif
 
 						//try to get the AccessToken silently using the resourceId that was passed in
 						//and the client ID of the application.
@@ -121,8 +129,13 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi
 				try
 				{
 					AuthContext.TokenCache.Clear();
+#if WINDOWS_PHONE_APP
+					_authenticationResult =
+						await AuthContext.AcquireTokenSilentAsync(GetResourceHost(ResourceUri), ClientId);
+#else
 					_authenticationResult =
 						await AuthContext.AcquireTokenAsync(GetResourceHost(ResourceUri), ClientId, new Uri(RedirectUri), PromptBehavior.Always);
+#endif
 				}
 				catch (Exception)
 				{
