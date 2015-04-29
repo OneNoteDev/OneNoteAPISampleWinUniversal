@@ -9,8 +9,9 @@
                 {
                     "UniqueId": "Group-0-Item-0",
                     "Title": "Simple page using HTML",
+                    "Subtitle": "Microsoft Account Only",
                     "ImagePath": "Assets/LightGray.png",
-                    "Description": "Create a simple page using HTML to describe the page content (under default section) [*LiveId only*]",
+                    "Description": "Create a simple page using HTML to describe the page content (under default section)",
                     "RequiresInputComboBox1": "false",
                     "RequiresInputComboBox2": "false",
                     "RequiresInputTextBox": "false"
@@ -90,6 +91,7 @@
                 {
                     "UniqueId": "Group-0-Item-9",
                     "Title": "Page under a named section",
+                    "Subtitle": "Microsoft Account Only",
                     "ImagePath": "Assets/MediumGray.png",
                     "Description": "Create a page under a given section name using the 'sectionName' query parameter. Please enter a section name in the TextBox below. If the named section does not exist, it will be auto-created",
                     "RequiresInputComboBox1": "false",
@@ -318,9 +320,17 @@
                     "RequiresInputComboBox1": "true",
                     "RequiresInputComboBox2": "false",
                     "RequiresInputTextBox": "false"
-                },
+                }
+            ]
+        },
+        {
+            "UniqueId": "Group-4",
+            "Title": "Delete Pages",
+            "ImagePath": "Assets/LightGray.png",
+            "Description": "Examples of how to use the HTTP DELETE verb to delete a specific page",
+            "Items": [
                 {
-                    "UniqueId": "Group-3-Item-1",
+                    "UniqueId": "Group-4-Item-0",
                     "Title": "Delete Page",
                     "Subtitle": "BETA",
                     "ImagePath": "Assets/LightGray.png",
