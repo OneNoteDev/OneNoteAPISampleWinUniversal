@@ -5,6 +5,8 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using OneNoteServiceSamplesWinUniversal.Common;
 using OneNoteServiceSamplesWinUniversal.Data;
+using Windows.UI.Xaml;
+using OneNoteServiceSamplesWinUniversal.OneNoteApi;
 
 // The Universal Hub Application project template is documented at http://go.microsoft.com/fwlink/?LinkID=391955
 
@@ -63,9 +65,15 @@ namespace OneNoteServiceSamplesWinUniversal
 		/// session.  The state will be null the first time a page is visited.</param>
 		private async void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
 		{
-			// TODO: Create an appropriate data model for your problem domain to replace the sample data
 			var sampleDataGroups = await SampleDataSource.GetGroupsAsync();
 			DefaultViewModel["Groups"] = sampleDataGroups;
+
+			// load our toggle switch states
+			UserData.Provider = AppSettings.GetProviderO365() ? AuthProvider.O365 : AuthProvider.MicrosoftAccount;
+			O365ToggleSwitch.IsOn = UserData.Provider == AuthProvider.O365;
+
+			UserData.UseBeta = AppSettings.GetUseBeta();
+			UseBetaToggleSwitch.IsOn = UserData.UseBeta;
 		}
 
 		/// <summary>
@@ -126,5 +134,25 @@ namespace OneNoteServiceSamplesWinUniversal
 		}
 
 		#endregion
+
+		private async void O365ToggleSwitch_Toggled(object sender, RoutedEventArgs e)
+		{
+			var toggleSwitch = (ToggleSwitch)sender;
+			var priorProviderSelection = UserData.Provider;
+			UserData.Provider = toggleSwitch.IsOn ? AuthProvider.O365 : AuthProvider.MicrosoftAccount;
+			AppSettings.SetProviderO365(toggleSwitch.IsOn);
+
+			if (UserData.Provider != priorProviderSelection)
+			{
+				await Auth.SignOut(UserData.Provider);
+			}
+		}
+
+		private void UseBetaToggleSwitch_Toggled(object sender, RoutedEventArgs e)
+		{
+			var toggleSwitch = (ToggleSwitch)sender;
+			UserData.UseBeta = toggleSwitch.IsOn;
+			AppSettings.SetUseBeta(UserData.UseBeta);
+		}
 	}
 }
