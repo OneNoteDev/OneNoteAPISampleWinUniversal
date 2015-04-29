@@ -14,6 +14,7 @@ using OneNoteServiceSamplesWinUniversal.Common;
 using OneNoteServiceSamplesWinUniversal.Data;
 using OneNoteServiceSamplesWinUniversal.OneNoteApi;
 using OneNoteServiceSamplesWinUniversal.DataModel;
+using Windows.ApplicationModel.Activation;
 
 // The Universal Hub Application project template is documented at http://go.microsoft.com/fwlink/?LinkID=391955
 
@@ -108,7 +109,7 @@ namespace OneNoteServiceSamplesWinUniversal
 		protected async override void OnNavigatedTo(NavigationEventArgs e)
 		{
 			_navigationHelper.OnNavigatedTo(e);
-            Model.AuthUserName = await Auth.GetUserName();
+            Model.AuthUserName = await Auth.GetUserName(UserData.Provider);
         }
 
 		protected override void OnNavigatedFrom(NavigationEventArgs e)
@@ -170,7 +171,7 @@ namespace OneNoteServiceSamplesWinUniversal
 			UserData.TimeStamp = DateTime.UtcNow;
 			Model.UserData = UserData;
             Model.ApiResponse = await SampleDataSource.ExecuteApi(item.UniqueId, debug, requiredSelectedId, requiredInputText, UserData.Provider, UserData.UseBeta);
-            Model.AuthUserName = await Auth.GetUserName();
+			Model.AuthUserName = await Auth.GetUserName(UserData.Provider);
 		}
 
 		private void SetResponseLinks(ApiBaseResponse apiBaseResponse)

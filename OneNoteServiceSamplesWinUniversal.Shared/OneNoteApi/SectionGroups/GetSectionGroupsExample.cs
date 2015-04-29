@@ -103,7 +103,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.SectionGroups
 		/// <remarks>  The notebookId can be fetched from an earlier GET/POST response of Notebooks endpoint (e.g. GET https://www.onenote.com/api/v1.0/notebooks ).
 		/// </remarks>
 		/// <returns>The converted HTTP response message</returns>
-		public static async Task<List<ApiBaseResponse>> GetSectionGroupsUnderASpecificNotebook(bool debug, string notebookId)
+		public static async Task<List<ApiBaseResponse>> GetSectionGroupsUnderASpecificNotebook(bool debug, string notebookId, AuthProvider provider, string apiRoute)
 		{
 			if (debug)
 			{
@@ -118,10 +118,10 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.SectionGroups
 
 			// Not adding the Authentication header would produce an unauthorized call and the API will return a 401
 			client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer",
-				await Auth.GetAuthToken());
+				await Auth.GetAuthToken(provider));
 
 			// Prepare an HTTP GET request to the sectionGroups endpoint
-			var createMessage = new HttpRequestMessage(HttpMethod.Get, @"https://www.onenote.com/api/v1.0/notebooks/" + notebookId + "/sectionGroups");
+			var createMessage = new HttpRequestMessage(HttpMethod.Get, apiRoute + "notebooks/" + notebookId + "/sectionGroups");
 
 			HttpResponseMessage response = await client.SendAsync(createMessage);
 
@@ -140,7 +140,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.SectionGroups
 		/// <remarks>  The sectionGroupId can be fetched from an earlier GET/POST response of SectionGroups endpoint (e.g. GET https://www.onenote.com/api/v1.0/sectiongroups ).
 		/// </remarks>
 		/// <returns>The converted HTTP response message</returns>
-		public static async Task<List<ApiBaseResponse>> GetSectionGroupsUnderASpecificSectionGroup(bool debug, string sectionGroupId)
+		public static async Task<List<ApiBaseResponse>> GetSectionGroupsUnderASpecificSectionGroup(bool debug, string sectionGroupId, AuthProvider provider, string apiRoute)
 		{
 			if (debug)
 			{
@@ -155,10 +155,10 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.SectionGroups
 
 			// Not adding the Authentication header would produce an unauthorized call and the API will return a 401
 			client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer",
-				await Auth.GetAuthToken());
+				await Auth.GetAuthToken(provider));
 
 			// Prepare an HTTP GET request to the sectionGroups endpoint
-			var createMessage = new HttpRequestMessage(HttpMethod.Get, @"https://www.onenote.com/api/v1.0/sectionGroups/" + sectionGroupId + "/sectionGroups");
+			var createMessage = new HttpRequestMessage(HttpMethod.Get, apiRoute + "sectionGroups/" + sectionGroupId + "/sectionGroups");
 
 			HttpResponseMessage response = await client.SendAsync(createMessage);
 
@@ -177,7 +177,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.SectionGroups
 		/// <remarks>  The sectionGroupId can be fetched from an earlier GET/POST response of SectionGroups endpoint (e.g. GET https://www.onenote.com/api/v1.0/sectionGroups ).
 		/// </remarks>
 		/// <returns>The converted HTTP response message</returns>
-		public static async Task<ApiBaseResponse> GetASpecificSectionGroup(bool debug, string sectionGroupId)
+		public static async Task<ApiBaseResponse> GetASpecificSectionGroup(bool debug, string sectionGroupId, AuthProvider provider, string apiRoute)
 		{
 			if (debug)
 			{
@@ -192,10 +192,10 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.SectionGroups
 
 			// Not adding the Authentication header would produce an unauthorized call and the API will return a 401
 			client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer",
-				await Auth.GetAuthToken());
+				await Auth.GetAuthToken(provider));
 
 			// Prepare an HTTP GET request to the SectionGroups endpoint
-			var createMessage = new HttpRequestMessage(HttpMethod.Get, @"https://www.onenote.com/api/v1.0/sectionGroups/" + sectionGroupId);
+			var createMessage = new HttpRequestMessage(HttpMethod.Get, apiRoute + "sectionGroups/" + sectionGroupId);
 
 			HttpResponseMessage response = await client.SendAsync(createMessage);
 

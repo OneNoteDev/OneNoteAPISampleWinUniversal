@@ -183,7 +183,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Sections
 		/// NOTE: Using this approach, you can still query sections with ALL the different params shown in examples above.
 		/// </remarks>
 		/// <returns>The converted HTTP response message</returns>
-		public static async Task<List<ApiBaseResponse>> GetSectionsUnderASpecificSectionGroup(bool debug, string sectionGroupId, string apiRoute)
+		public static async Task<List<ApiBaseResponse>> GetSectionsUnderASpecificSectionGroup(bool debug, string sectionGroupId, AuthProvider provider, string apiRoute)
 		{
 			if (debug)
 			{
@@ -198,7 +198,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Sections
 
 			// Not adding the Authentication header would produce an unauthorized call and the API will return a 401
 			client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer",
-				await Auth.GetAuthToken());
+				await Auth.GetAuthToken(provider));
 
 			// Prepare an HTTP GET request to the Sections endpoint
 			var createMessage = new HttpRequestMessage(HttpMethod.Get, apiRoute + "sectionGroups/" + sectionGroupId + "/sections");

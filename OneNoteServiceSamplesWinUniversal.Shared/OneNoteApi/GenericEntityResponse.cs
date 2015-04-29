@@ -48,7 +48,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi
 
 		public override string ToString()
 		{
-			return "Id: " + Id + ", Name: " + Name;
+			return "Name: " + Name + ", Id: " + Id;
 		}
 	}
 }

@@ -42,7 +42,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi
 		///     Used by the API request generators before making calls to the OneNote APIs.
 		/// </remarks>
 		/// <returns>valid authentication token</returns>
-		internal static async Task<string> GetAuthToken(AuthProvider provider = AuthProvider.MicrosoftAccount)
+		internal static async Task<string> GetAuthToken(AuthProvider provider)
 		{
 			if (provider == AuthProvider.MicrosoftAccount)
 			{
@@ -54,7 +54,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi
 			}
 		}
 
-		internal static async Task SignOut(AuthProvider provider = AuthProvider.MicrosoftAccount)
+		internal static async Task SignOut(AuthProvider provider)
 		{
 			if (provider == AuthProvider.MicrosoftAccount)
 			{
@@ -66,14 +66,14 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi
 			}
 		}
 
-		internal static bool IsSignedIn(AuthProvider provider = AuthProvider.MicrosoftAccount)
+		internal static bool IsSignedIn(AuthProvider provider)
 		{
 			if (provider == AuthProvider.MicrosoftAccount)
 				return LiveIdAuth.IsSignedIn;
 			return O365Auth.IsSignedIn;
 		}
 
-		internal static async Task<string> GetUserName(AuthProvider provider = AuthProvider.MicrosoftAccount)
+		internal static async Task<string> GetUserName(AuthProvider provider)
 		{
 			if (provider == AuthProvider.MicrosoftAccount)
 			{
