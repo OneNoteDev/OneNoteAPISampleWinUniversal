@@ -23,7 +23,7 @@ namespace OneNoteServiceSamplesWinUniversal
 	/// <summary>
 	/// A page that displays details for a single item within a group.
 	/// </summary>
-	public sealed partial class ItemPage : SharedBasePage, IWebAuthenticationContinuable
+	public sealed partial class ItemPage : SharedBasePage
 	{
 		private readonly NavigationHelper _navigationHelper;
         private readonly ItemPageModel _model = new ItemPageModel();
@@ -264,14 +264,5 @@ namespace OneNoteServiceSamplesWinUniversal
 			}
 		}
 		#endregion
-
-		// IWebAuthenticationContinuable
-		public async void ContinueWebAuthentication(WebAuthenticationBrokerContinuationEventArgs args)
-		{
-			if (UserData.Provider == AuthProvider.O365)
-			{
-				await O365Auth.ContinueAcquireTokenAsync(args);
-			}
-		}
 	}
 }

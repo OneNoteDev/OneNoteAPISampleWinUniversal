@@ -5,6 +5,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 using OneNoteServiceSamplesWinUniversal.OneNoteApi;
+using Windows.ApplicationModel.Activation;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -27,7 +28,11 @@ namespace OneNoteServiceSamplesWinUniversal
     /// This class was built using the concepts defined at "How to share an app bar across pages (XAML)"
     /// http://msdn.microsoft.com/en-us/library/windows/apps/xaml/jj150604.aspx
     /// </remarks>
-    public partial class SharedBasePage
+#if WINDOWS_PHONE_APP
+    public partial class SharedBasePage : IWebAuthenticationContinuable
+#else
+	public partial class SharedBasePage
+#endif
     {
 	    protected static HubContext UserData = new HubContext();
         public SharedBasePage()
@@ -118,5 +123,15 @@ namespace OneNoteServiceSamplesWinUniversal
             }
         }
 
-    }
+#if WINDOWS_PHONE_APP
+		// IWebAuthenticationContinuable
+		public async void ContinueWebAuthentication(WebAuthenticationBrokerContinuationEventArgs args)
+		{
+			if (UserData.Provider == AuthProvider.O365)
+			{
+				await O365Auth.ContinueAcquireTokenAsync(args);
+			}
+		}
+#endif
+	}
 }

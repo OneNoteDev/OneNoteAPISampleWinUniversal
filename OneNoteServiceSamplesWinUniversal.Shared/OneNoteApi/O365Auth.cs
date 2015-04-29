@@ -136,13 +136,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi
 
 					if (_authenticationResult == null || string.IsNullOrEmpty(_authenticationResult.AccessToken))
 					{
-						AuthenticationContextDelegate myDelegate = (result) =>
-						{
-							Debug.WriteLine("Access Token: {0}", result.AccessToken);
-							_authenticationResult = result;
-						};
-
-						AuthContext.AcquireTokenAndContinue(GetResourceHost(ResourceUri), ClientId, new Uri(RedirectUri), myDelegate);
+						AuthContext.AcquireTokenAndContinue(GetResourceHost(ResourceUri), ClientId, new Uri(RedirectUri), null);
 					}
 #else
 					_authenticationResult =
