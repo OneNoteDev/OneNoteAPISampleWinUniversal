@@ -52,7 +52,7 @@ namespace OneNoteServiceSamplesWinUniversal.DataModel
 			{
 				string title = "Sign In";
 
-				if (Auth.IsSignedIn())
+				if (Auth.IsSignedIn(UserData.Provider))
 				{
 					title = "Sign Out";
 				}
