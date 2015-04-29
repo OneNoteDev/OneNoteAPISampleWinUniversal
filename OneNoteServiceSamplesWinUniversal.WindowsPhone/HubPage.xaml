@@ -46,21 +46,21 @@
 
 	<Grid x:Name="LayoutRoot">
 		<Grid.RowDefinitions>
-			<RowDefinition Height="50"/>
+			<RowDefinition Height="55"/>
 			<RowDefinition Height="*"/>
 		</Grid.RowDefinitions>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="90"></ColumnDefinition>
 			<ColumnDefinition Width="*"></ColumnDefinition>
 		</Grid.ColumnDefinitions>
-		<ToggleSwitch Grid.Row="0" x:Name="O365ToggleSwitch" Header="{Binding TappedEvent, ElementName=O365ToggleSwitch, Mode=OneWay}" HorizontalAlignment="Left" Height="68" VerticalAlignment="Top" Width="224" OffContent="MSA" OnContent="O365" ToolTipService.ToolTip="Select the Authentication model" Toggled="O365ToggleSwitch_Toggled" 
-					  RenderTransformOrigin="0.5,0.5" Margin="-22,-24,0,0" Grid.ColumnSpan="2">
+		<ToggleSwitch Grid.Row="0" x:Name="O365ToggleSwitch" Header="{Binding TappedEvent, ElementName=O365ToggleSwitch, Mode=OneWay}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="224" OffContent="MSA" OnContent="O365" ToolTipService.ToolTip="Select the Authentication model" Toggled="O365ToggleSwitch_Toggled" 
+					  RenderTransformOrigin="0.5,0.5" Margin="-21,-17,0,0" Grid.ColumnSpan="2" Background="{ThemeResource ToggleSwitchCurtainDisabledBackgroundThemeBrush}">
 			<ToggleSwitch.RenderTransform>
 				<CompositeTransform ScaleX="0.5" ScaleY="0.5"/>
 			</ToggleSwitch.RenderTransform>
 		</ToggleSwitch>
-		<ToggleSwitch Grid.Row="0" Grid.Column="1" x:Name="UseBetaToggleSwitch" Header="{Binding TappedEvent, ElementName=UseBetaToggleSwitch, Mode=OneWay}" Height="68" Margin="0,-25,-47,0" VerticalAlignment="Top" Width="229" OffContent="v1.0 API" OnContent="Beta API" ToolTipService.ToolTip="Select Beta vs v1.0 API route" Toggled="UseBetaToggleSwitch_Toggled" 
-					  HorizontalAlignment="Right" RenderTransformOrigin="0.5,0.5">
+		<ToggleSwitch Grid.Row="0" Grid.Column="1" x:Name="UseBetaToggleSwitch" Header="{Binding TappedEvent, ElementName=UseBetaToggleSwitch, Mode=OneWay}" Margin="0,-17,-36,0" VerticalAlignment="Top" Width="229" OffContent="v1.0 API" OnContent="Beta API" ToolTipService.ToolTip="Select Beta vs v1.0 API route" Toggled="UseBetaToggleSwitch_Toggled" 
+					  HorizontalAlignment="Right" RenderTransformOrigin="0.5,0.5" Background="{ThemeResource ToggleSwitchCurtainDisabledBackgroundThemeBrush}">
 			<ToggleSwitch.RenderTransform>
 				<CompositeTransform ScaleX="0.5" ScaleY="0.5"/>
 			</ToggleSwitch.RenderTransform>

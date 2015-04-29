@@ -14,6 +14,7 @@ using OneNoteServiceSamplesWinUniversal.Common;
 using OneNoteServiceSamplesWinUniversal.Data;
 using OneNoteServiceSamplesWinUniversal.OneNoteApi;
 using OneNoteServiceSamplesWinUniversal.DataModel;
+using Windows.ApplicationModel.Activation;
 
 // The Universal Hub Application project template is documented at http://go.microsoft.com/fwlink/?LinkID=391955
 
@@ -22,7 +23,7 @@ namespace OneNoteServiceSamplesWinUniversal
 	/// <summary>
 	/// A page that displays details for a single item within a group.
 	/// </summary>
-	public sealed partial class ItemPage : SharedBasePage
+	public sealed partial class ItemPage : SharedBasePage, IWebAuthenticationContinuable
 	{
 		private readonly NavigationHelper _navigationHelper;
         private readonly ItemPageModel _model = new ItemPageModel();
@@ -263,5 +264,14 @@ namespace OneNoteServiceSamplesWinUniversal
 			}
 		}
 		#endregion
+
+		// IWebAuthenticationContinuable
+		public async void ContinueWebAuthentication(WebAuthenticationBrokerContinuationEventArgs args)
+		{
+			if (UserData.Provider == AuthProvider.O365)
+			{
+				await O365Auth.ContinueAcquireTokenAsync(args);
+			}
+		}
 	}
 }

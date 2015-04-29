@@ -1,11 +1,10 @@
 ﻿using System;
-using Windows.ApplicationModel.Resources;
 using Windows.Graphics.Display;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using OneNoteServiceSamplesWinUniversal.Common;
 using OneNoteServiceSamplesWinUniversal.Data;
-using Windows.UI.Xaml;
 using OneNoteServiceSamplesWinUniversal.OneNoteApi;
 
 // The Universal Hub Application project template is documented at http://go.microsoft.com/fwlink/?LinkID=391955
