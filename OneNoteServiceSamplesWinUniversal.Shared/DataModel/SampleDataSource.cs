@@ -185,25 +185,23 @@ namespace OneNoteServiceSamplesWinUniversal.Data
 				case "Group-0-Item-0":
 					return await PostPagesExample.CreateSimplePage(debug, provider, apiEndPoint);
 				case "Group-0-Item-1":
-					return await PostPagesExample.CreatePageWithImage(debug, provider, apiEndPoint);
+					return await PostPagesExample.CreatePageWithImage(debug, requiredSelectedId, provider, apiEndPoint);
 				case "Group-0-Item-2":
-					return await PostPagesExample.CreatePageWithEmbeddedWebPage(debug, provider, apiEndPoint);
+					return await PostPagesExample.CreatePageWithEmbeddedWebPage(debug, requiredSelectedId, provider, apiEndPoint);
 				case "Group-0-Item-3":
-					return await PostPagesExample.CreatePageWithUrl(debug, provider, apiEndPoint);
+					return await PostPagesExample.CreatePageWithUrl(debug, requiredSelectedId, provider, apiEndPoint);
 				case "Group-0-Item-4":
-					return await PostPagesExample.CreatePageWithAttachedFile(debug, provider, apiEndPoint);
+					return await PostPagesExample.CreatePageWithAttachedFile(debug, requiredSelectedId, provider, apiEndPoint);
 				case "Group-0-Item-5":
-					return await PostPagesExample.CreatePageWithNoteTags(debug, provider, apiEndPoint);
+					return await PostPagesExample.CreatePageWithNoteTags(debug, requiredSelectedId, provider, apiEndPoint);
 				case "Group-0-Item-6":
-					return await PostPagesExample.CreatePageWithAutoExtractBusinessCard(debug, provider, apiEndPoint);
+					return await PostPagesExample.CreatePageWithAutoExtractBusinessCard(debug, requiredSelectedId, provider, apiEndPoint);
 				case "Group-0-Item-7":
-					return await PostPagesExample.CreatePageWithAutoExtractRecipe(debug, provider, apiEndPoint);
+					return await PostPagesExample.CreatePageWithAutoExtractRecipe(debug, requiredSelectedId, provider, apiEndPoint);
 				case "Group-0-Item-8":
-					return await PostPagesExample.CreatePageWithAutoExtractProduct(debug, provider, apiEndPoint);
+					return await PostPagesExample.CreatePageWithAutoExtractProduct(debug, requiredSelectedId, provider, apiEndPoint);
 				case "Group-0-Item-9":
 					return await PostPagesExample.CreateSimplePageInAGivenSectionName(debug, requiredInputText, provider, apiEndPoint);
-				case "Group-0-Item-10":
-					return await PostPagesExample.CreateSimplePageInAGivenSectionId(debug, requiredSelectedId, provider, apiEndPoint);
 				case "Group-1-Item-0":
 					return await GetPagesExample.GetAllPages(debug, provider, apiEndPoint);
 				case "Group-1-Item-1":
@@ -248,7 +246,7 @@ namespace OneNoteServiceSamplesWinUniversal.Data
 					return await PostSectionsExample.CreateSimpleSection(debug, requiredSelectedId, requiredInputText, provider, apiEndPoint);
 				case "Group-3-Item-0":
 					return await PatchPagesExample.AppendToDefaultOutlineInPageContent(debug, requiredSelectedId, provider, apiEndPoint);
-				case "Group-3-Item-1":
+				case "Group-4-Item-0":
 					return await DeletePagesExample.DeletePage(debug, requiredSelectedId, provider, apiEndPoint);
 			}
 			return null;
@@ -259,6 +257,15 @@ namespace OneNoteServiceSamplesWinUniversal.Data
 			var apiEndPoint = ApiEndPoint(useBeta);
 			switch (uniqueId)
 			{
+				case "Group-0-Item-0":
+				case "Group-0-Item-1":
+				case "Group-0-Item-2":
+				case "Group-0-Item-3":
+				case "Group-0-Item-4":
+				case "Group-0-Item-5":
+				case "Group-0-Item-6":
+				case "Group-0-Item-7":
+				case "Group-0-Item-8":
 				case "Group-0-Item-10":
                 case "Group-1-Item-7":
 					return await GetNotebooksExample.GetAllNotebooksExpand(false, provider, apiEndPoint);
@@ -277,6 +284,7 @@ namespace OneNoteServiceSamplesWinUniversal.Data
 				case "Group-3-Item-0":
 					return await GetPagesExample.GetAllPages(false, provider, apiEndPoint);
 				case "Group-3-Item-1":
+				case "Group-4-Item-0":
 					return await GetPagesExample.GetAllPages(false, provider, apiEndPoint);
 
 			}
