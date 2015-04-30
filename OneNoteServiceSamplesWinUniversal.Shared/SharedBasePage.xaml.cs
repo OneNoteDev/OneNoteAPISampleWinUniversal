@@ -127,7 +127,7 @@ namespace OneNoteServiceSamplesWinUniversal
 		// IWebAuthenticationContinuable
 		public async void ContinueWebAuthentication(WebAuthenticationBrokerContinuationEventArgs args)
 		{
-			if (UserData.Provider == AuthProvider.O365)
+			if (UserData.Provider == AuthProvider.MicrosoftOffice365)
 			{
 				await O365Auth.ContinueAcquireTokenAsync(args);
 			}

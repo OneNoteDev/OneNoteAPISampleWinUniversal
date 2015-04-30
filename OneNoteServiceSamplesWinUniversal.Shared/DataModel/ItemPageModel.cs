@@ -59,6 +59,7 @@ namespace OneNoteServiceSamplesWinUniversal.DataModel
 
 		public object ApiResponse
 		{
+			get { return _apiResponse as ApiBaseResponse; }
 			set
 			{
 				_apiResponse = value;

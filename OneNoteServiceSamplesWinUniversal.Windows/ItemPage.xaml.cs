@@ -126,8 +126,9 @@ namespace OneNoteServiceSamplesWinUniversal
 
 			UserData.TimeStamp = DateTime.UtcNow;
 			Model.UserData = UserData;
-			await ExecuteApiAction(debug, item);
 			Model.AuthUserName = await Auth.GetUserName(UserData.Provider);
+
+			await ExecuteApiAction(debug, item);
 		}
 
 		private async Task ExecuteApiAction(bool debug, SampleDataItem item)
@@ -175,7 +176,7 @@ namespace OneNoteServiceSamplesWinUniversal
 
 			Model.ApiResponse = await SampleDataSource.ExecuteApi(item.UniqueId, debug, requiredSelectedId, requiredInputText, UserData.Provider, UserData.UseBeta);
 			// DELETE page - if successful, remove current selection from the dropdown
-			if (((ApiBaseResponse) Model.ApiResponse).StatusCode == HttpStatusCode.NoContent && item.UniqueId.Equals("Group-4-Item-0"))
+			if (Model.ApiResponse != null && ((ApiBaseResponse) Model.ApiResponse).StatusCode == HttpStatusCode.NoContent && item.UniqueId.Equals("Group-4-Item-0"))
 			{
 				var items = (List<ApiBaseResponse>)InputComboBox1.ItemsSource;
 				if (items != null)

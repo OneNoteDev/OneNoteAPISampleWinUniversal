@@ -264,5 +264,6 @@ namespace OneNoteServiceSamplesWinUniversal
 			}
 		}
 		#endregion
+
 	}
 }
