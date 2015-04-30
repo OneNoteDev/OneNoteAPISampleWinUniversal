@@ -175,16 +175,6 @@ namespace OneNoteServiceSamplesWinUniversal
 			}
 
 			Model.ApiResponse = await SampleDataSource.ExecuteApi(item.UniqueId, debug, requiredSelectedId, requiredInputText, UserData.Provider, UserData.UseBeta);
-			// DELETE page - if successful, remove current selection from the dropdown
-			if (Model.ApiResponse != null && ((ApiBaseResponse) Model.ApiResponse).StatusCode == HttpStatusCode.NoContent && item.UniqueId.Equals("Group-4-Item-0"))
-			{
-				var items = (List<ApiBaseResponse>)InputComboBox1.ItemsSource;
-				if (items != null)
-				{
-					items.RemoveAt(InputComboBox1.SelectedIndex);
-					InputComboBox1.SelectedIndex = -1;
-				}
-			}
 		}
 
 		/// <summary>
