@@ -24,6 +24,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 using Microsoft.IdentityModel.Clients.ActiveDirectory;
+using Windows.ApplicationModel.Activation;
 namespace OneNoteServiceSamplesWinUniversal.OneNoteApi
 {
 	/// <summary>
@@ -129,8 +130,13 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi
 				{
 					AuthContext.TokenCache.Clear();
 #if WINDOWS_PHONE_APP
-					_authenticationResult =
-						await AuthContext.AcquireTokenSilentAsync(GetResourceHost(ResourceUri), ClientId);
+
+					_authenticationResult = await AuthContext.AcquireTokenSilentAsync(GetResourceHost(ResourceUri), ClientId);
+
+					if (_authenticationResult == null || string.IsNullOrEmpty(_authenticationResult.AccessToken))
+					{
+						AuthContext.AcquireTokenAndContinue(GetResourceHost(ResourceUri), ClientId, new Uri(RedirectUri), null);
+					}
 #else
 					_authenticationResult =
 						await AuthContext.AcquireTokenAsync(GetResourceHost(ResourceUri), ClientId, new Uri(RedirectUri), PromptBehavior.Always);
@@ -209,5 +215,15 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi
 		}
 
 		#endregion
+
+#if WINDOWS_PHONE_APP
+		internal static async Task ContinueAcquireTokenAsync(WebAuthenticationBrokerContinuationEventArgs args)
+		{
+			_authenticationResult = await _authenticationContext.ContinueAcquireTokenAsync(args);
+
+			// TODO by app developer: ideally we want to preserve the state of what we wanted to do before the continuation call, and do it.
+			// see https://msdn.microsoft.com/library/windows/apps/dn631755.aspx and http://www.cloudidentity.com/blog/2014/06/16/adal-for-windows-phone-8-1-deep-dive/
+		}
+#endif
 	}
 }

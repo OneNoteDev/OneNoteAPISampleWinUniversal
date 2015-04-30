@@ -178,12 +178,13 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Sections
 		/// </summary>
 		/// <param name="debug">Run the code under the debugger</param>
 		/// <param name="sectionGroupId">Id of the sectionGroup for which the meta data is returned</param>
+		/// <param name="provider"></param>
 		/// <param name="apiRoute"></param>
 		/// <remarks>  The sectionGroupId can be fetched from an earlier GET/POST response of SectionGroups endpoint (e.g. GET https://www.onenote.com/api/v1.0/sectiongroups ).
 		/// NOTE: Using this approach, you can still query sections with ALL the different params shown in examples above.
 		/// </remarks>
 		/// <returns>The converted HTTP response message</returns>
-		public static async Task<List<ApiBaseResponse>> GetSectionsUnderASpecificSectionGroup ( bool debug, AuthProvider provider, string sectionGroupId, string apiRoute )
+		public static async Task<List<ApiBaseResponse>> GetSectionsUnderASpecificSectionGroup(bool debug, string sectionGroupId, AuthProvider provider, string apiRoute)
 		{
 			if (debug)
 			{

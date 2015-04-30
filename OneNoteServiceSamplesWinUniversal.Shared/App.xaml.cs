@@ -40,6 +40,20 @@ namespace OneNoteServiceSamplesWinUniversal
             this.Suspending += this.OnSuspending;
         }
 
+		protected async override void OnActivated(IActivatedEventArgs e)
+		{
+#if WINDOWS_PHONE_APP
+			var rootFrame = Window.Current.Content as Frame;
+
+			var wabPage = rootFrame.Content as IWebAuthenticationContinuable;
+			if (wabPage != null)
+			{
+				wabPage.ContinueWebAuthentication(e as WebAuthenticationBrokerContinuationEventArgs);
+			}
+#endif
+			Window.Current.Activate();
+		}
+
         /// <summary>
         /// Invoked when the application is launched normally by the end user.  Other entry points
         /// will be used when the application is launched to open a specific file, to display

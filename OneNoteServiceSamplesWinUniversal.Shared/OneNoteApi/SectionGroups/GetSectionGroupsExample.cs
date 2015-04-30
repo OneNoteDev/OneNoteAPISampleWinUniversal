@@ -100,10 +100,12 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.SectionGroups
 		/// </summary>
 		/// <param name="debug">Run the code under the debugger</param>
 		/// <param name="notebookId">Id of the parent notebook</param>
+		/// <param name="provider"></param>
+		/// <param name="apiRoute"></param>
 		/// <remarks>  The notebookId can be fetched from an earlier GET/POST response of Notebooks endpoint (e.g. GET https://www.onenote.com/api/v1.0/notebooks ).
 		/// </remarks>
 		/// <returns>The converted HTTP response message</returns>
-		public static async Task<List<ApiBaseResponse>> GetSectionGroupsUnderASpecificNotebook ( bool debug, AuthProvider provider, string notebookId )
+		public static async Task<List<ApiBaseResponse>> GetSectionGroupsUnderASpecificNotebook(bool debug, string notebookId, AuthProvider provider, string apiRoute)
 		{
 			if (debug)
 			{
@@ -121,7 +123,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.SectionGroups
 				await Auth.GetAuthToken(provider));
 
 			// Prepare an HTTP GET request to the sectionGroups endpoint
-			var createMessage = new HttpRequestMessage(HttpMethod.Get, @"https://www.onenote.com/api/v1.0/notebooks/" + notebookId + "/sectionGroups");
+			var createMessage = new HttpRequestMessage(HttpMethod.Get, apiRoute + "notebooks/" + notebookId + "/sectionGroups");
 
 			HttpResponseMessage response = await client.SendAsync(createMessage);
 
@@ -137,10 +139,12 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.SectionGroups
 		/// </summary>
 		/// <param name="debug">Run the code under the debugger</param>
 		/// <param name="sectionGroupId">Id of the sectionGroup for which the meta data is returned</param>
+		/// <param name="provider"></param>
+		/// <param name="apiRoute"></param>
 		/// <remarks>  The sectionGroupId can be fetched from an earlier GET/POST response of SectionGroups endpoint (e.g. GET https://www.onenote.com/api/v1.0/sectiongroups ).
 		/// </remarks>
 		/// <returns>The converted HTTP response message</returns>
-		public static async Task<List<ApiBaseResponse>> GetSectionGroupsUnderASpecificSectionGroup ( bool debug, AuthProvider provider, string sectionGroupId )
+		public static async Task<List<ApiBaseResponse>> GetSectionGroupsUnderASpecificSectionGroup(bool debug, string sectionGroupId, AuthProvider provider, string apiRoute)
 		{
 			if (debug)
 			{
@@ -158,7 +162,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.SectionGroups
 				await Auth.GetAuthToken(provider));
 
 			// Prepare an HTTP GET request to the sectionGroups endpoint
-			var createMessage = new HttpRequestMessage(HttpMethod.Get, @"https://www.onenote.com/api/v1.0/sectionGroups/" + sectionGroupId + "/sectionGroups");
+			var createMessage = new HttpRequestMessage(HttpMethod.Get, apiRoute + "sectionGroups/" + sectionGroupId + "/sectionGroups");
 
 			HttpResponseMessage response = await client.SendAsync(createMessage);
 
@@ -174,10 +178,12 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.SectionGroups
 		/// </summary>
 		/// <param name="debug">Run the code under the debugger</param>
 		/// <param name="sectionGroupId">Id of the sectionGroup for which the meta data is returned</param>
+		/// <param name="provider"></param>
+		/// <param name="apiRoute"></param>
 		/// <remarks>  The sectionGroupId can be fetched from an earlier GET/POST response of SectionGroups endpoint (e.g. GET https://www.onenote.com/api/v1.0/sectionGroups ).
 		/// </remarks>
 		/// <returns>The converted HTTP response message</returns>
-		public static async Task<ApiBaseResponse> GetASpecificSectionGroup ( bool debug, AuthProvider provider, string sectionGroupId )
+		public static async Task<ApiBaseResponse> GetASpecificSectionGroup(bool debug, string sectionGroupId, AuthProvider provider, string apiRoute)
 		{
 			if (debug)
 			{
@@ -195,7 +201,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.SectionGroups
 				await Auth.GetAuthToken(provider));
 
 			// Prepare an HTTP GET request to the SectionGroups endpoint
-			var createMessage = new HttpRequestMessage(HttpMethod.Get, @"https://www.onenote.com/api/v1.0/sectionGroups/" + sectionGroupId);
+			var createMessage = new HttpRequestMessage(HttpMethod.Get, apiRoute + "sectionGroups/" + sectionGroupId);
 
 			HttpResponseMessage response = await client.SendAsync(createMessage);
 

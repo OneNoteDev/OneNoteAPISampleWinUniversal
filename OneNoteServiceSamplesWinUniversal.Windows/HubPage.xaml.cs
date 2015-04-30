@@ -123,19 +123,17 @@ namespace OneNoteServiceSamplesWinUniversal
 		private async void O365ToggleSwitch_Toggled(object sender, RoutedEventArgs e)
 		{
 			var toggleSwitch = (ToggleSwitch)sender;
-			var priorProviderSelection = UserData.Provider;
 			UserData.Provider = toggleSwitch.IsOn ? AuthProvider.MicrosoftOffice365 : AuthProvider.MicrosoftAccount;
 			AppSettings.SetProviderO365(toggleSwitch.IsOn);
 
-			if (UserData.Provider != priorProviderSelection)
-			{
-				await Auth.SignOut(UserData.Provider);
-			}
+			// kick off getting the access token
+			await Auth.GetAuthToken(UserData.Provider);
 		}
 
 		private void UseBetaToggleSwitch_Toggled(object sender, RoutedEventArgs e)
 		{
 			var toggleSwitch = (ToggleSwitch) sender;
+			UserData.UseBeta = toggleSwitch.IsOn;
 			AppSettings.SetUseBeta(toggleSwitch.IsOn);
 		}
 	}

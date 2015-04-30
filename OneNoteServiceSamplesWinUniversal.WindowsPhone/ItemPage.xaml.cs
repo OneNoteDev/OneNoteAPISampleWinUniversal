@@ -14,6 +14,7 @@ using OneNoteServiceSamplesWinUniversal.Common;
 using OneNoteServiceSamplesWinUniversal.Data;
 using OneNoteServiceSamplesWinUniversal.OneNoteApi;
 using OneNoteServiceSamplesWinUniversal.DataModel;
+using Windows.ApplicationModel.Activation;
 
 // The Universal Hub Application project template is documented at http://go.microsoft.com/fwlink/?LinkID=391955
 
