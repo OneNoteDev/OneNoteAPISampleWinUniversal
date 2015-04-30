@@ -80,7 +80,7 @@
                 <StackPanel Grid.Row="1" Orientation="Horizontal">
                     <StackPanel x:Name="InputSelectionPanel1" Orientation="Vertical" Width="Auto" Margin="0,0,20,0">
                         <TextBlock Text="Select an item from the drop-down to continue:" Style="{StaticResource SubtitleTextBlockStyle}" Margin="0,0,0,20"/>
-                        <ComboBox x:Name="InputComboBox1" ItemsSource="{Binding}" FlyoutBase.AttachedFlyout="{StaticResource InputComboBoxFlyout}" SelectionChanged="InputComboBox1_OnSelectionChanged"></ComboBox>
+                        <ComboBox x:Name="InputComboBox1" FlyoutBase.AttachedFlyout="{StaticResource InputComboBoxFlyout}" SelectionChanged="InputComboBox1_OnSelectionChanged"></ComboBox>
                     </StackPanel>
                 </StackPanel>
                 <StackPanel Grid.Row="2" Orientation="Horizontal">

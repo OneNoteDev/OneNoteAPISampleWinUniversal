@@ -11,6 +11,7 @@ using OneNoteServiceSamplesWinUniversal.OneNoteApi.Notebooks;
 using OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages;
 using OneNoteServiceSamplesWinUniversal.OneNoteApi.SectionGroups;
 using OneNoteServiceSamplesWinUniversal.OneNoteApi.Sections;
+using System.Net;
 
 // The data model defined by this file serves as a representative example of a strongly-typed
 // model.  The property names chosen coincide with data bindings in the standard item templates.

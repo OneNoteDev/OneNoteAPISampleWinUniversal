@@ -314,7 +314,7 @@
                 {
                     "UniqueId": "Group-3-Item-0",
                     "Title": "Append to the end of the default outline in the page",
-                    "Subtitle": "BETA",
+                    "Subtitle": "BETA Only",
                     "ImagePath": "Assets/MediumGray.png",
                     "Description": "Add new trailing content to the default outline in an existing page",
                     "RequiresInputComboBox1": "true",
@@ -332,7 +332,7 @@
                 {
                     "UniqueId": "Group-4-Item-0",
                     "Title": "Delete Page",
-                    "Subtitle": "BETA",
+                    "Subtitle": "BETA Only",
                     "ImagePath": "Assets/LightGray.png",
                     "Description": "Delete an existing page",
                     "RequiresInputComboBox1": "true",

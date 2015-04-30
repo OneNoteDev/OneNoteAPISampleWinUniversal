@@ -57,9 +57,9 @@ namespace OneNoteServiceSamplesWinUniversal
 			var sampleDataGroups = await SampleDataSource.GetGroupsAsync();
 			DefaultViewModel["Groups"] = sampleDataGroups;
 
-			// load our toggle switch states
-			UserData.Provider = AppSettings.GetProviderO365() ? AuthProvider.O365 : AuthProvider.MicrosoftAccount;
-			O365ToggleSwitch.IsOn = UserData.Provider == AuthProvider.O365;
+			// save our toggle switch states
+			UserData.Provider = AppSettings.GetProviderO365() ? AuthProvider.MicrosoftOffice365 : AuthProvider.MicrosoftAccount;
+			O365ToggleSwitch.IsOn = UserData.Provider == AuthProvider.MicrosoftOffice365;
 
 			UserData.UseBeta = AppSettings.GetUseBeta();
 			UseBetaToggleSwitch.IsOn = UserData.UseBeta;
@@ -124,7 +124,7 @@ namespace OneNoteServiceSamplesWinUniversal
 		{
 			var toggleSwitch = (ToggleSwitch)sender;
 			var priorProviderSelection = UserData.Provider;
-			UserData.Provider = toggleSwitch.IsOn ? AuthProvider.O365 : AuthProvider.MicrosoftAccount;
+			UserData.Provider = toggleSwitch.IsOn ? AuthProvider.MicrosoftOffice365 : AuthProvider.MicrosoftAccount;
 			AppSettings.SetProviderO365(toggleSwitch.IsOn);
 
 			if (UserData.Provider != priorProviderSelection)
@@ -136,8 +136,7 @@ namespace OneNoteServiceSamplesWinUniversal
 		private void UseBetaToggleSwitch_Toggled(object sender, RoutedEventArgs e)
 		{
 			var toggleSwitch = (ToggleSwitch) sender;
-			UserData.UseBeta = toggleSwitch.IsOn;
-			AppSettings.SetUseBeta(UserData.UseBeta);
+			AppSettings.SetUseBeta(toggleSwitch.IsOn);
 		}
 	}
 }

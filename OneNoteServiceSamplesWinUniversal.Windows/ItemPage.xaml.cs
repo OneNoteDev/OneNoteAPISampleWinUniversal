@@ -18,6 +18,7 @@ using Windows.UI.Xaml.Navigation;
 // The Universal Hub Application project template is documented at http://go.microsoft.com/fwlink/?LinkID=391955
 using OneNoteServiceSamplesWinUniversal.OneNoteApi;
 using System.ComponentModel;
+using System.Net;
 using OneNoteServiceSamplesWinUniversal.DataModel;
 
 namespace OneNoteServiceSamplesWinUniversal
@@ -173,7 +174,17 @@ namespace OneNoteServiceSamplesWinUniversal
 			}
 
 			Model.ApiResponse = await SampleDataSource.ExecuteApi(item.UniqueId, debug, requiredSelectedId, requiredInputText, UserData.Provider, UserData.UseBeta);
-        }
+			// DELETE page - if successful, remove current selection from the dropdown
+			if (((ApiBaseResponse) Model.ApiResponse).StatusCode == HttpStatusCode.NoContent && item.UniqueId.Equals("Group-4-Item-0"))
+			{
+				var items = (List<ApiBaseResponse>)InputComboBox1.ItemsSource;
+				if (items != null)
+				{
+					items.RemoveAt(InputComboBox1.SelectedIndex);
+					InputComboBox1.SelectedIndex = -1;
+				}
+			}
+		}
 
 		/// <summary>
 		/// Yield the thread of operation to the dispatcher to allow UI updates to happen.

@@ -90,7 +90,6 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi
 		/// <returns>valid authentication token</returns>
 		internal static async Task<AuthenticationResult> GetAuthenticationResult()
 		{
-
 			if (String.IsNullOrEmpty(AccessToken))
 			{
 				try

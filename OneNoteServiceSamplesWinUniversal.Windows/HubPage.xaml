@@ -139,7 +139,7 @@
 				</DataTemplate>
 			</HubSection>
 		</Hub>
-		<ToggleSwitch x:Name="O365ToggleSwitch" Header="{Binding TappedEvent, ElementName=O365ToggleSwitch, Mode=OneWay}" HorizontalAlignment="Left" Height="68" Margin="615,35,0,0" VerticalAlignment="Top" Width="229" OffContent="Microsoft Account" OnContent="O365" ToolTipService.ToolTip="Select the Authentication model" Toggled="O365ToggleSwitch_Toggled" />
+		<ToggleSwitch x:Name="O365ToggleSwitch" Header="{Binding TappedEvent, ElementName=O365ToggleSwitch, Mode=OneWay}" HorizontalAlignment="Left" Height="68" Margin="615,35,0,0" VerticalAlignment="Top" Width="229" OffContent="Microsoft Account" OnContent="Microsoft Office 365" ToolTipService.ToolTip="Select the Authentication model" Toggled="O365ToggleSwitch_Toggled" />
 		<ToggleSwitch x:Name="UseBetaToggleSwitch" Header="{Binding TappedEvent, ElementName=UseBetaToggleSwitch, Mode=OneWay}" HorizontalAlignment="Left" Height="68" Margin="887,35,0,0" VerticalAlignment="Top" Width="229" OffContent="Use 'v1.0' API Route" OnContent="Use 'beta' API route" ToolTipService.ToolTip="Select Beta vs v1.0 API route" Toggled="UseBetaToggleSwitch_Toggled" />
 	</Grid>
 </local:SharedBasePage>

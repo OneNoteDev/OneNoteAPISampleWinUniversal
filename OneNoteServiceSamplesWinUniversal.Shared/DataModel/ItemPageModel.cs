@@ -46,21 +46,6 @@ namespace OneNoteServiceSamplesWinUniversal.DataModel
 			}
 		}
 
-		public string SignInButtonTitle
-		{
-			get
-			{
-				string title = "Sign In";
-
-				if (Auth.IsSignedIn())
-				{
-					title = "Sign Out";
-				}
-
-				return title;
-			}
-		}
-
 		public SampleDataItem Item
 		{
 			get { return _item; }
