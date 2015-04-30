@@ -18,6 +18,7 @@ using Windows.UI.Xaml.Navigation;
 // The Universal Hub Application project template is documented at http://go.microsoft.com/fwlink/?LinkID=391955
 using OneNoteServiceSamplesWinUniversal.OneNoteApi;
 using System.ComponentModel;
+using System.Net;
 using OneNoteServiceSamplesWinUniversal.DataModel;
 
 namespace OneNoteServiceSamplesWinUniversal
@@ -64,13 +65,23 @@ namespace OneNoteServiceSamplesWinUniversal
 		/// session.  The state will be null the first time a page is visited.</param>
 		private async void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
 		{
-			var item = await SampleDataSource.GetItemAsync((string) e.NavigationParameter);
+			var itemId = e.NavigationParameter as string;
+			if (itemId != null)
+			{
+				UserData.ItemId = itemId;
+			}
+			else
+			{
+				UserData = (HubContext) e.NavigationParameter;
+			}
+
+			var item = await SampleDataSource.GetItemAsync(UserData.ItemId);
 			Model.Item = item;
 			InputSelectionPanel2.Visibility = (item.RequiresInputComboBox2) ? Visibility.Visible : Visibility.Collapsed;
 			InputTextBox.Visibility = (item.RequiresInputTextBox) ? Visibility.Visible : Visibility.Collapsed;
 			if (item.RequiresInputComboBox1)
 			{
-				var response = await SampleDataSource.ExecuteApiPrereq(item.UniqueId);
+				var response = await SampleDataSource.ExecuteApiPrereq(item.UniqueId, UserData.Provider, UserData.UseBeta);
 				if (response is List<ApiBaseResponse>)
 				{
 					InputComboBox1.ItemsSource = response;
@@ -97,7 +108,7 @@ namespace OneNoteServiceSamplesWinUniversal
 		protected override async void OnNavigatedTo(NavigationEventArgs e)
 		{
 			_navigationHelper.OnNavigatedTo(e);
-            Model.AuthUserName = await Auth.GetUserName();
+            Model.AuthUserName = await Auth.GetUserName(UserData.Provider);
 		}
 
 		protected override void OnNavigatedFrom(NavigationEventArgs e)
@@ -113,9 +124,11 @@ namespace OneNoteServiceSamplesWinUniversal
 			bool debug = button != null && button.Name.Equals("DebugButton");
 			SampleDataItem item = Model.Item;
 
+			UserData.TimeStamp = DateTime.UtcNow;
+			Model.UserData = UserData;
+			Model.AuthUserName = await Auth.GetUserName(UserData.Provider);
+
 			await ExecuteApiAction(debug, item);
-            await Auth.GetAuthToken();
-            Model.AuthUserName = await Auth.GetUserName();
 		}
 
 		private async Task ExecuteApiAction(bool debug, SampleDataItem item)
@@ -161,8 +174,8 @@ namespace OneNoteServiceSamplesWinUniversal
 				}
 			}
 
-			Model.ApiResponse = await SampleDataSource.ExecuteApi(item.UniqueId, debug, requiredSelectedId, requiredInputText);
-        }
+			Model.ApiResponse = await SampleDataSource.ExecuteApi(item.UniqueId, debug, requiredSelectedId, requiredInputText, UserData.Provider, UserData.UseBeta);
+		}
 
 		/// <summary>
 		/// Yield the thread of operation to the dispatcher to allow UI updates to happen.

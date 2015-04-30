@@ -8,119 +8,128 @@
     xmlns:model="using:OneNoteServiceSamplesWinUniversal.DataModel"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006">
 
-	<Page.Resources>
-		<Flyout x:Key="InputTextBoxFlyout" Placement="Right">
-			<TextBlock Style="{StaticResource SubtitleTextBlockStyle}" TextWrapping="Wrap">This example requires a user-specified input in the TextBox</TextBlock>
-		</Flyout>
-		<Flyout x:Key="InputComboBoxFlyout" Placement="Right">
-			<TextBlock Style="{StaticResource SubtitleTextBlockStyle}" TextWrapping="Wrap">This example requires a user-selected item in the drop down</TextBlock>
-		</Flyout>
-	</Page.Resources>
+    <Page.Resources>
+        <Flyout x:Key="InputTextBoxFlyout" Placement="Right">
+            <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" TextWrapping="Wrap">This example requires a user-specified input in the TextBox</TextBlock>
+        </Flyout>
+        <Flyout x:Key="InputComboBoxFlyout" Placement="Right">
+            <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" TextWrapping="Wrap">This example requires a user-selected item in the drop down</TextBlock>
+        </Flyout>
+    </Page.Resources>
 
-	<!--
+    <!--
 		This grid acts as a root panel for the page that defines two rows:
 		* Row 0 contains the back button and page title
 		* Row 1 contains the rest of the page layout
 	-->
-	<Grid x:Name="ItemPageGrid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    <Grid x:Name="ItemPageGrid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
           DataContext="{Binding Item}">
-		<Grid.ChildrenTransitions>
-			<TransitionCollection>
-				<EntranceThemeTransition/>
-			</TransitionCollection>
-		</Grid.ChildrenTransitions>
-		<Grid.RowDefinitions>
-			<RowDefinition Height="140"/>
-			<RowDefinition Height="*"/>
-		</Grid.RowDefinitions>
+        <Grid.ChildrenTransitions>
+            <TransitionCollection>
+                <EntranceThemeTransition/>
+            </TransitionCollection>
+        </Grid.ChildrenTransitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="140"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
-		<!-- Back button and page title -->
-		<Grid Grid.Row="0">
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="120"/>
-				<ColumnDefinition Width="*"/>
-				<ColumnDefinition Width="400"/>
-			</Grid.ColumnDefinitions>
-			<Button Margin="39,59,39,0" Command="{Binding NavigationHelper.GoBackCommand, ElementName=pageRoot}"
+        <!-- Back button and page title -->
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="120"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="400"/>
+            </Grid.ColumnDefinitions>
+            <Button Margin="39,59,39,0" Command="{Binding NavigationHelper.GoBackCommand, ElementName=pageRoot}"
 						Style="{StaticResource NavigationBackButtonNormalStyle}"
 						VerticalAlignment="Top"
 						AutomationProperties.Name="Back"
 						AutomationProperties.AutomationId="BackButton"
 						AutomationProperties.ItemType="Navigation Button"/>
-			<TextBlock Text="{Binding Title}" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
+            <TextBlock Text="{Binding Title}" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
 						IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40"/>
-			<Grid Grid.Column="2" VerticalAlignment="Center">
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="*"/>
-					<ColumnDefinition Width="Auto"/>
-				</Grid.ColumnDefinitions>
+            <Grid Grid.Column="2" VerticalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
                 <TextBlock Text="{Binding ElementName=pageRoot, Path=Model.AuthUserName}" Grid.Column="0" x:Name="AuthUserName" Style="{StaticResource BodyTextBlockStyle}"
 					   IsHitTestVisible="False" TextWrapping="WrapWholeWords" HorizontalAlignment="Right" Margin="20,10,20,0"/>
-			</Grid>
-		</Grid>
+            </Grid>
+        </Grid>
 
-		<!-- Example input and output content -->
-		<Grid Grid.Row="1">
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="800" />
-				<ColumnDefinition Width="*"/>
-			</Grid.ColumnDefinitions>
-			<Grid Grid.Column="0" Margin="39,0,0,0">
-				<Grid.RowDefinitions>
-					<RowDefinition Height="Auto"/>
-					<RowDefinition Height="Auto"/>
-					<RowDefinition Height="Auto"/>
-					<RowDefinition Height="Auto"/>
-				</Grid.RowDefinitions>
-				<StackPanel Grid.Row="0" Orientation="Vertical">
-					<TextBlock Text="{Binding Subtitle}" Style="{StaticResource SubtitleTextBlockStyle}" Margin="5,0,0,2"/>
-					<TextBlock Text="{Binding Description}" Style="{StaticResource SubtitleTextBlockStyle}" Margin="0,0,0,20"/>
-				</StackPanel>
-				<StackPanel Grid.Row="1" Orientation="Horizontal">
-					<StackPanel x:Name="InputSelectionPanel1" Orientation="Vertical" Width="Auto" Margin="0,0,20,0">
-					<TextBlock Text="Select an item from the drop-down to continue:" Style="{StaticResource SubtitleTextBlockStyle}" Margin="0,0,0,20"/>
-						<ComboBox x:Name="InputComboBox1" ItemsSource="{Binding}" FlyoutBase.AttachedFlyout="{StaticResource InputComboBoxFlyout}" SelectionChanged="InputComboBox1_OnSelectionChanged"></ComboBox>
-					</StackPanel>
-					<StackPanel x:Name="InputSelectionPanel2" Orientation="Vertical" Width="Auto" Margin="10,0,20,0">
-						<TextBlock Text="Select an item from the drop-down to continue:" Style="{StaticResource SubtitleTextBlockStyle}" Margin="0,0,0,20"/>
-						<ComboBox x:Name="InputComboBox2" FlyoutBase.AttachedFlyout="{StaticResource InputComboBoxFlyout}"></ComboBox>
-					</StackPanel>
-				</StackPanel>
-				<TextBox Grid.Row="2" x:Name="InputTextBox" Text="Enter required text here" GotFocus="InputTextBox_OnGotFocus" LostFocus="InputTextBox_OnLostFocus" Margin="0,20,300,20" FlyoutBase.AttachedFlyout="{StaticResource InputTextBoxFlyout}">
-				</TextBox>
-				<StackPanel Orientation="Horizontal" Grid.Row="3">
-					<Button x:Name="RunButton" Margin="0,20,0,20" Click="Button_Click">Run</Button>
-					<Button x:Name="DebugButton" Margin="20,20,0,20" Click="Button_Click">Debug</Button>
-				</StackPanel>
-			</Grid>
-            <Grid Grid.Column="1" x:Name="OutputRegionGrid" DataContext="{Binding ElementName=pageRoot, Path=Model}">
-				<Grid.RowDefinitions>
-					<RowDefinition Height="Auto"/>
-					<RowDefinition Height="Auto"/>
-					<RowDefinition Height="Auto"/>
-					<RowDefinition Height="Auto"/>
-					<RowDefinition Height="Auto"/>
-				</Grid.RowDefinitions>
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="Auto"/>
-					<ColumnDefinition Width="*"/>
-					<ColumnDefinition Width="Auto"/>
-				</Grid.ColumnDefinitions>
-				<TextBlock Grid.Column="0" Grid.Row="0"  TextAlignment="Left" VerticalAlignment="Center" Margin="20,20,0,5" Style="{StaticResource SubtitleTextBlockStyle}">Response:</TextBlock>
-                <TextBox Text="{Binding StatusCode}" IsEnabled="{Binding IsResponseAvailable}" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2" Margin="20,10,0,0" IsReadOnly="True" MaxWidth="300" HorizontalAlignment="Left"/>
-				<TextBlock Grid.Column="0" Grid.Row="1" TextAlignment="Left" VerticalAlignment="Center" Margin="20,20,0,5" Style="{StaticResource SubtitleTextBlockStyle}">Body:</TextBlock>
+        <!-- Example input and output content -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="800" />
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0" Margin="39,0,43,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0" Orientation="Vertical">
+                    <TextBlock Text="{Binding Subtitle}" Style="{StaticResource SubtitleTextBlockStyle}" Margin="5,0,0,2"/>
+                    <TextBlock Text="{Binding Description}" Style="{StaticResource SubtitleTextBlockStyle}" Margin="0,0,0,20"/>
+                </StackPanel>
+                <StackPanel Grid.Row="1" Orientation="Horizontal">
+                    <StackPanel x:Name="InputSelectionPanel1" Orientation="Vertical" Width="Auto" Margin="0,0,20,0">
+                        <TextBlock Text="Select an item from the drop-down to continue:" Style="{StaticResource SubtitleTextBlockStyle}" Margin="0,0,0,20"/>
+                        <ComboBox x:Name="InputComboBox1" FlyoutBase.AttachedFlyout="{StaticResource InputComboBoxFlyout}" SelectionChanged="InputComboBox1_OnSelectionChanged"></ComboBox>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel Grid.Row="2" Orientation="Horizontal">
+                    <StackPanel x:Name="InputSelectionPanel2" Orientation="Vertical" Width="Auto" Margin="0,0,20,0">
+                        <TextBlock Text="Select an item from the drop-down to continue:" Style="{StaticResource SubtitleTextBlockStyle}" Margin="0,0,0,20"/>
+                        <ComboBox x:Name="InputComboBox2" FlyoutBase.AttachedFlyout="{StaticResource InputComboBoxFlyout}"></ComboBox>
+                    </StackPanel>
+                </StackPanel>
+                <TextBox Grid.Row="3" x:Name="InputTextBox" Text="Enter required text here" GotFocus="InputTextBox_OnGotFocus" LostFocus="InputTextBox_OnLostFocus" Margin="0,20,300,20" FlyoutBase.AttachedFlyout="{StaticResource InputTextBoxFlyout}">
+                </TextBox>
+                <StackPanel Orientation="Horizontal" Grid.Row="4">
+                    <Button x:Name="RunButton" Margin="0,20,0,20" Click="Button_Click">Run</Button>
+                    <Button x:Name="DebugButton" Margin="20,20,0,20" Click="Button_Click">Debug</Button>
+                </StackPanel>
+            </Grid>
+            <Grid x:Name="OutputRegionGrid" DataContext="{Binding ElementName=pageRoot, Path=Model}" Grid.ColumnSpan="2" Margin="757,10,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" MinWidth="176"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="Auto" MinWidth="92"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Grid.Row="0"  TextAlignment="Left" VerticalAlignment="Center" Margin="20,20,0,5" Style="{StaticResource SubtitleTextBlockStyle}" Height="20">Response:</TextBlock>
+                <TextBox Text="{Binding StatusCode}" IsEnabled="{Binding IsResponseAvailable}" Grid.Column="1" Grid.Row="0" Margin="20,10,0,0" IsReadOnly="True" MaxWidth="300" HorizontalAlignment="Left" Width="182"/>
+                <TextBlock Grid.Column="0" Grid.Row="1" TextAlignment="Left" VerticalAlignment="Center" Margin="20,36,0,20" Style="{StaticResource SubtitleTextBlockStyle}" Height="20">Body:</TextBlock>
                 <Border BorderThickness="{Binding BodyBorderThikness}" BorderBrush="Gray" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Margin="20,10,10,0">
                     <TextBox Text="{Binding Body}" MaxHeight="400" x:Name="ResponseBody" ScrollViewer.VerticalScrollBarVisibility="Visible" IsEnabled="{Binding IsResponseAvailable}" IsReadOnly="True" TextWrapping="Wrap" AcceptsReturn="True" BorderThickness="0"/>
                 </Border>
-                <TextBlock Visibility="{Binding IsResponseListAvailable}" Grid.Column="0" Grid.Row="2" x:Name="ResponseListTextBlock" Margin="20,20,0,5" Style="{StaticResource SubtitleTextBlockStyle}">List of items in response:</TextBlock>
+                <TextBlock Visibility="{Binding IsResponseListAvailable}" Grid.Column="0" Grid.Row="2" x:Name="ResponseListTextBlock" Margin="13,20,7,5" Style="{StaticResource SubtitleTextBlockStyle}">List of items in response:</TextBlock>
                 <ComboBox SelectedItem="{Binding SelectedResponse, Mode=TwoWay}" Visibility="{Binding IsResponseListAvailable}" ItemsSource="{Binding ResponseList}" Grid.Column="1" Grid.Row="2" x:Name="ResponseListBox" Margin="20,10,0,0"></ComboBox>
-				<TextBlock Grid.Column="0" Grid.Row="3" TextAlignment="Left" VerticalAlignment="Center" Margin="20,20,0,5" Style="{StaticResource SubtitleTextBlockStyle}">OneNote client link:</TextBlock>
+                <TextBlock Grid.Column="0" Grid.Row="3" TextAlignment="Left" VerticalAlignment="Center" Margin="20,27,0,11" Style="{StaticResource SubtitleTextBlockStyle}" Height="20">OneNote client link:</TextBlock>
                 <TextBox Text="{Binding OneNoteClientUrl}" IsEnabled="{Binding IsResponseAvailable}" Grid.Column="1" Grid.Row="3" x:Name="ClientLinkTextBox"  Margin="20,10,0,0" IsReadOnly="True"/>
-                <Button IsEnabled="{Binding IsResponseAvailable}" Grid.Column="2" Grid.Row="3" x:Name="ClientLinkLaunchButton" Content="Launch" HorizontalAlignment="Left" Margin="10,20,10,0" VerticalAlignment="Top" Click="ClientLinkLaunchButton_OnClickLinkLaunchButton_Click"/>
-				<TextBlock Grid.Column="0" Grid.Row="4" TextAlignment="Left" VerticalAlignment="Center" Margin="20,20,0,5" Style="{StaticResource SubtitleTextBlockStyle}">OneNote web link:</TextBlock>
+                <Button IsEnabled="{Binding IsResponseAvailable}" Grid.Column="2" Grid.Row="3" x:Name="ClientLinkLaunchButton" Content="Launch" HorizontalAlignment="Left" Margin="10,20,0,0" VerticalAlignment="Top" Click="ClientLinkLaunchButton_OnClickLinkLaunchButton_Click" Height="38" Width="82"/>
+                <TextBlock Grid.Column="0" Grid.Row="4" TextAlignment="Left" VerticalAlignment="Center" Margin="20,27,0,11" Style="{StaticResource SubtitleTextBlockStyle}" Height="20">OneNote web link:</TextBlock>
                 <TextBox Text="{Binding OneNoteWebUrl}" IsEnabled="{Binding IsResponseAvailable}" Grid.Column="1" Grid.Row="4" x:Name="WebLinkTextBox" Margin="20,10,0,0" IsReadOnly="True"/>
-                <Button IsEnabled="{Binding IsResponseAvailable}" Grid.Column="2" Grid.Row="4" x:Name="WebLinkLaunchButton" Content="Launch" HorizontalAlignment="Left" Margin="10,20,10,0" VerticalAlignment="Top" Click="WebLinkLaunchButton_Click"/>
-			</Grid>
-		</Grid>
-	</Grid>
+                <Button IsEnabled="{Binding IsResponseAvailable}" Grid.Column="2" Grid.Row="4" x:Name="WebLinkLaunchButton" Content="Launch" HorizontalAlignment="Left" Margin="10,20,0,0" VerticalAlignment="Top" Click="WebLinkLaunchButton_Click" Height="38" Width="82"/>
+                <TextBlock Grid.Column="0" Grid.Row="5" TextAlignment="Left" VerticalAlignment="Center" Margin="20,27,0,11" Style="{StaticResource SubtitleTextBlockStyle}" Height="20">Correlation ID:</TextBlock>
+                <TextBox Text="{Binding CorrelationId}" IsEnabled="{Binding IsResponseAvailable}" Grid.Column="1" HorizontalAlignment="Left"  Grid.Row="5" x:Name="CorrelationIdTextBox" Margin="20,10,0,0" IsReadOnly="True" Width="321"/>
+                <TextBlock Grid.Column="0" Grid.Row="6" TextAlignment="Left" VerticalAlignment="Center" Margin="20,27,0,11" Style="{StaticResource SubtitleTextBlockStyle}" Height="20">Timestamp (UTC):</TextBlock>
+                <TextBox Text="{Binding TimeStamp}" IsEnabled="{Binding IsResponseAvailable}" Grid.Column="1" HorizontalAlignment="Left"  Grid.Row="6" x:Name="TimeStampTextBox" Margin="20,10,0,0" IsReadOnly="True" Width="321"/>
+            </Grid>
+        </Grid>
+    </Grid>
 </local:SharedBasePage>

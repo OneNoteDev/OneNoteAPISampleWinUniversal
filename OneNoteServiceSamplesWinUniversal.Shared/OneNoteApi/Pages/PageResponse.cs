@@ -37,7 +37,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 
 		public override string ToString()
 		{
-			return "Id: " + Id + ", Title: " + Title;
+			return "Title: " + Title + ", Id: " + Id;
 		}
 	}
 }

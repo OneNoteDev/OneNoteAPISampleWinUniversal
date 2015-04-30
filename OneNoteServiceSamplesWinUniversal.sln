@@ -1,15 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30624.0
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "OneNoteServiceSamplesWinUniversal", "OneNoteServiceSamplesWinUniversal", "{617E6D0F-972F-409A-AE75-3C85B5BE5899}"
-EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "OneNoteServiceSamplesWinUniversal.Shared", "OneNoteServiceSamplesWinUniversal.Shared\OneNoteServiceSamplesWinUniversal.Shared.shproj", "{556A67F3-BD06-49BE-AE69-E638D2D6A790}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OneNoteServiceSamplesWinUniversal.Windows", "OneNoteServiceSamplesWinUniversal.Windows\OneNoteServiceSamplesWinUniversal.Windows.csproj", "{04B19D2E-1156-423E-8E90-524F91EE688F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OneNoteServiceSamplesWinUniversal.WindowsPhone", "OneNoteServiceSamplesWinUniversal.WindowsPhone\OneNoteServiceSamplesWinUniversal.WindowsPhone.csproj", "{7310B814-9334-43BC-921C-735B66984A1D}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "OneNoteServiceSamplesWinUniversal.Shared", "OneNoteServiceSamplesWinUniversal.Shared\OneNoteServiceSamplesWinUniversal.Shared.shproj", "{556A67F3-BD06-49BE-AE69-E638D2D6A790}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
@@ -77,8 +77,8 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{556A67F3-BD06-49BE-AE69-E638D2D6A790} = {617E6D0F-972F-409A-AE75-3C85B5BE5899}
 		{04B19D2E-1156-423E-8E90-524F91EE688F} = {617E6D0F-972F-409A-AE75-3C85B5BE5899}
 		{7310B814-9334-43BC-921C-735B66984A1D} = {617E6D0F-972F-409A-AE75-3C85B5BE5899}
+		{556A67F3-BD06-49BE-AE69-E638D2D6A790} = {617E6D0F-972F-409A-AE75-3C85B5BE5899}
 	EndGlobalSection
 EndGlobal

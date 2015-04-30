@@ -64,8 +64,10 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 		/// Get meta data for ALL pages under ALL of the user's notebooks/sections
 		/// </summary>
 		/// <param name="debug">Run the code under the debugger</param>
+		/// <param name="provider"></param>
+		/// <param name="apiRoute"></param>
 		/// <returns>The converted HTTP response message</returns>
-		public static async Task<List<ApiBaseResponse>> GetAllPages(bool debug)
+		public static async Task<List<ApiBaseResponse>> GetAllPages(bool debug, AuthProvider provider, string apiRoute)
 		{
 			if (debug)
 			{
@@ -80,10 +82,10 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 
 			// Not adding the Authentication header would produce an unauthorized call and the API will return a 401
 			client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer",
-				await Auth.GetAuthToken());
+				await Auth.GetAuthToken(provider));
 
 			// Prepare an HTTP GET request to the Pages endpoint
-			var getMessage = new HttpRequestMessage(HttpMethod.Get, @"https://www.onenote.com/api/v1.0/pages");
+			var getMessage = new HttpRequestMessage(HttpMethod.Get, apiRoute + "pages");
 
 			HttpResponseMessage response = await client.SendAsync(getMessage);
 
@@ -96,10 +98,12 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 		/// <param name="debug">Run the code under the debugger</param>
 		/// <param name="skipCount">the number of first 1..n pages to skip</param>
 		/// <param name="topCount">the total number of pages to return after the skipCount</param>
+		/// <param name="provider"></param>
+		/// <param name="apiRoute"></param>
 		/// <returns>The converted HTTP response message</returns>
 		/// <example>https://www.onenote.com/api/v1.0/pages?$skip=20&$top=10
 		/// returns pages 21 to 30 (by skipping the first 20 pages). Default page count returned is 100.</example>
-		public static async Task<List<ApiBaseResponse>> GetAllPagesWithSkipAndTopQueryParams(bool debug, int skipCount, int topCount)
+		public static async Task<List<ApiBaseResponse>> GetAllPagesWithSkipAndTopQueryParams(bool debug, int skipCount, int topCount, AuthProvider provider, string apiRoute)
 		{
 			if (debug)
 			{
@@ -114,10 +118,10 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 
 			// Not adding the Authentication header would produce an unauthorized call and the API will return a 401
 			client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer",
-				await Auth.GetAuthToken());
+				await Auth.GetAuthToken(provider));
 
 			// Prepare an HTTP GET request to the Pages endpoint
-			var getMessage = new HttpRequestMessage(HttpMethod.Get, String.Format(@"https://www.onenote.com/api/v1.0/pages?$skip={0}&$top={1}", skipCount, topCount));
+			var getMessage = new HttpRequestMessage(HttpMethod.Get, String.Format(apiRoute + "pages?$skip={0}&$top={1}", skipCount, topCount));
 
 			HttpResponseMessage response = await client.SendAsync(getMessage);
 
@@ -130,11 +134,12 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 		/// </summary>
 		/// <param name="debug">Run the code under the debugger</param>
 		/// <param name="titleFilterString">substring to search for in page titles</param>
+		/// <param name="provider"></param>
+		/// <param name="apiRoute"></param>
 		/// <returns>The converted HTTP response message</returns>
 		/// <example>https://www.onenote.com/api/v1.0/pages?$filter=contains(title,'API')
 		///  returns all pages with title containing the case-sensitive substring 'API'</example>
-		public static async Task<List<ApiBaseResponse>> GetAllPagesWithTitleContainsFilterQueryParams(bool debug,
-			string titleFilterString)
+		public static async Task<List<ApiBaseResponse>> GetAllPagesWithTitleContainsFilterQueryParams(bool debug, string titleFilterString, AuthProvider provider, string apiRoute)
 		{
 			if (debug)
 			{
@@ -149,11 +154,11 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 
 			// Not adding the Authentication header would produce an unauthorized call and the API will return a 401
 			client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer",
-				await Auth.GetAuthToken());
+				await Auth.GetAuthToken(provider));
 
 			// Prepare an HTTP GET request to the Pages endpoint
 			var getMessage = new HttpRequestMessage(HttpMethod.Get,
-				String.Format(@"https://www.onenote.com/api/v1.0/pages?$filter=contains(title,'{0}')", WebUtility.UrlEncode(titleFilterString)));
+				String.Format(apiRoute + "pages?$filter=contains(title,'{0}')", WebUtility.UrlEncode(titleFilterString)));
 
             HttpResponseMessage response = await client.SendAsync(getMessage);
 
@@ -166,11 +171,12 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 		/// <param name="debug">Run the code under the debugger</param>
 		/// <param name="orderByFieldName">the field that is used to order the results</param>
 		/// <param name="selectFieldNames">meta data fields to return in the response</param>
+		/// <param name="provider"></param>
+		/// <param name="apiRoute"></param>
 		/// <returns>The converted HTTP response message</returns>
 		/// <example>https://www.onenote.com/api/v1.0/pages?$select=id,title&$orderby=title%20asc
 		/// returns only the id and title meta data values sorting the result alphabetically by title in ascending order</example>
-		public static async Task<List<ApiBaseResponse>> GetAllPagesWithOrderByAndSelectQueryParams(bool debug,
-			string orderByFieldName, string selectFieldNames)
+		public static async Task<List<ApiBaseResponse>> GetAllPagesWithOrderByAndSelectQueryParams(bool debug, string orderByFieldName, string selectFieldNames, AuthProvider provider, string apiRoute)
 		{
 			if (debug)
 			{
@@ -185,11 +191,11 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 
 			// Not adding the Authentication header would produce an unauthorized call and the API will return a 401
 			client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer",
-				await Auth.GetAuthToken());
+				await Auth.GetAuthToken(provider));
 
 			// Prepare an HTTP GET request to the Pages endpoint
 			var getMessage = new HttpRequestMessage(HttpMethod.Get,
-				String.Format(@"https://www.onenote.com/api/v1.0/pages?$select={0}&$orderby={1}",
+				String.Format(apiRoute + "pages?$select={0}&$orderby={1}",
 					WebUtility.UrlEncode(selectFieldNames),
 					WebUtility.UrlEncode(orderByFieldName)));
 
@@ -208,10 +214,12 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 		/// </summary>
 		/// <param name="debug">Run the code under the debugger</param>
 		/// <param name="searchTerm">string to search for</param>
+		/// <param name="provider"></param>
+		/// <param name="apiRoute"></param>
 		/// <returns>The converted HTTP response message</returns>
 		/// <example>https://www.onenote.com/api/v1.0/pages?search=cat
 		///  returns all pages containing the case-insensitive string 'cat'</example>
-		public static async Task<List<ApiBaseResponse>> SearchAllPages(bool debug, string searchTerm)
+		public static async Task<List<ApiBaseResponse>> SearchAllPages(bool debug, string searchTerm, AuthProvider provider, string apiRoute)
 		{
 			if (debug)
 			{
@@ -226,11 +234,11 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 
 			// Not adding the Authentication header would produce an unauthorized call and the API will return a 401
 			client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer",
-				await Auth.GetAuthToken());
+				await Auth.GetAuthToken(provider));
 
 			// Prepare an HTTP GET request to the Pages endpoint
 			var getMessage = new HttpRequestMessage(HttpMethod.Get,
-				String.Format(@"https://www.onenote.com/api/v1.0/pages?search={0}", WebUtility.UrlEncode(searchTerm)));
+				String.Format(apiRoute + "pages?search={0}", WebUtility.UrlEncode(searchTerm)));
 
 			HttpResponseMessage response = await client.SendAsync(getMessage);
 
@@ -245,11 +253,13 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 		/// </summary>
 		/// <param name="debug">Run the code under the debugger</param>
 		/// <param name="sectionId">Id of the section for which the page are returned</param>
+		/// <param name="provider"></param>
+		/// <param name="apiRoute"></param>
 		/// <remarks>  The sectionId can be fetched by querying the user's sections (e.g. GET https://www.onenote.com/api/v1.0/sections ).
 		/// NOTE: Using this approach, you can still query pages with ALL the different params shown in examples above.
 		/// </remarks>
 		/// <returns>The converted HTTP response message</returns>
-		public static async Task<List<ApiBaseResponse>> GetAllPagesUnderASpecificSectionId(bool debug, string sectionId)
+		public static async Task<List<ApiBaseResponse>> GetAllPagesUnderASpecificSectionId(bool debug, string sectionId, AuthProvider provider, string apiRoute)
 		{
 			if (debug)
 			{
@@ -264,10 +274,10 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 
 			// Not adding the Authentication header would produce an unauthorized call and the API will return a 401
 			client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer",
-				await Auth.GetAuthToken());
+				await Auth.GetAuthToken(provider));
 
 			// Prepare an HTTP GET request to the Pages endpoint
-			var getMessage = new HttpRequestMessage(HttpMethod.Get, @"https://www.onenote.com/api/v1.0/sections/" + sectionId + "/pages");
+			var getMessage = new HttpRequestMessage(HttpMethod.Get, apiRoute + "sections/" + sectionId + "/pages");
 
             HttpResponseMessage response = await client.SendAsync(getMessage);
 
@@ -283,11 +293,13 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 		/// </summary>
 		/// <param name="debug">Run the code under the debugger</param>
 		/// <param name="pageId">Id of the page for which the meta data is returned</param>
+		/// <param name="provider"></param>
+		/// <param name="apiRoute"></param>
 		/// <remarks>  The pageId can be fetched from an earlier GET/POST response of pages endpoint (e.g. GET https://www.onenote.com/api/v1.0/pages ).
 		/// NOTE: Using this approach, you can still query pages with ALL the different params shown in examples above.
 		/// </remarks>
 		/// <returns>The converted HTTP response message</returns>
-		public static async Task<ApiBaseResponse> GetASpecificPageMetadata(bool debug, string pageId)
+		public static async Task<ApiBaseResponse> GetASpecificPageMetadata(bool debug, string pageId, AuthProvider provider, string apiRoute)
 		{
 			if (debug)
 			{
@@ -302,10 +314,10 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 
 			// Not adding the Authentication header would produce an unauthorized call and the API will return a 401
 			client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer",
-				await Auth.GetAuthToken());
+				await Auth.GetAuthToken(provider));
 
 			// Prepare an HTTP GET request to the Pages endpoint
-			var getMessage = new HttpRequestMessage(HttpMethod.Get, @"https://www.onenote.com/api/v1.0/pages/" + pageId);
+			var getMessage = new HttpRequestMessage(HttpMethod.Get, apiRoute + "pages/" + pageId);
 
             HttpResponseMessage response = await client.SendAsync(getMessage);
 
@@ -322,10 +334,12 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 		/// </summary>
 		/// <param name="debug">Run the code under the debugger</param>
 		/// <param name="pageId">Id of the page for which the content is returned</param>
+		/// <param name="provider"></param>
+		/// <param name="apiRoute"></param>
 		/// <remarks>  The pageId can be fetched from an earlier GET/POST response of pages endpoint (e.g. GET https://www.onenote.com/api/v1.0/pages ).
 		/// </remarks>
 		/// <returns>The converted HTTP response message</returns>
-		public static async Task<ApiBaseResponse> GetASpecificPageContent(bool debug, string pageId)
+		public static async Task<ApiBaseResponse> GetASpecificPageContent(bool debug, string pageId, AuthProvider provider, string apiRoute)
 		{
 			if (debug)
 			{
@@ -340,10 +354,10 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 
 			// Not adding the Authentication header would produce an unauthorized call and the API will return a 401
 			client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer",
-				await Auth.GetAuthToken());
+				await Auth.GetAuthToken(provider));
 
 			// Prepare an HTTP GET request to the Pages endpoint
-			var getMessage = new HttpRequestMessage(HttpMethod.Get, @"https://www.onenote.com/api/v1.0/pages/" + pageId + "/content");
+			var getMessage = new HttpRequestMessage(HttpMethod.Get, apiRoute + "pages/" + pageId + "/content");
 
 			HttpResponseMessage response = await client.SendAsync(getMessage);
 

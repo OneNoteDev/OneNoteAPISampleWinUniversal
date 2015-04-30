@@ -1,8 +1,11 @@
 ﻿using System;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 using OneNoteServiceSamplesWinUniversal.Common;
 using OneNoteServiceSamplesWinUniversal.Data;
+using OneNoteServiceSamplesWinUniversal.OneNoteApi;
 
 // The Universal Hub Application project template is documented at http://go.microsoft.com/fwlink/?LinkID=391955
 namespace OneNoteServiceSamplesWinUniversal
@@ -12,15 +15,15 @@ namespace OneNoteServiceSamplesWinUniversal
 	/// </summary>
 	public sealed partial class HubPage : SharedBasePage
 	{
-		private NavigationHelper navigationHelper;
-		private ObservableDictionary defaultViewModel = new ObservableDictionary();
+		private readonly NavigationHelper _navigationHelper;
+		private readonly ObservableDictionary _defaultViewModel = new ObservableDictionary();
 
 		/// <summary>
 		/// Gets the NavigationHelper used to aid in navigation and process lifetime management.
 		/// </summary>
 		public NavigationHelper NavigationHelper
 		{
-			get { return navigationHelper; }
+			get { return _navigationHelper; }
 		}
 
 		/// <summary>
@@ -28,14 +31,14 @@ namespace OneNoteServiceSamplesWinUniversal
 		/// </summary>
 		public ObservableDictionary DefaultViewModel
 		{
-			get { return defaultViewModel; }
+			get { return _defaultViewModel; }
 		}
 
 		public HubPage()
 		{
 			InitializeComponent();
-			navigationHelper = new NavigationHelper(this);
-			navigationHelper.LoadState += NavigationHelper_LoadState;
+			_navigationHelper = new NavigationHelper(this);
+			_navigationHelper.LoadState += NavigationHelper_LoadState;
 		}
 
 		/// <summary>
@@ -53,6 +56,13 @@ namespace OneNoteServiceSamplesWinUniversal
 		{
 			var sampleDataGroups = await SampleDataSource.GetGroupsAsync();
 			DefaultViewModel["Groups"] = sampleDataGroups;
+
+			// save our toggle switch states
+			UserData.Provider = AppSettings.GetProviderO365() ? AuthProvider.MicrosoftOffice365 : AuthProvider.MicrosoftAccount;
+			O365ToggleSwitch.IsOn = UserData.Provider == AuthProvider.MicrosoftOffice365;
+
+			UserData.UseBeta = AppSettings.GetUseBeta();
+			UseBetaToggleSwitch.IsOn = UserData.UseBeta;
 		}
 
 		/// <summary>
@@ -77,8 +87,8 @@ namespace OneNoteServiceSamplesWinUniversal
 		{
 			// Navigate to the appropriate destination page, configuring the new page
 			// by passing required information as a navigation parameter
-			var itemId = ((SampleDataItem)e.ClickedItem).UniqueId;
-			Frame.Navigate(typeof(ItemPage), itemId);
+			UserData.ItemId = ((SampleDataItem)e.ClickedItem).UniqueId;
+			Frame.Navigate(typeof(ItemPage), UserData);
 		}
 		#region NavigationHelper registration
 
@@ -93,12 +103,12 @@ namespace OneNoteServiceSamplesWinUniversal
 		/// </summary>
 		protected override void OnNavigatedTo(NavigationEventArgs e)
 		{
-			navigationHelper.OnNavigatedTo(e);
+			_navigationHelper.OnNavigatedTo(e);
 		}
 
 		protected override void OnNavigatedFrom(NavigationEventArgs e)
 		{
-			navigationHelper.OnNavigatedFrom(e);
+			_navigationHelper.OnNavigatedFrom(e);
 		}
 
 		#endregion
@@ -107,6 +117,24 @@ namespace OneNoteServiceSamplesWinUniversal
 		{
 			var groupId = ((SampleDataGroup)e.ClickedItem).UniqueId;
 			Frame.Navigate(typeof (SectionPage), groupId);
+		}
+
+
+		private async void O365ToggleSwitch_Toggled(object sender, RoutedEventArgs e)
+		{
+			var toggleSwitch = (ToggleSwitch)sender;
+			UserData.Provider = toggleSwitch.IsOn ? AuthProvider.MicrosoftOffice365 : AuthProvider.MicrosoftAccount;
+			AppSettings.SetProviderO365(toggleSwitch.IsOn);
+
+			// kick off getting the access token
+			await Auth.GetAuthToken(UserData.Provider);
+		}
+
+		private void UseBetaToggleSwitch_Toggled(object sender, RoutedEventArgs e)
+		{
+			var toggleSwitch = (ToggleSwitch) sender;
+			UserData.UseBeta = toggleSwitch.IsOn;
+			AppSettings.SetUseBeta(toggleSwitch.IsOn);
 		}
 	}
 }

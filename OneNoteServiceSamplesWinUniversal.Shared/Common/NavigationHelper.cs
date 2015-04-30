@@ -9,6 +9,7 @@ using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
+using OneNoteServiceSamplesWinUniversal.OneNoteApi;
 
 namespace OneNoteServiceSamplesWinUniversal.Common
 {
@@ -307,14 +308,14 @@ namespace OneNoteServiceSamplesWinUniversal.Common
         /// </summary>
         public event SaveStateEventHandler SaveState;
 
-        /// <summary>
-        /// Invoked when this page is about to be displayed in a Frame.  
-        /// This method calls <see cref="LoadState"/>, where all page specific
-        /// navigation and process lifetime management logic should be placed.
-        /// </summary>
-        /// <param name="e">Event data that describes how this page was reached.  The Parameter
-        /// property provides the group to be displayed.</param>
-        public void OnNavigatedTo(NavigationEventArgs e)
+	    /// <summary>
+	    /// Invoked when this page is about to be displayed in a Frame.  
+	    /// This method calls <see cref="LoadState"/>, where all page specific
+	    /// navigation and process lifetime management logic should be placed.
+	    /// </summary>
+	    /// <param name="e">Event data that describes how this page was reached.  The Parameter
+	    /// property provides the group to be displayed.</param>
+	    public void OnNavigatedTo(NavigationEventArgs e)
         {
             var frameState = SuspensionManager.SessionStateForFrame(this.Frame);
             this._pageKey = "Page-" + this.Frame.BackStackDepth;

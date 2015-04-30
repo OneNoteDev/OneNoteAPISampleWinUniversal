@@ -58,10 +58,14 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <StackPanel Grid.Row="0" Orientation="Vertical" HorizontalAlignment="Left">
-                <StackPanel x:Name="InputSelectionPanel1" Orientation="Vertical" Width="Auto" Margin="0,0,0,0">
+            <StackPanel Grid.Row="0" Orientation="Vertical" HorizontalAlignment="Stretch">
+                <StackPanel x:Name="InputSelectionPanel1" Orientation="Vertical" Margin="0,0,0,0"
+							HorizontalAlignment="Stretch">
                     <TextBlock Text="Select an item from the drop-down to continue:" Margin="0,0,0,0"/>
-                    <ComboBox x:Name="InputComboBox1" ItemsSource="{Binding}" SelectionChanged="InputComboBox1_OnSelectionChanged"></ComboBox>
+                    <ComboBox x:Name="InputComboBox1" 
+							  ItemsSource="{Binding}" 
+							  SelectionChanged="InputComboBox1_OnSelectionChanged"
+							  HorizontalAlignment="Stretch"></ComboBox>
                 </StackPanel>
                 <StackPanel x:Name="InputSelectionPanel2" Orientation="Vertical" Width="Auto" Margin="0,0,0,0">
                     <TextBlock Text="Select an item from the drop-down to continue:" Margin="0,0,0,0"/>
@@ -85,15 +89,15 @@
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" Grid.Row="0" TextAlignment="Left" VerticalAlignment="Center">User:</TextBlock>
-                <TextBlock Grid.Column="1" Grid.Row="0" x:Name="AuthUserName"  Text="{Binding AuthUserName}" Margin="10,0,0,0" HorizontalAlignment="Left" TextAlignment="Left" VerticalAlignment="Center"/>
-                <TextBlock Grid.Column="0" Grid.Row="1"  TextAlignment="Left" VerticalAlignment="Center">Response:</TextBlock>
-                <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding StatusCode}" x:Name="ResponseTextBox" Margin="10,0,0,0" HorizontalAlignment="Left" TextAlignment="Left" VerticalAlignment="Center"/>
+                <TextBlock Grid.Column="0" Grid.Row="0" TextAlignment="Left" VerticalAlignment="Center" FontSize="20" FontFamily="Arial Black">User:</TextBlock>
+                <TextBlock Grid.Column="1" Grid.Row="0" x:Name="AuthUserName"  Text="{Binding AuthUserName}" Margin="10,0,0,0" HorizontalAlignment="Left" TextAlignment="Left" VerticalAlignment="Center" FontSize="20" FontFamily="Arial Black"/>
+                <TextBlock Grid.Column="0" Grid.Row="1"  TextAlignment="Left" VerticalAlignment="Center" FontSize="20" FontFamily="Arial Black">Response:</TextBlock>
+                <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding StatusCode}" x:Name="ResponseTextBox" Margin="10,0,0,0" HorizontalAlignment="Left" TextAlignment="Left" VerticalAlignment="Center" FontSize="20" FontFamily="Arial Black"/>
                 <TextBlock Grid.Column="0" Grid.Row="2" x:Name="ResponseListTextBlock" Visibility="Collapsed">List of items in response:</TextBlock>
                 <ComboBox Grid.Column="1"  SelectedItem="{Binding SelectedResponse, Mode=TwoWay}" ItemsSource="{Binding ResponseList}" Grid.Row="2" x:Name="ResponseListBox" Visibility="{Binding IsResponseListAvailable}" Margin="10,0,0,0">
                 </ComboBox>
-                <HyperlinkButton Visibility="{Binding IsClientUrlAvailable}" Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" x:Name="ClientLinkLaunchButton" Content="OneNote client link" HorizontalAlignment="Left" VerticalAlignment="Center" Tag="{Binding OneNoteClientUrl}" Click="ClientLinkLaunchButton_OnClickLinkLaunchButton_Click"/>
-                <TextBlock Grid.Column="0" Grid.Row="4" TextAlignment="Left" VerticalAlignment="Center">Body:</TextBlock>
+                <HyperlinkButton Visibility="{Binding IsClientUrlAvailable}" Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" x:Name="ClientLinkLaunchButton" Content="Click to open in OneNote App" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="20" FontFamily="Arial Black" Tag="{Binding OneNoteClientUrl}" Click="ClientLinkLaunchButton_OnClickLinkLaunchButton_Click" ToolTipService.ToolTip="the link should open the page in OneNote app"/>
+                <TextBlock Grid.Column="0" Grid.Row="4" TextAlignment="Left" VerticalAlignment="Top" FontSize="20" FontFamily="Arial Black">Body:</TextBlock>
                 <TextBox  Grid.Column="1" Grid.Row="4" Text="{Binding Body}"  x:Name="ResponseBodyTextBox" Margin="0,0,10,0" IsReadOnly="True" TextWrapping="Wrap" AcceptsReturn="True" VerticalAlignment="Stretch" FontSize="11" MaxHeight="400"></TextBox>
             </Grid>
         </Grid>

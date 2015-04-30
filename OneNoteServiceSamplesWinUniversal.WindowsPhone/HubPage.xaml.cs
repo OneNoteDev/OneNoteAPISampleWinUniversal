@@ -1,10 +1,11 @@
 ﻿using System;
-using Windows.ApplicationModel.Resources;
 using Windows.Graphics.Display;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using OneNoteServiceSamplesWinUniversal.Common;
 using OneNoteServiceSamplesWinUniversal.Data;
+using OneNoteServiceSamplesWinUniversal.OneNoteApi;
 
 // The Universal Hub Application project template is documented at http://go.microsoft.com/fwlink/?LinkID=391955
 
@@ -16,6 +17,7 @@ namespace OneNoteServiceSamplesWinUniversal
 	public sealed partial class HubPage : SharedBasePage
 	{
 		private readonly NavigationHelper _navigationHelper;
+		private HubContext _hubContext;
 		private readonly ObservableDictionary _defaultViewModel = new ObservableDictionary();
 
 		public HubPage()
@@ -62,9 +64,15 @@ namespace OneNoteServiceSamplesWinUniversal
 		/// session.  The state will be null the first time a page is visited.</param>
 		private async void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
 		{
-			// TODO: Create an appropriate data model for your problem domain to replace the sample data
 			var sampleDataGroups = await SampleDataSource.GetGroupsAsync();
 			DefaultViewModel["Groups"] = sampleDataGroups;
+
+			// load our toggle switch states
+			UserData.Provider = AppSettings.GetProviderO365() ? AuthProvider.MicrosoftOffice365 : AuthProvider.MicrosoftAccount;
+			O365ToggleSwitch.IsOn = UserData.Provider == AuthProvider.MicrosoftOffice365;
+
+			UserData.UseBeta = AppSettings.GetUseBeta();
+			UseBetaToggleSwitch.IsOn = UserData.UseBeta;
 		}
 
 		/// <summary>
@@ -98,8 +106,8 @@ namespace OneNoteServiceSamplesWinUniversal
 		/// <param name="e">Defaults about the click event.</param>
 		private void ItemView_ItemClick(object sender, ItemClickEventArgs e)
 		{
-			var itemId = ((SampleDataItem)e.ClickedItem).UniqueId;
-			Frame.Navigate(typeof(ItemPage), itemId);
+			_hubContext.ItemId = ((SampleDataItem)e.ClickedItem).UniqueId;
+			Frame.Navigate(typeof(ItemPage), _hubContext);
 		}
 
 		#region NavigationHelper registration
@@ -125,5 +133,22 @@ namespace OneNoteServiceSamplesWinUniversal
 		}
 
 		#endregion
+
+		private async void O365ToggleSwitch_Toggled(object sender, RoutedEventArgs e)
+		{
+			var toggleSwitch = (ToggleSwitch)sender;
+			UserData.Provider = toggleSwitch.IsOn ? AuthProvider.MicrosoftOffice365 : AuthProvider.MicrosoftAccount;
+			AppSettings.SetProviderO365(toggleSwitch.IsOn);
+
+			// kick off getting the access token
+			await Auth.GetAuthToken(UserData.Provider);
+		}
+
+		private void UseBetaToggleSwitch_Toggled(object sender, RoutedEventArgs e)
+		{
+			var toggleSwitch = (ToggleSwitch)sender;
+			UserData.UseBeta = toggleSwitch.IsOn;
+			AppSettings.SetUseBeta(UserData.UseBeta);
+		}
 	}
 }

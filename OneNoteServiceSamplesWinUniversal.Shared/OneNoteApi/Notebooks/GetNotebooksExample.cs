@@ -62,8 +62,10 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Notebooks
 		/// This include the user's notebooks as well as notebooks shared with this user by others.
 		/// </summary>
 		/// <param name="debug">Run the code under the debugger</param>
+		/// <param name="provider"></param>
+		/// <param name="apiRoute"></param>
 		/// <returns>The converted HTTP response message</returns>
-		public static async Task<List<ApiBaseResponse>> GetAllNotebooks(bool debug)
+		public static async Task<List<ApiBaseResponse>> GetAllNotebooks(bool debug, AuthProvider provider, string apiRoute)
 		{
 			if (debug)
 			{
@@ -77,11 +79,10 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Notebooks
 			client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
 			// Not adding the Authentication header would produce an unauthorized call and the API will return a 401
-			client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer",
-				await Auth.GetAuthToken());
+			client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await Auth.GetAuthToken(provider));
 
 			// Prepare an HTTP GET request to the Notebooks endpoint
-			var getMessage = new HttpRequestMessage(HttpMethod.Get, @"https://www.onenote.com/api/v1.0/notebooks");
+			var getMessage = new HttpRequestMessage(HttpMethod.Get, apiRoute + "notebooks");
 
 			HttpResponseMessage response = await client.SendAsync(getMessage);
 
@@ -94,10 +95,12 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Notebooks
 		/// </summary>
 		/// <param name="debug">Run the code under the debugger</param>
 		/// <param name="nameFilterString">search for the given notebook name</param>
+		/// <param name="provider"></param>
+		/// <param name="apiRoute"></param>
 		/// <returns>The converted HTTP response message</returns>
 		/// <example>https://www.onenote.com/api/v1.0/notebooks?$filter=name%20eq%20'API' 
 		///  returns all notebooks with name equals (case-sensitive) 'API'</example>
-		public static async Task<List<ApiBaseResponse>> GetAllNotebooksWithNameMatchingFilterQueryParam(bool debug, string nameFilterString)
+		public static async Task<List<ApiBaseResponse>> GetAllNotebooksWithNameMatchingFilterQueryParam(bool debug, string nameFilterString, AuthProvider provider, string apiRoute)
 		{
 			if (debug)
 			{
@@ -111,12 +114,11 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Notebooks
 			client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
 			// Not adding the Authentication header would produce an unauthorized call and the API will return a 401
-			client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer",
-				await Auth.GetAuthToken());
+			client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await Auth.GetAuthToken(provider));
 
 			// Prepare an HTTP GET request to the Notebooks endpoint
 			var getMessage = new HttpRequestMessage(HttpMethod.Get,
-				String.Format(@"https://www.onenote.com/api/v1.0/notebooks?$filter=name eq '{0}'", WebUtility.UrlEncode(nameFilterString)));
+				String.Format(apiRoute + "notebooks?$filter=name eq '{0}'", WebUtility.UrlEncode(nameFilterString)));
 
 			HttpResponseMessage response = await client.SendAsync(getMessage);
 
@@ -129,12 +131,14 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Notebooks
 		/// This will return all notebooks that were shared by others with this user
 		/// </summary>
 		/// <param name="debug">Run the code under the debugger</param>
+		/// <param name="provider"></param>
+		/// <param name="apiRoute"></param>
 		/// <returns>The converted HTTP response message</returns>
 		/// <example>https://www.onenote.com/api/v1.0/notebooks?$filter=userRole%20ne%20Microsoft.OneNote.Api.UserRole'Owner' 
 		///  returns all notebooks where userRole is not Owner. 
 		/// NOTE: There is an easier way to get the same results by filtering on 'isShared' == true.
 		/// </example>
-		public static async Task<List<ApiBaseResponse>> GetAllNotebooksWithUserRoleAsNotOwnerFilterQueryParam(bool debug)
+		public static async Task<List<ApiBaseResponse>> GetAllNotebooksWithUserRoleAsNotOwnerFilterQueryParam(bool debug, AuthProvider provider, string apiRoute)
 		{
 			if (debug)
 			{
@@ -148,12 +152,11 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Notebooks
 			client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
 			// Not adding the Authentication header would produce an unauthorized call and the API will return a 401
-			client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer",
-				await Auth.GetAuthToken());
+			client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await Auth.GetAuthToken(provider));
 
 			// Prepare an HTTP GET request to the Notebooks endpoint
 			var getMessage = new HttpRequestMessage(HttpMethod.Get,
-				@"https://www.onenote.com/api/v1.0/notebooks?$filter=userRole ne Microsoft.OneNote.Api.UserRole'Owner'");
+				apiRoute + "notebooks?$filter=userRole ne Microsoft.OneNote.Api.UserRole'Owner'");
 
 			HttpResponseMessage response = await client.SendAsync(getMessage);
 
@@ -166,11 +169,12 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Notebooks
 		/// <param name="debug">Run the code under the debugger</param>
 		/// <param name="orderByFieldName">the field that is used to order the results</param>
 		/// <param name="selectFieldNames">meta data fields to return in the response</param>
+		/// <param name="provider"></param>
+		/// <param name="apiRoute"></param>
 		/// <returns>The converted HTTP response message</returns>
 		/// <example>https://www.onenote.com/api/v1.0/notebooks?$select=id,name&$orderby=createdTime
 		/// returns only the id and name meta data values sorting the result chronologically by createdTime (ascending order by default)</example>
-		public static async Task<List<ApiBaseResponse>> GetAllNotebooksWithOrderByAndSelectQueryParams(bool debug,
-			string orderByFieldName, string selectFieldNames)
+		public static async Task<List<ApiBaseResponse>> GetAllNotebooksWithOrderByAndSelectQueryParams(bool debug, string orderByFieldName, string selectFieldNames, AuthProvider provider, string apiRoute)
 		{
 			if (debug)
 			{
@@ -184,12 +188,11 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Notebooks
 			client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
 			// Not adding the Authentication header would produce an unauthorized call and the API will return a 401
-			client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer",
-				await Auth.GetAuthToken());
+			client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await Auth.GetAuthToken(provider));
 
 			// Prepare an HTTP GET request to the Notebooks endpoint
 			var getMessage = new HttpRequestMessage(HttpMethod.Get,
-				String.Format(@"https://www.onenote.com/api/v1.0/notebooks?$select={0}&$orderby={1}",
+				String.Format(apiRoute + "notebooks?$select={0}&$orderby={1}",
 					WebUtility.UrlEncode(selectFieldNames),
 					WebUtility.UrlEncode(orderByFieldName)));
 
@@ -203,10 +206,12 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Notebooks
 		/// this is a good way to build a location picker data in one API roundtrip.
 		/// </summary>
 		/// <param name="debug">Run the code under the debugger</param>
+		/// <param name="provider"></param>
+		/// <param name="apiRoute"></param>
 		/// <returns>The converted HTTP response message</returns>
 		/// <example>https://www.onenote.com/api/v1.0/notebooks?$expand=sections,sectionGroups($expand=sections)
 		/// </example>
-		public static async Task<List<ApiBaseResponse>> GetAllNotebooksExpand(bool debug)
+		public static async Task<List<ApiBaseResponse>> GetAllNotebooksExpand(bool debug, AuthProvider provider, string apiRoute)
 		{
 			if (debug)
 			{
@@ -220,12 +225,11 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Notebooks
 			client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
 			// Not adding the Authentication header would produce an unauthorized call and the API will return a 401
-			client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer",
-				await Auth.GetAuthToken());
+			client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await Auth.GetAuthToken(provider));
 
 			// Prepare an HTTP GET request to the Notebooks endpoint
 			var getMessage = new HttpRequestMessage(HttpMethod.Get,
-				String.Format(@"https://www.onenote.com/api/v1.0/notebooks?$expand=sections,sectionGroups($expand=sections)"));
+				String.Format(apiRoute + "notebooks?$expand=sections,sectionGroups($expand=sections)"));
 
 			HttpResponseMessage response = await client.SendAsync(getMessage);
 
@@ -241,11 +245,13 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Notebooks
 		/// </summary>
 		/// <param name="debug">Run the code under the debugger</param>
 		/// <param name="notebookId">Id of the notebook for which the meta data is returned</param>
+		/// <param name="provider"></param>
+		/// <param name="apiRoute"></param>
 		/// <remarks>  The notebookId can be fetched from an earlier GET/POST response of Notebooks endpoint (e.g. GET https://www.onenote.com/api/v1.0/notebooks ).
 		/// NOTE: Using this approach, you can still query notebooks with ALL the different params shown in examples above.
 		/// </remarks>
 		/// <returns>The converted HTTP response message</returns>
-		public static async Task<ApiBaseResponse> GetASpecificNotebook(bool debug, string notebookId)
+		public static async Task<ApiBaseResponse> GetASpecificNotebook(bool debug, string notebookId, AuthProvider provider, string apiRoute)
 		{
 			if (debug)
 			{
@@ -259,11 +265,10 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Notebooks
 			client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
 			// Not adding the Authentication header would produce an unauthorized call and the API will return a 401
-			client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer",
-				await Auth.GetAuthToken());
+			client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await Auth.GetAuthToken(provider));
 
 			// Prepare an HTTP GET request to the Notebooks endpoint
-			var getMessage = new HttpRequestMessage(HttpMethod.Get, @"https://www.onenote.com/api/v1.0/notebooks/" + notebookId);
+			var getMessage = new HttpRequestMessage(HttpMethod.Get, apiRoute + "notebooks/" + notebookId);
 
 			HttpResponseMessage response = await client.SendAsync(getMessage);
 

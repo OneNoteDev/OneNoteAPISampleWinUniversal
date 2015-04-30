@@ -8,11 +8,11 @@ Created by Microsoft Corporation, 2014. Provided As-is without warranty. Tradema
 * This is a **newer and better** version of the previously released oneNote API [WinStore](https://github.com/OneNoteDev/OneNoteAPISampleWinStore) and [WinPhone](https://github.com/OneNoteDev/OneNoteAPISampleWinPhone) code samples. Use this code sample to build universal Windows 8.1 and above apps.
 * As of December 2014, This code sample contains examples of all shipped features as well as most of the beta features released by the OneNote API team.
 
-### API functionality demonstrated in this sample
-
 **If you wish to ignore the app UI/design and directly get to the part that interacts with the OneNote API, you can find the code under the [OneNoteServiceSamplesWinUniversal.Shared/OneNoteApi](https://github.com/OneNoteDev/OneNoteAPISampleWinUniversal/tree/master/OneNoteServiceSamplesWinUniversal.Shared/OneNoteApi) folder**. 
 
-The following aspects of the API are covered in this sample. You can find additional documentation at the links below.
+### OneDrive based API
+
+You can find additional documentation at the links below.
 
 * [Authenticate the user using the OnlineIdAuthenticator API](http://msdn.microsoft.com/en-us/library/windows/apps/windows.security.authentication.onlineid.onlineidauthenticator.aspx)
     * In our previous [WinStore](https://github.com/OneNoteDev/OneNoteAPISampleWinStore) and [WinPhone](https://github.com/OneNoteDev/OneNoteAPISampleWinPhone) Code samples we demonstrated how to use the 
@@ -35,7 +35,7 @@ The following aspects of the API are covered in this sample. You can find additi
 * Query and Search Pages:
     *  [GET a paginated list of all pages in OneNote](http://dev.onenote.com/docs#/reference/get-pages)
     *  [GET metadata for a specific page](http://dev.onenote.com/docs#/reference/get-pages/betapagesid/get)
-    *  [GET pages with title containing a specifc substring using the $filter query parameter and contains method](http://dev.onenote.com/docs#/reference/get-pages/betapagesfilterorderbyselecttopskipsearch/get)
+    *  [GET pages with title containing a specific substring using the $filter query parameter and contains method](http://dev.onenote.com/docs#/reference/get-pages/betapagesfilterorderbyselecttopskipsearch/get)
     *  [GET pages using OData v4 query parameters like $skip and $top](http://dev.onenote.com/docs#/reference/get-pages/betapagesfilterorderbyselecttopskipsearch/get)
         * [OData v4](http://docs.oasis-open.org/odata/odata/v4.0/os/part1-protocol/odata-v4.0-os-part1-protocol.html)
     *  [GET a sorted list of pages using the $orderBy query parameter](http://dev.onenote.com/docs#/reference/get-pages/betapagesfilterorderbyselecttopskipsearch/get)
@@ -43,7 +43,7 @@ The following aspects of the API are covered in this sample. You can find additi
     *  [GET pages containing the matching search term using the search query parameter](http://dev.onenote.com/docs#/reference/get-pages/betapagesfilterorderbyselecttopskipsearch/get)
     *  [GET back a specific page's content as HTML](http://dev.onenote.com/docs#/reference/get-pages/betapagesidcontent/get)
 * Manage Notebooks and Sections:
-    * GET all notebooks and sections in one roundtrip using the $expand query parameter
+    * GET all notebooks and sections in one round trip using the $expand query parameter
     * [GET a list of all notebooks](http://dev.onenote.com/docs#/reference/get-notebooks)
     * [GET metadata for a specific notebook](http://dev.onenote.com/docs#/reference/get-notebooks/v10notebooksid/get)
     * [GET a list of all sections](http://dev.onenote.com/docs#/reference/get-sections)
@@ -56,8 +56,17 @@ The following aspects of the API are covered in this sample. You can find additi
     * [GET a list of all sections under a specific notebook](http://dev.onenote.com/docs#/reference/get-sections/v10notebooksidsectionsfilterorderbyselect/get)
     * [POST a new notebook](http://dev.onenote.com/docs#/reference/post-notebooks)
     * [POST a new section under a specific notebook](http://dev.onenote.com/docs#/reference/post-sections)
-* Updates Pages (Coming soon):
+* Updates Pages:
     * Examples of [PATCH Pages](http://dev.onenote.com/docs#/reference/patch-pages) will be added soon.
+
+### O365 based API (only available on beta)
+    * All the APIs for Microsoft Account (LiveId) are supported in O365 as well except the following:-
+      *POST ~/me/notes/pages is currently not supported. To create a page, you have to include the section ID: ~/me/notes/sections/{id}/pages. 
+      *Using the ?sectionName filter to create a page  under a named section is currently not supported either.
+      *$search query option is currently not supported.
+
+Additional features in beta:
+    * Example of [DELETE Page]
 
 ### Prerequisites
 
@@ -69,37 +78,50 @@ The following aspects of the API are covered in this sample. You can find additi
 * [Visual Studio 2013 Update 4 or later](http://www.visualstudio.com/en-us/downloads). 
 
 Be sure you enable the Windows Phone SDK when you install Visual Studio. 
-If you don't, you will need to uninstall and re-install Visual Studio to get those features.
+If you don't, you will need to un-install and re-install Visual Studio to get those features.
+
+For using emulator (Windows Phone), make sure to enable hyper-v
 
 * You can get a full list of tools needed to build Universal Windows app [here](http://dev.windows.com/en-us/develop/downloads)
+
+** O365 specific Pre-requisites
+* What you need to do is to go to Programs and Features, Turn on/off Windows features and then choose to add Windows Identity Foundation 3.5 to your system.
 
 * **NuGet packages** used in the sample. These are handled using the package 
 manager, as described in the setup instructions. These should update 
 automatically at build time; if not, make sure your NuGet package manager 
 is up-to-date. You can learn more about the packages we used at the links below.
     * [Newtonsoft Json.NET package](http://newtonsoft.com/) provides Json parsing utilities.
+    * [Active Directory Authentication Library package](https://www.nuget.org/packages/Microsoft.IdentityModel.Clients.ActiveDirectory/) provides AAD authentication utilities (for Office 365)
 
 ### Accounts
+**To use this Code Sample in your own Microsoft Account based app, be sure to do the following:**
+* As the developer, you'll need to [have a Microsoft account and get a client ID string](http://msdn.microsoft.com/EN-US/library/office/dn575426.aspx) so your app can authenticate. Get a client ID string and copy it into the file under [.../OneNoteServiceSamplesWinUniversal.Shared/OneNoteApi/LiveIdAuth.cs](https://github.com/OneNoteDev/OneNoteAPISampleWinUniversal/blob/master/OneNoteServiceSamplesWinUniversal.Shared/OneNoteApi/LiveIdAuth.cs#L54) (~line 54).
+* Use the least permissible scopes by editing [.../OneNoteServiceSamplesWinUniversal.Shared/OneNoteApi/LiveIdAuth.cs](https://github.com/OneNoteDev/OneNoteAPISampleWinUniversal/blob/master/OneNoteServiceSamplesWinUniversal.Shared/OneNoteApi/LiveIdAuth.cs#L61) (~line 61).
+* [Create an app package and use appropriate certificates](http://msdn.microsoft.com/en-us/library/windows/apps/xaml/hh975357.aspx)
 
-* As the developer, you'll need to [have a Microsoft account and get a client ID string](http://msdn.microsoft.com/EN-US/library/office/dn575426.aspx) so your app can authenticate.
+**To use this Code Sample in your own Microsoft Office 365 based app, refer to the details in the blog [TBD](TBD)
 
 ### Using the sample
 
-After you've setup your development tools, and installed the prerequisites listed above,...
+After you've set up your development tools, and installed the prerequisites listed above,...
 
-1. Download the repo as a ZIP file to your local computer, and extract the files. Or, clone the repository into a local copy of Git.
+1. Download the repository as a ZIP file to your local computer, and extract the files. Or, clone the repository into a local copy of Git.
 2. Open the project (.sln file) in Visual Studio.
-3. It is highly recommended that you get your own client ID string and copy it into the file under [.../OneNoteServiceSamplesWinUniversal.Shared/OneNoteApi/Auth.cs](https://github.com/OneNoteDev/OneNoteAPISampleWinUniversal/blob/master/OneNoteServiceSamplesWinUniversal.Shared/OneNoteApi/Auth.cs#L54) (~line 54).
-4. Build and run the app (F5). 
+3. It is highly recommended that you get your own client ID string and copy it into the file under 
+	[.../OneNoteServiceSamplesWinUniversal.Shared/OneNoteApi/LiveIdAuth.cs](https://github.com/OneNoteDev/OneNoteAPISampleWinUniversal/blob/master/OneNoteServiceSamplesWinUniversal.Shared/OneNoteApi/LiveIdAuth.cs#L54) (~line 54)
+	OR
+	[.../OneNoteServiceSamplesWinUniversal.Shared/OneNoteApi/o365Auth.cs](https://github.com/OneNoteDev/OneNoteAPISampleWinUniversal/blob/master/OneNoteServiceSamplesWinUniversal.Shared/OneNoteApi/o365Auth.cs#L40) (~line 40)
+4. For o365, additionally, change RedirectUri to one of your app under
+	[.../OneNoteServiceSamplesWinUniversal.Shared/OneNoteApi/o365Auth.cs](https://github.com/OneNoteDev/OneNoteAPISampleWinUniversal/blob/master/OneNoteServiceSamplesWinUniversal.Shared/OneNoteApi/o365Auth.cs#L52) (~line 52)
+
+5. Build and run the application (F5). 
 
 (If your copy of NuGet is up-to-date, it should automatically update the packages. If you get package-not-found errors, update NuGet and rebuild, and that should fix it.)
 
-If you get any build or deployment errors related to the Publisher of the app, be sure to [Create an app package and use appropriate certificates](http://msdn.microsoft.com/en-us/library/windows/apps/xaml/hh975357.aspx)
-
-**To use this Code Sample in your own app, be sure to do the following:**
-* [Create an app package and use appropriate certificates](http://msdn.microsoft.com/en-us/library/windows/apps/xaml/hh975357.aspx)
-* As the developer, you'll need to [have a Microsoft account and get a client ID string](http://msdn.microsoft.com/EN-US/library/office/dn575426.aspx) so your app can authenticate. Get a client ID string and copy it into the file under [.../OneNoteServiceSamplesWinUniversal.Shared/OneNoteApi/Auth.cs](https://github.com/OneNoteDev/OneNoteAPISampleWinUniversal/blob/master/OneNoteServiceSamplesWinUniversal.Shared/OneNoteApi/Auth.cs#L54) (~line 54).
-* Use the least permissable scopes by editing [.../OneNoteServiceSamplesWinUniversal.Shared/OneNoteApi/Auth.cs](https://github.com/OneNoteDev/OneNoteAPISampleWinUniversal/blob/master/OneNoteServiceSamplesWinUniversal.Shared/OneNoteApi/Auth.cs#L61) (~line 61).
+If you get any build or deployment errors related to the Publisher of the app, be sure to 
+[Create LiveId app package and use appropriate certificates](http://msdn.microsoft.com/en-us/library/windows/apps/xaml/hh975357.aspx)
+[Create O365 app package and use appropriate certificates](TBD)
 
 ### Version Info
 

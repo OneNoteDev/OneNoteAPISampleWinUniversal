@@ -15,13 +15,18 @@
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Common\AppSettings.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DataModel\ItemPageModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DataModel\SampleDataSource.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)OneNoteApi\ApiBaseResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)OneNoteApi\HttpUtils.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)OneNoteApi\O365Auth.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)OneNoteApi\LiveIdAuth.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)OneNoteApi\Auth.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)OneNoteApi\GenericEntityResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)OneNoteApi\Notebooks\GetNotebooksExample.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)OneNoteApi\Notebooks\PostNotebooksExample.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)OneNoteApi\Pages\DeletePageExample.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)OneNoteApi\Pages\GetPagesExample.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)OneNoteApi\Pages\PageResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)OneNoteApi\Pages\PatchPagesExample.cs" />

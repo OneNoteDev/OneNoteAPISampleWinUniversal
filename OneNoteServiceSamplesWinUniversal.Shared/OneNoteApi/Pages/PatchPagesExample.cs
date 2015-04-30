@@ -71,9 +71,11 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 		/// </summary>
 		/// <param name="debug">Run the code under the debugger</param>
 		/// <param name="pageId">The identifier of the page whose content to append to</param>
+		/// <param name="provider"></param>
+		/// <param name="apiRoute"></param>
 		/// <remarks>Create page using a single part text/html content type</remarks>
 		/// <returns>The converted HTTP response message</returns>
-		public static async Task<ApiBaseResponse> AppendToDefaultOutlineInPageContent(bool debug, string pageId)
+		public static async Task<ApiBaseResponse> AppendToDefaultOutlineInPageContent(bool debug, string pageId, AuthProvider provider, string apiRoute)
 		{
 			if (debug)
 			{
@@ -88,7 +90,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 
 			// Not adding the Authentication header would produce an unauthorized call and the API will return a 401
 			client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer",
-				await Auth.GetAuthToken());
+				await Auth.GetAuthToken(provider));
 
 			//The request content must be a JSON list of commands
 			var commands = new List<PatchCommand>();
@@ -106,7 +108,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 
 			// Prepare an HTTP PATCH request to the Pages/{pageId}/content endpoint
 			// The request body content type is application/json
-			var createMessage = new HttpRequestMessage(new HttpMethod("PATCH"), @"https://www.onenote.com/api/beta/pages/" + pageId + "/content")
+			var createMessage = new HttpRequestMessage(new HttpMethod("PATCH"), apiRoute + "pages/" + pageId + "/content")
 			{
 				Content = new StringContent(appendRequestContent, Encoding.UTF8, "application/json")
 			};

@@ -11,12 +11,16 @@ namespace OneNoteServiceSamplesWinUniversal.DataModel
 {
 	public class ItemPageModel : INotifyPropertyChanged
 	{
-		private string _authUserName = null;  // Logged in user name
-		private SampleDataItem _item = null;  // Info about the current item
-		private object _apiResponse = null;  // Response from an API request - Either a ApiBaseResponse or a List<ApiBaseResponse>
-		private ApiBaseResponse _selectedResponse = null;  // Holds a reference to the currently selected response
+		private string _authUserName = null; // Logged in user name
+		private SampleDataItem _item = null; // Info about the current item
+		private HubContext _userData = null;
+		private object _apiResponse = null;
+			// Response from an API request - Either a ApiBaseResponse or a List<ApiBaseResponse>
 
-		public event PropertyChangedEventHandler PropertyChanged;  // Implements INotifyPropertyChanged for notifying the binding engine when an attribute changes
+		private ApiBaseResponse _selectedResponse = null; // Holds a reference to the currently selected response
+
+		public event PropertyChangedEventHandler PropertyChanged;
+			// Implements INotifyPropertyChanged for notifying the binding engine when an attribute changes
 
 		/// <summary>
 		// NotifyPropertyChanged will fire the PropertyChanged event, 
@@ -32,10 +36,7 @@ namespace OneNoteServiceSamplesWinUniversal.DataModel
 
 		public string AuthUserName
 		{
-			get
-			{
-				return _authUserName;
-			}
+			get { return _authUserName; }
 
 			set
 			{
@@ -45,27 +46,9 @@ namespace OneNoteServiceSamplesWinUniversal.DataModel
 			}
 		}
 
-		public string SignInButtonTitle
-		{
-			get
-			{
-				string title = "Sign In";
-
-				if (Auth.IsSignedIn)
-				{
-					title = "Sign Out";
-				}
-
-				return title;
-			}
-		}
-
 		public SampleDataItem Item
 		{
-			get
-			{
-				return _item;
-			}
+			get { return _item; }
 
 			set
 			{
@@ -76,6 +59,7 @@ namespace OneNoteServiceSamplesWinUniversal.DataModel
 
 		public object ApiResponse
 		{
+			get { return _apiResponse as ApiBaseResponse; }
 			set
 			{
 				_apiResponse = value;
@@ -85,14 +69,18 @@ namespace OneNoteServiceSamplesWinUniversal.DataModel
 
 				if (_apiResponse != null)
 				{
-					if (_apiResponse is ApiBaseResponse)
+					var response = _apiResponse as ApiBaseResponse;
+					if (response != null)
 					{
-						selectedResponse = _apiResponse as ApiBaseResponse;
+						selectedResponse = response;
 					}
 					else
 					{
-						List<ApiBaseResponse> multipleResponses = _apiResponse as List<ApiBaseResponse>;
-						selectedResponse = multipleResponses[0];
+						var multipleResponses = _apiResponse as List<ApiBaseResponse>;
+						if (multipleResponses != null)
+						{
+							selectedResponse = multipleResponses[0];
+						}
 					}
 				}
 
@@ -105,21 +93,30 @@ namespace OneNoteServiceSamplesWinUniversal.DataModel
 				NotifyPropertyChanged("IsClientUrlAvailable");
 				NotifyPropertyChanged("ResponseList");
 				NotifyPropertyChanged("SelectedResponse");
+				NotifyPropertyChanged("CorrelationId");
 			}
 		}
 
 		public ApiBaseResponse SelectedResponse
 		{
-			get
-			{
-				return _selectedResponse;
-			}
+			get { return _selectedResponse; }
 
 			set
 			{
 				_selectedResponse = value;
 				NotifyPropertyChanged("OneNoteClientUrl");
 				NotifyPropertyChanged("OneNoteWebUrl");
+			}
+		}
+
+		public HubContext UserData
+		{
+			get { return _userData; }
+
+			set
+			{
+				_userData = value;
+				NotifyPropertyChanged("TimeStamp");
 			}
 		}
 
@@ -135,7 +132,7 @@ namespace OneNoteServiceSamplesWinUniversal.DataModel
 
 					if (statusCode != 0)
 					{
-						statusCodeString = string.Format("{0}-{1}", (int)statusCode, statusCode.ToString());
+						statusCodeString = string.Format("{0}-{1}", (int) statusCode, statusCode.ToString());
 					}
 				}
 
@@ -149,7 +146,7 @@ namespace OneNoteServiceSamplesWinUniversal.DataModel
 			{
 				string body = string.Empty;
 
-				if (_selectedResponse != null)
+				if (_selectedResponse != null && _selectedResponse.Body != null)
 				{
 					body = _selectedResponse.Body;
 				}
@@ -175,10 +172,7 @@ namespace OneNoteServiceSamplesWinUniversal.DataModel
 
 		public bool IsResponseAvailable
 		{
-			get
-			{
-				return _apiResponse != null;
-			}
+			get { return _apiResponse != null; }
 		}
 
 		public Visibility IsResponseListAvailable
@@ -198,10 +192,7 @@ namespace OneNoteServiceSamplesWinUniversal.DataModel
 
 		public List<ApiBaseResponse> ResponseList
 		{
-			get
-			{
-				return _apiResponse as List<ApiBaseResponse>;
-			}
+			get { return _apiResponse as List<ApiBaseResponse>; }
 		}
 
 		public Visibility IsClientUrlAvailable
@@ -246,6 +237,24 @@ namespace OneNoteServiceSamplesWinUniversal.DataModel
 				}
 
 				return webUrl;
+			}
+		}
+
+		public string CorrelationId
+		{
+			get
+			{
+				return _selectedResponse != null && !string.IsNullOrEmpty(_selectedResponse.CorrelationId)
+					? _selectedResponse.CorrelationId
+					: string.Empty;
+			}
+		}
+
+		public string TimeStamp
+		{
+			get
+			{
+				return _userData != null ? _userData.TimeStamp.ToString() : string.Empty;
 			}
 		}
 	}

@@ -9,8 +9,9 @@
                 {
                     "UniqueId": "Group-0-Item-0",
                     "Title": "Simple page using HTML",
+                    "Subtitle": "Microsoft Account Only",
                     "ImagePath": "Assets/LightGray.png",
-                    "Description": "Create a simple page using HTML to describe the page content",
+                    "Description": "Create a simple page using HTML to describe the page content (under default section)",
                     "RequiresInputComboBox1": "false",
                     "RequiresInputComboBox2": "false",
                     "RequiresInputTextBox": "false"
@@ -20,8 +21,8 @@
                     "Title": "Page with an image",
                     "ImagePath": "Assets/DarkGray.png",
                     "Description": "Create a page with some formatted text and an image",
-                    "RequiresInputComboBox1": "false",
-                    "RequiresInputComboBox2": "false",
+                    "RequiresInputComboBox1": "true",
+                    "RequiresInputComboBox2": "true",
                     "RequiresInputTextBox": "false"
                 },
                 {
@@ -29,8 +30,8 @@
                     "Title": "Page with a snapshot of an embedded web page",
                     "ImagePath": "Assets/MediumGray.png",
                     "Description": "Create a page with a snapshot of the HTML of a web page on it",
-                    "RequiresInputComboBox1": "false",
-                    "RequiresInputComboBox2": "false",
+                    "RequiresInputComboBox1": "true",
+                    "RequiresInputComboBox2": "true",
                     "RequiresInputTextBox": "false"
                 },
                 {
@@ -38,8 +39,8 @@
                     "Title": "Page with a snapshot of a url",
                     "ImagePath": "Assets/DarkGray.png",
                     "Description": "Create a page with a snapshot of the OneNote.com homepage on it.",
-                    "RequiresInputComboBox1": "false",
-                    "RequiresInputComboBox2": "false",
+                    "RequiresInputComboBox1": "true",
+                    "RequiresInputComboBox2": "true",
                     "RequiresInputTextBox": "false"
                 },
                 {
@@ -47,8 +48,8 @@
                     "Title": "Page with a PDF attachment rendered",
                     "ImagePath": "Assets/MediumGray.png",
                     "Description": "Create a page with a PDF file attachment rendered",
-                    "RequiresInputComboBox1": "false",
-                    "RequiresInputComboBox2": "false",
+                    "RequiresInputComboBox1": "true",
+                    "RequiresInputComboBox2": "true",
                     "RequiresInputTextBox": "false"
                 },
                 {
@@ -56,8 +57,8 @@
                     "Title": "Page with note tags",
                     "ImagePath": "Assets/LightGray.png",
                     "Description": "Create a page with examples of note tags. For example build a to do list",
-                    "RequiresInputComboBox1": "false",
-                    "RequiresInputComboBox2": "false",
+                    "RequiresInputComboBox1": "true",
+                    "RequiresInputComboBox2": "true",
                     "RequiresInputTextBox": "false"
                 },
                 {
@@ -65,8 +66,8 @@
                     "Title": "Page with a business card",
                     "ImagePath": "Assets/MediumGray.png",
                     "Description": "Create a page with a business card info automatically extracted from an image",
-                    "RequiresInputComboBox1": "false",
-                    "RequiresInputComboBox2": "false",
+                    "RequiresInputComboBox1": "true",
+                    "RequiresInputComboBox2": "true",
                     "RequiresInputTextBox": "false"
                 },
                 {
@@ -74,8 +75,8 @@
                     "Title": "Page with a recipe",
                     "ImagePath": "Assets/DarkGray.png",
                     "Description": "Create a page with a cooking recipe automatically extracted from an example webpage",
-                    "RequiresInputComboBox1": "false",
-                    "RequiresInputComboBox2": "false",
+                    "RequiresInputComboBox1": "true",
+                    "RequiresInputComboBox2": "true",
                     "RequiresInputTextBox": "false"
                 },
                 {
@@ -83,27 +84,19 @@
                     "Title": "Page with product info",
                     "ImagePath": "Assets/LightGray.png",
                     "Description": "Create a page with a product info automatically extracted from an example amazon.com webpage",
-                    "RequiresInputComboBox1": "false",
-                    "RequiresInputComboBox2": "false",
+                    "RequiresInputComboBox1": "true",
+                    "RequiresInputComboBox2": "true",
                     "RequiresInputTextBox": "false"
                 },
                 {
                     "UniqueId": "Group-0-Item-9",
                     "Title": "Page under a named section",
+                    "Subtitle": "Microsoft Account Only",
                     "ImagePath": "Assets/MediumGray.png",
                     "Description": "Create a page under a given section name using the 'sectionName' query parameter. Please enter a section name in the TextBox below. If the named section does not exist, it will be auto-created",
                     "RequiresInputComboBox1": "false",
                     "RequiresInputComboBox2": "false",
                     "RequiresInputTextBox": "true"
-                },
-                {
-                    "UniqueId": "Group-0-Item-10",
-                    "Title": "Page under a specific notebook and section",
-                    "ImagePath": "Assets/DarkGray.png",
-                    "Description": "Create a page under a specific notebook and section. First we will make a call to fetch all the user's notebooks and sections and then create a page under one of the selected notebook and section. Please select a specific notebook and section in the drop-down below.",
-                    "RequiresInputComboBox1": "true",
-                    "RequiresInputComboBox2": "true",
-                    "RequiresInputTextBox": "false"
                 }
             ]
         },
@@ -321,9 +314,27 @@
                 {
                     "UniqueId": "Group-3-Item-0",
                     "Title": "Append to the end of the default outline in the page",
-                    "Subtitle": "BETA",
+                    "Subtitle": "BETA Only",
                     "ImagePath": "Assets/MediumGray.png",
                     "Description": "Add new trailing content to the default outline in an existing page",
+                    "RequiresInputComboBox1": "true",
+                    "RequiresInputComboBox2": "false",
+                    "RequiresInputTextBox": "false"
+                }
+            ]
+        },
+        {
+            "UniqueId": "Group-4",
+            "Title": "Delete Pages",
+            "ImagePath": "Assets/LightGray.png",
+            "Description": "Examples of how to use the HTTP DELETE verb to delete a specific page",
+            "Items": [
+                {
+                    "UniqueId": "Group-4-Item-0",
+                    "Title": "Delete Page",
+                    "Subtitle": "BETA Only",
+                    "ImagePath": "Assets/LightGray.png",
+                    "Description": "Delete an existing page",
                     "RequiresInputComboBox1": "true",
                     "RequiresInputComboBox2": "false",
                     "RequiresInputTextBox": "false"
