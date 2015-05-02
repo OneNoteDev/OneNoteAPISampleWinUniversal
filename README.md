@@ -57,7 +57,7 @@ You can find additional documentation at the links below.
     * [POST a new notebook](http://dev.onenote.com/docs#/reference/post-notebooks)
     * [POST a new section under a specific notebook](http://dev.onenote.com/docs#/reference/post-sections)
 * Updates Pages:
-    * Examples of [PATCH Pages](http://dev.onenote.com/docs#/reference/patch-pages) will be added soon.
+    * Examples of [PATCH Pages](http://dev.onenote.com/docs#/reference/patch-pages)
 
 ### O365 based API (only available on beta)
     * All the APIs for Microsoft Account (LiveId) are supported in O365 as well except the following:-
@@ -66,7 +66,7 @@ You can find additional documentation at the links below.
       *$search query option is currently not supported.
 
 Additional features in beta:
-    * Example of [DELETE Page]
+    * Example of [DELETE Page] (http://dev.onenote.com/docs#/reference/delete-pages) (page is coming soon).
 
 ### Prerequisites
 
@@ -100,7 +100,7 @@ is up-to-date. You can learn more about the packages we used at the links below.
 * Use the least permissible scopes by editing [.../OneNoteServiceSamplesWinUniversal.Shared/OneNoteApi/LiveIdAuth.cs](https://github.com/OneNoteDev/OneNoteAPISampleWinUniversal/blob/master/OneNoteServiceSamplesWinUniversal.Shared/OneNoteApi/LiveIdAuth.cs#L61) (~line 61).
 * [Create an app package and use appropriate certificates](http://msdn.microsoft.com/en-us/library/windows/apps/xaml/hh975357.aspx)
 
-**To use this Code Sample in your own Microsoft Office 365 based app, refer to the details in the blog [TBD](TBD)
+**To use this Code Sample in your own Microsoft Office 365 based app, refer to the details in the blog [Support for work and school notebooks on Office 365](http://blogs.msdn.com/b/onenotedev/archive/2015/04/30/support-for-work-and-school-notebooks-on-office-365-in-preview.aspx)
 
 ### Using the sample
 
@@ -119,9 +119,11 @@ After you've set up your development tools, and installed the prerequisites list
 
 (If your copy of NuGet is up-to-date, it should automatically update the packages. If you get package-not-found errors, update NuGet and rebuild, and that should fix it.)
 
-If you get any build or deployment errors related to the Publisher of the app, be sure to 
+If you get any build or deployment errors related to the Publisher of the app (Microsoft Account), be sure to 
 [Create LiveId app package and use appropriate certificates](http://msdn.microsoft.com/en-us/library/windows/apps/xaml/hh975357.aspx)
-[Create O365 app package and use appropriate certificates](TBD)
+
+If you get any build or deployment errors related to the Publisher of the app (Microsoft Office 365), be sure to 
+[Have your app appear in the Office 365 app launcher](https://msdn.microsoft.com/en-us/office/office365/howto/connect-your-app-to-o365-app-launcher)
 
 ### Version Info
 
