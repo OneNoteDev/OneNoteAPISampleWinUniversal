@@ -9,7 +9,6 @@
                 {
                     "UniqueId": "Group-0-Item-0",
                     "Title": "Simple page using HTML",
-                    "Subtitle": "Microsoft Account Only",
                     "ImagePath": "Assets/LightGray.png",
                     "Description": "Create a simple page using HTML to describe the page content (under default section)",
                     "RequiresInputComboBox1": "false",
@@ -91,7 +90,6 @@
                 {
                     "UniqueId": "Group-0-Item-9",
                     "Title": "Page under a named section",
-                    "Subtitle": "Microsoft Account Only",
                     "ImagePath": "Assets/MediumGray.png",
                     "Description": "Create a page under a given section name using the 'sectionName' query parameter. Please enter a section name in the TextBox below. If the named section does not exist, it will be auto-created",
                     "RequiresInputComboBox1": "false",
