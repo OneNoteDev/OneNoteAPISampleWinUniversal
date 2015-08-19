@@ -30,13 +30,14 @@ using System.Threading.Tasks;
 namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Sections
 {
 	/// <summary>
-	/// Class to show a selection of example creating sections via HTTP POST to the OneNote API
+	/// Class to show a selection of examples creating sections via HTTP POST to the OneNote API
 	/// - Creating a new section is represented via the POST HTTP verb.
-	/// - Creating a new section under a given notebook is represented by the Uri: https://www.onenote.com/api/v1.0/notebooks/{notebookId}/sections
+    /// - Creating a new section under a given notebook is represented by the Uri: https://www.onenote.com/api/v1.0/me/notes/notebooks/{notebookId}/sections
+    /// - Creating a new section under a given section group is represented by the Uri: https://www.onenote.com/api/beta/me/notes/sectiongroups/{sectionGroupId}/sections
 	/// For more info, see http://dev.onenote.com/docs
 	/// </summary>
 	/// <remarks>
-	/// NOTE: All sections require a parent notebook
+	/// NOTE: All create-sections operations require a parent notebook or parent section group.
 	/// The section name is specified in the request body
 	/// NOTE: It is not the goal of this code sample to produce well re-factored, elegant code.
 	/// You may notice code blocks being duplicated in various places in this project.
@@ -47,7 +48,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Sections
 	///  var client = new HttpClient();
 	///  client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 	///  client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await Auth.GetAuthToken());
-	///  var createMessage = new HttpRequestMessage(HttpMethod.Post, "https://www.onenote.com/api/v1.0/notebooks/{notebookId}/ections")
+	///  var createMessage = new HttpRequestMessage(HttpMethod.Post, "https://www.onenote.com/api/v1.0/me/notes/notebooks/{notebookId}/sections")
 	///  {
 	///      Content = new StringContent("{name: NewSectionName }", System.Text.Encoding.UTF8, "application/json")
 	///  };
@@ -55,7 +56,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Sections
 	/// </code>
 	public static class PostSectionsExample
 	{
-		#region Examples of POST https://www.onenote.com/api/v1.0/notebooks/{notebookId}/sections
+		#region Examples of POST https://www.onenote.com/api/v1.0/me/notes/notebooks/{notebookId}/sections
 
 		/// <summary>
 		/// Create a section with a given name under a given notebookId
@@ -67,7 +68,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Sections
 		/// <param name="apiRoute"></param>
 		/// <remarks>Create section using a application/json content type</remarks>
 		/// <returns>The converted HTTP response message</returns>
-		public static async Task<ApiBaseResponse> CreateSimpleSection(bool debug, string notebookId, string sectionName, AuthProvider provider, string apiRoute)
+		public static async Task<ApiBaseResponse> CreateSectionInNotebook(bool debug, string notebookId, string sectionName, AuthProvider provider, string apiRoute)
 		{
 			if (debug)
 			{
@@ -95,6 +96,49 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Sections
 
 			return await HttpUtils.TranslateResponse(response);
 		}
+ 
+        #endregion
+
+        #region Examples of POST https://www.onenote.com/api/beta/me/notes/sectiongroups/{sectionGroupId}/sections
+
+        /// <summary>
+        /// BETA Create a section with a given name under a given sectionGroupId
+        /// </summary>
+        /// <param name="debug">Run the code under the debugger</param>
+        /// <param name="notebookId">parent section group's Id</param>
+        /// <param name="sectionName">name of the section to create</param>
+        /// <param name="provider"></param>
+        /// <param name="apiRoute"></param>
+        /// <remarks>Create section using a application/json content type</remarks>
+        /// <returns>The converted HTTP response message</returns>
+        public static async Task<ApiBaseResponse> CreateSectionInSectionGroup(bool debug, string sectionGroupId, string sectionName, AuthProvider provider, string apiRoute)
+        {
+            if (debug)
+            {
+                Debugger.Launch();
+                Debugger.Break();
+            }
+
+            var client = new HttpClient();
+
+            // Note: API only supports JSON response.
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            // Not adding the Authentication header would produce an unauthorized call and the API will return a 401
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer",
+                await Auth.GetAuthToken(provider));
+
+            // Prepare an HTTP POST request to the Sections endpoint
+            // The request body content type is application/json and require a name property
+            var createMessage = new HttpRequestMessage(HttpMethod.Post, apiRoute + @"sectiongroups/" + sectionGroupId + "/sections")
+            {
+                Content = new StringContent("{ name : '" + WebUtility.UrlEncode(sectionName) + "' }", Encoding.UTF8, "application/json")
+            };
+
+            HttpResponseMessage response = await client.SendAsync(createMessage);
+
+            return await HttpUtils.TranslateResponse(response);
+        }
 
 		#endregion
 	}
