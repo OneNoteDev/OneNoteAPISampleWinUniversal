@@ -65,8 +65,8 @@ You can find additional documentation at the links below.
     * [DELETE page](http://dev.onenote.com/docs#/reference/delete-pages)
 
 ### O365 based API (only available on beta)
-    * All the APIs for Microsoft Account (LiveId) are supported in O365 as well except the following:
-      *$search query option is currently not supported.
+All the APIs for Microsoft Account (LiveId) are supported in O365 as well except the following:  
+* $search query option is currently not supported.
 
 
 ### Prerequisites
