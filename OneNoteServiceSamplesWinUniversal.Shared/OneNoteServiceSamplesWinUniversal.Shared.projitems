@@ -32,6 +32,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)OneNoteApi\Pages\PatchPagesExample.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)OneNoteApi\Pages\PostPagesExample.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)OneNoteApi\SectionGroups\GetSectionGroupsExample.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)OneNoteApi\SectionGroups\PostSectionGroupsExample.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)OneNoteApi\Sections\GetSectionsExample.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)OneNoteApi\Sections\PostSectionsExample.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SharedBasePage.xaml.cs">

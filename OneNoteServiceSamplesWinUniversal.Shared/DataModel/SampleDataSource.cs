@@ -244,7 +244,13 @@ namespace OneNoteServiceSamplesWinUniversal.Data
 				case "Group-2-Item-11":
 					return await PostNotebooksExample.CreateSimpleNotebook(debug, requiredInputText, provider, apiEndPoint);
 				case "Group-2-Item-12":
-					return await PostSectionsExample.CreateSimpleSection(debug, requiredSelectedId, requiredInputText, provider, apiEndPoint);
+                    return await PostSectionsExample.CreateSectionInNotebook(debug, requiredSelectedId, requiredInputText, provider, apiEndPoint);
+                case "Group-2-Item-13":
+                    return await PostSectionsExample.CreateSectionInSectionGroup(debug, requiredSelectedId, requiredInputText, provider, apiEndPoint);
+                case "Group-2-Item-14":
+                    return await PostSectionGroupsExample.CreateSectionGroupInNotebook(debug, requiredSelectedId, requiredInputText, provider, apiEndPoint);
+                case "Group-2-Item-15":
+                    return await PostSectionGroupsExample.CreateSectionGroupInSectionGroup(debug, requiredSelectedId, requiredInputText, provider, apiEndPoint);
 				case "Group-3-Item-0":
 					return await PatchPagesExample.AppendToDefaultOutlineInPageContent(debug, requiredSelectedId, provider, apiEndPoint);
 				case "Group-4-Item-0":
@@ -281,7 +287,13 @@ namespace OneNoteServiceSamplesWinUniversal.Data
 				case "Group-2-Item-9":
 					return await GetNotebooksExample.GetAllNotebooks(false, provider, apiEndPoint);
 				case "Group-2-Item-12":
-					return await GetNotebooksExample.GetAllNotebooks(false, provider, apiEndPoint);
+                    return await GetNotebooksExample.GetAllNotebooks(false, provider, apiEndPoint);
+                case "Group-2-Item-13":
+                    return await GetSectionGroupsExample.GetAllSectionGroups(false, provider, apiEndPoint);
+                case "Group-2-Item-14":
+                    return await GetNotebooksExample.GetAllNotebooks(false, provider, apiEndPoint);
+                case "Group-2-Item-15":
+                    return await GetSectionGroupsExample.GetAllSectionGroups(false, provider, apiEndPoint);
 				case "Group-3-Item-0":
 					return await GetPagesExample.GetAllPages(false, provider, apiEndPoint);
 				case "Group-3-Item-1":
