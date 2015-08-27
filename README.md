@@ -1,7 +1,7 @@
 
 ## OneNote service API Windows Universal Sample README
 
-Created by Microsoft Corporation, 2014. Provided As-is without warranty. Trademarks mentioned here are the property of their owners.
+Created by Microsoft Corporation, 2015. Provided As-is without warranty. Trademarks mentioned here are the property of their owners.
 
 ### Intro
 * [Universal Windows apps](http://blogs.windows.com/buildingapps/2014/04/02/extending-platform-commonality-through-universal-windows-apps/)
