@@ -25,9 +25,9 @@ using System.Threading.Tasks;
 namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 {
 	/// <summary>
-	///     Class to show a selection of examples creating pages via HTTP DELETE to the OneNote API
+	///     Class to show a selection of examples deleting pages via HTTP DELETE to the OneNote API
 	///     - Delete a new page is represented via the DELETE HTTP verb.
-	///     For more info, see http://dev.onenote.com/docs
+    ///     For more info, see http://dev.onenote.com/docs#/reference/delete-pages.
 	/// </summary>
 	/// <remarks>
 	///     NOTE: It is not the goal of this code sample to produce well re-factored, elegant code.
@@ -39,7 +39,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 	///   var client = new HttpClient();
 	///   client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await Auth.GetAuthToken());
 	/// 
-	///   var deleteMessage = new HttpRequestMessage(HttpMethod.Delete, "https://www.onenote.com/beta/v1.0/pages");
+	///   var deleteMessage = new HttpRequestMessage(HttpMethod.Delete, "https://www.onenote.com/api/v1.0/pages");
 	///   HttpResponseMessage response = await client.SendAsync(deleteMessage);
 	///  </code>
 	public static class DeletePagesExample
@@ -53,7 +53,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 		/// <param name="pageId"></param>
 		/// <param name="provider"></param>
 		/// <param name="apiRoute"></param>
-		/// <remarks>Create page using a single part text/html content type</remarks>
+		/// <remarks>Delete a specified page by ID.</remarks>
 		/// <returns>The converted HTTP response message</returns>
 		public static async Task<ApiBaseResponse> DeletePage(bool debug, string pageId, AuthProvider provider, string apiRoute)
 		{

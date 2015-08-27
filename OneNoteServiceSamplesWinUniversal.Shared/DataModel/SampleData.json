@@ -304,6 +304,7 @@
                 {
                     "UniqueId": "Group-2-Item-13",
                     "Title": "Create a new section in a section group",
+                    "Subtitle": "BETA Only",
                     "ImagePath": "Assets/MediumGray.png",
                     "Description": "First we get a list of all section groups and then create a new empty section under the selected section group. Please select a specific section group from the drop-down below and also enter the new section's name in the TextBox below",
                     "RequiresInputComboBox1": "true",
@@ -313,6 +314,7 @@
                 {
                     "UniqueId": "Group-2-Item-14",
                     "Title": "Create a new section group in a notebook",
+                    "Subtitle": "BETA Only",
                     "ImagePath": "Assets/MediumGray.png",
                     "Description": "First we get a list of all notebooks and then create a new empty section group under the selected notebook. Please select a specific notebook from the drop-down below and also enter the new section group's name in the TextBox below",
                     "RequiresInputComboBox1": "true",
@@ -322,6 +324,7 @@
                 {
                     "UniqueId": "Group-2-Item-15",
                     "Title": "Create a new section group in a section group",
+                    "Subtitle": "BETA Only",
                     "ImagePath": "Assets/MediumGray.png",
                     "Description": "First we get a list of all section groups and then create a new empty section group under the selected section group. Please select a specific section group from the drop-down below and also enter the new section group's name in the TextBox below",
                     "RequiresInputComboBox1": "true",
@@ -339,7 +342,6 @@
                 {
                     "UniqueId": "Group-3-Item-0",
                     "Title": "Append to the end of the default outline in the page",
-                    "Subtitle": "BETA Only",
                     "ImagePath": "Assets/MediumGray.png",
                     "Description": "Add new trailing content to the default outline in an existing page",
                     "RequiresInputComboBox1": "true",
@@ -357,7 +359,6 @@
                 {
                     "UniqueId": "Group-4-Item-0",
                     "Title": "Delete Page",
-                    "Subtitle": "BETA Only",
                     "ImagePath": "Assets/LightGray.png",
                     "Description": "Delete an existing page",
                     "RequiresInputComboBox1": "true",

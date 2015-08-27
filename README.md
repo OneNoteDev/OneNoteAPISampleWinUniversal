@@ -6,7 +6,7 @@ Created by Microsoft Corporation, 2014. Provided As-is without warranty. Tradema
 ### Intro
 * [Universal Windows apps](http://blogs.windows.com/buildingapps/2014/04/02/extending-platform-commonality-through-universal-windows-apps/)
 * This is a **newer and better** version of the previously released oneNote API [WinStore](https://github.com/OneNoteDev/OneNoteAPISampleWinStore) and [WinPhone](https://github.com/OneNoteDev/OneNoteAPISampleWinPhone) code samples. Use this code sample to build universal Windows 8.1 and above apps.
-* As of December 2014, This code sample contains examples of all shipped features as well as most of the beta features released by the OneNote API team.
+* As of August 2015, this code sample contains examples of all shipped features as well as most of the beta features released by the OneNote API team.
 
 **If you wish to ignore the app UI/design and directly get to the part that interacts with the OneNote API, you can find the code under the [OneNoteServiceSamplesWinUniversal.Shared/OneNoteApi](https://github.com/OneNoteDev/OneNoteAPISampleWinUniversal/tree/master/OneNoteServiceSamplesWinUniversal.Shared/OneNoteApi) folder**. 
 
@@ -19,54 +19,55 @@ You can find additional documentation at the links below.
 [LiveSDK](http://msdn.microsoft.com/EN-US/library/office/dn575435.aspx) to do OAuth against the Microsoft Account service. This code sample, demonstrates an alternative way to do OAuth using the new Windows.Security.Authentication.OnlineId.OnlineIdAuthenticator class. Both the existing Live SDK approach and this alternative will work in Windows 8.1 universal apps
     * The usage of the OnlineIdAuthenticator class is based on the [Windows universal code sample](http://code.msdn.microsoft.com/windowsapps/Windows-account-authorizati-7c95e284)
 * Create Pages: 
-    * [POST simple HTML to a new OneNote QuickNotes page](http://msdn.microsoft.com/EN-US/library/office/dn575428.aspx)
+    * [POST simple HTML to a new OneNote Quick Notes page](http://msdn.microsoft.com/EN-US/library/office/dn575428.aspx)
     * [POST multi-part message with image data included in the request](http://msdn.microsoft.com/EN-US/library/office/dn575432.aspx)
-    * POST page with a snapshot of an embedded web page HTML
+    * [POST page with a snapshot of an embedded web page HTML](http://msdn.microsoft.com/EN-US/library/office/dn575431.aspx)
     * [POST page with a URL rendered as an image](http://msdn.microsoft.com/EN-US/library/office/dn575431.aspx)
     * [POST page with a file attachment](http://msdn.microsoft.com/en-us/library/office/dn575436.aspx)
     * [POST page with a PDF file rendered and attached](http://msdn.microsoft.com/EN-US/library/office/dn655137.aspx)
-    * POST page with note tags
-    * POST page with a business card automatically extracted from an image
-    * POST page with a recipe automatically extracted from a URL
-    * POST page with a product info automatically extracted from a URL
+    * [POST page with note tags](https://msdn.microsoft.com/EN-US/library/office/mt159148.aspx)
+    * [POST page with a business card automatically extracted from an image](https://msdn.microsoft.com/EN-US/library/office/dn600338.aspx#ExtractBusinessCard)
+    * [POST page with a recipe automatically extracted from a URL](https://msdn.microsoft.com/EN-US/library/office/dn600338.aspx#ExtractRecipe)
+    * [POST page with a product info automatically extracted from a URL](https://msdn.microsoft.com/EN-US/library/office/dn600338.aspx#ExtractProduct)
     * [Extract the returned oneNoteClientURL and oneNoteWebURL links](http://msdn.microsoft.com/EN-US/library/office/dn575433.aspx)
     * [POST page in a specific named section](http://msdn.microsoft.com/EN-US/library/office/dn672416.aspx)
-    * [POST page under a specific notebook and section](http://dev.onenote.com/docs#/reference/post-pages/v10sectionsidpages/post)
+    * [POST page under a specific notebook and section](http://dev.onenote.com/docs#/reference/post-pages/v10menotessectionsidpages/post)
 * Query and Search Pages:
     *  [GET a paginated list of all pages in OneNote](http://dev.onenote.com/docs#/reference/get-pages)
-    *  [GET metadata for a specific page](http://dev.onenote.com/docs#/reference/get-pages/betapagesid/get)
-    *  [GET pages with title containing a specific substring using the $filter query parameter and contains method](http://dev.onenote.com/docs#/reference/get-pages/betapagesfilterorderbyselecttopskipsearch/get)
-    *  [GET pages using OData v4 query parameters like $skip and $top](http://dev.onenote.com/docs#/reference/get-pages/betapagesfilterorderbyselecttopskipsearch/get)
+    *  [GET metadata for a specific page](http://dev.onenote.com/docs#/reference/get-pages/v10menotespagesid/get)
+    *  [GET pages with title containing a specific substring using the $filter query parameter and contains method](http://dev.onenote.com/docs#/reference/get-pages/v10menotespagesfilterorderbyselecttopskipsearchcount/get)
+    *  [GET pages using OData v4 query parameters like $skip and $top](http://dev.onenote.com/docs#/reference/get-pages/v10menotespagesfilterorderbyselecttopskipsearchcount/get)
         * [OData v4](http://docs.oasis-open.org/odata/odata/v4.0/os/part1-protocol/odata-v4.0-os-part1-protocol.html)
-    *  [GET a sorted list of pages using the $orderBy query parameter](http://dev.onenote.com/docs#/reference/get-pages/betapagesfilterorderbyselecttopskipsearch/get)
-    *  [GET selected metadata for pages using the $select query parameter](http://dev.onenote.com/docs#/reference/get-pages/betapagesfilterorderbyselecttopskipsearch/get)
-    *  [GET pages containing the matching search term using the search query parameter](http://dev.onenote.com/docs#/reference/get-pages/betapagesfilterorderbyselecttopskipsearch/get)
-    *  [GET back a specific page's content as HTML](http://dev.onenote.com/docs#/reference/get-pages/betapagesidcontent/get)
+    *  [GET a sorted list of pages using the $orderby query parameter](http://dev.onenote.com/docs#/reference/get-pages/v10menotespagesfilterorderbyselecttopskipsearchcount/get)
+    *  [GET selected metadata for pages using the $select query parameter](http://dev.onenote.com/docs#/reference/get-pages/v10menotespagesfilterorderbyselecttopskipsearchcount/get)
+    *  [GET pages containing the matching search term using the search query parameter](http://dev.onenote.com/docs#/reference/get-pages/v10menotespagesfilterorderbyselecttopskipsearchcount/get)
+    *  [GET back a specific page's content as HTML](http://dev.onenote.com/docs#/reference/get-pages/v10menotespagesidcontentincludeids/get)
 * Manage Notebooks and Sections:
     * GET all notebooks and sections in one round trip using the $expand query parameter
     * [GET a list of all notebooks](http://dev.onenote.com/docs#/reference/get-notebooks)
-    * [GET metadata for a specific notebook](http://dev.onenote.com/docs#/reference/get-notebooks/v10notebooksid/get)
+    * [GET metadata for a specific notebook](http://dev.onenote.com/docs#/reference/get-notebooks/v10menotesnotebooksidselectexpand/get)
     * [GET a list of all sections](http://dev.onenote.com/docs#/reference/get-sections)
-    * [GET metadata for a specific section](http://dev.onenote.com/docs#/reference/get-sections/v10sectionsid/get)
-    * [GET a list of all SectionGroups](http://dev.onenote.com/docs#/reference/get-sectiongroups)
-    * [GET notebooks and sections with a specific name using the $filter query parameter](http://dev.onenote.com/docs#/reference/get-notebooks/v10notebooksfilterorderbyselect/get)
-    * [GET notebooks shared by others using the $filter query parameter and useRole property](http://dev.onenote.com/docs#/reference/get-notebooks/v10notebooksfilterorderbyselect/get)
-    * [GET a sorted list of notebooks using the $orderBy query parameter](http://dev.onenote.com/docs#/reference/get-notebooks/v10notebooksfilterorderbyselect/get)
-    * [GET selected metadata for notebooks using the $select query parameter](http://dev.onenote.com/docs#/reference/get-notebooks/v10notebooksfilterorderbyselect/get)
-    * [GET a list of all sections under a specific notebook](http://dev.onenote.com/docs#/reference/get-sections/v10notebooksidsectionsfilterorderbyselect/get)
+    * [GET metadata for a specific section](http://dev.onenote.com/docs#/reference/get-sections/v10menotessectionsidselectexpand/get)
+    * [GET a list of all section groups](http://dev.onenote.com/docs#/reference/get-sectiongroups)
+    * [GET notebooks and sections with a specific name using the $filter query parameter](http://dev.onenote.com/docs#/reference/get-notebooks/v10menotesnotebooksfilterorderbyselectexpandtopskipcount/get)
+    * [GET notebooks shared by others using the $filter query parameter and userRole property](http://dev.onenote.com/docs#/reference/get-notebooks/v10menotesnotebooksfilterorderbyselectexpandtopskipcount/get)
+    * [GET a sorted list of notebooks using the $orderby query parameter](http://dev.onenote.com/docs#/reference/get-notebooks/v10menotesnotebooksfilterorderbyselectexpandtopskipcount/get)
+    * [GET selected metadata for notebooks using the $select query parameter](http://dev.onenote.com/docs#/reference/get-notebooks/v10menotesnotebooksfilterorderbyselectexpandtopskipcount/get)
+    * [GET a list of all sections under a specific notebook](http://dev.onenote.com/docs#/reference/get-notebooks/v10menotesnotebooksfilterorderbyselectexpandtopskipcount/get)
     * [POST a new notebook](http://dev.onenote.com/docs#/reference/post-notebooks)
-    * [POST a new section under a specific notebook](http://dev.onenote.com/docs#/reference/post-sections)
-* Updates Pages:
-    * Examples of [PATCH Pages](http://dev.onenote.com/docs#/reference/patch-pages)
+    * [POST a new section group under a specific notebook](http://dev.onenote.com/docs#/reference/post-sectiongroups/betamenotesnotebooksidsectiongroups/post)
+    * [POST a new section group under a specific section group](http://dev.onenote.com/docs#/reference/post-sectiongroups/betamenotessectiongroupsidsectiongroups/post)
+    * [POST a new section under a specific notebook](http://dev.onenote.com/docs#/reference/post-sections/v10menotesnotebooksidsections/post)
+    * [POST a new section under a specific section group](http://dev.onenote.com/docs#/reference/post-sections/betamenotessectiongroupsidsections/post)
+* Update Pages:  
+    * Examples of [PATCH Pages](http://dev.onenote.com/docs#/reference/patch-pages)  
+* Delete Pages:  
+    * [DELETE page](http://dev.onenote.com/docs#/reference/delete-pages)
 
 ### O365 based API (only available on beta)
-    * All the APIs for Microsoft Account (LiveId) are supported in O365 as well except the following:-
-      *POST ~/me/notes/pages is currently not supported. To create a page, you have to include the section ID: ~/me/notes/sections/{id}/pages. 
-      *Using the ?sectionName filter to create a page  under a named section is currently not supported either.
+    * All the APIs for Microsoft Account (LiveId) are supported in O365 as well except the following:
       *$search query option is currently not supported.
 
-Additional features in beta:
-    * Example of [DELETE Page] (http://dev.onenote.com/docs#/reference/delete-pages) (page is coming soon).
 
 ### Prerequisites
 
@@ -127,7 +128,13 @@ If you get any build or deployment errors related to the Publisher of the app (M
 
 ### Version Info
 
-This is the initial public release for this code sample.
+| Date | Change |
+|------|------|
+| August 2015 | Added beta `POST /sectiongroups/{id}/sections`, `POST /notebooks/{id}/sectiongroups`, and  `POST /sectiongroups/{id}/sectiongroups` examples.<br/>Changed `DELETE /pages/{id}` from beta to v1.0.<br/>Support for `POST /pages` and `POST /pages?sectionName` in Office 365. |
+| April 2015 | Added Office 365 with Azure AD auth support<br/>Added beta `DELETE /pages/{id}` example. |
+| March 2015 | Added `PATCH` example |
+| January 2015 | Added `GET /sections/{id}/pages` examples. |
+| December 2014 | Initial public release for this code sample. |
   
 ### Learning More
 
