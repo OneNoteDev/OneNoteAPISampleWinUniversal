@@ -29,7 +29,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Notebooks
 	/// <summary>
 	/// Class to show a selection of examples creating notebooks via HTTP POST to the OneNote API
 	/// - Creating a new notebook is represented via the POST HTTP verb.
-	/// - Creating a new notebook represented by the Uri: https://www.onenote.com/api/v1.0/notebooks
+	/// - Creating a new notebook represented by the Uri: https://www.onenote.com/api/v1.0/me/notes/notebooks
 	/// For more info, see http://dev.onenote.com/docs
 	/// </summary>
 	/// <remarks>
@@ -44,7 +44,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Notebooks
 	///  var client = new HttpClient();
 	///  client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 	///  client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await Auth.GetAuthToken());
-	///  var createMessage = new HttpRequestMessage(HttpMethod.Post, "https://www.onenote.com/api/v1.0/notebooks")
+	///  var createMessage = new HttpRequestMessage(HttpMethod.Post, "https://www.onenote.com/api/v1.0/me/notes/notebooks")
 	///  {
 	///      Content = new StringContent("{name: NewNotebookName }", System.Text.Encoding.UTF8, "application/json")
 	///  };
@@ -52,7 +52,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Notebooks
 	/// </code>
 	public static class PostNotebooksExample
 	{
-		#region Examples of POST https://www.onenote.com/api/v1.0/notebooks
+		#region Examples of POST https://www.onenote.com/api/v1.0/me/notes/notebooks
 
 		/// <summary>
 		/// Create a notebook with a given name

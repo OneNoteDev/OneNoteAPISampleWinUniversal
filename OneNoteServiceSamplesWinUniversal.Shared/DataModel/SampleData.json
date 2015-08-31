@@ -305,7 +305,7 @@
                     "UniqueId": "Group-2-Item-13",
                     "Title": "Create a new section in a section group",
                     "Subtitle": "BETA Only",
-                    "ImagePath": "Assets/MediumGray.png",
+                    "ImagePath": "Assets/DarkGray.png",
                     "Description": "First we get a list of all section groups and then create a new empty section under the selected section group. Please select a specific section group from the drop-down below and also enter the new section's name in the TextBox below",
                     "RequiresInputComboBox1": "true",
                     "RequiresInputComboBox2": "false",
@@ -315,7 +315,7 @@
                     "UniqueId": "Group-2-Item-14",
                     "Title": "Create a new section group in a notebook",
                     "Subtitle": "BETA Only",
-                    "ImagePath": "Assets/MediumGray.png",
+                    "ImagePath": "Assets/LightGray.png",
                     "Description": "First we get a list of all notebooks and then create a new empty section group under the selected notebook. Please select a specific notebook from the drop-down below and also enter the new section group's name in the TextBox below",
                     "RequiresInputComboBox1": "true",
                     "RequiresInputComboBox2": "false",
@@ -364,6 +364,50 @@
                     "RequiresInputComboBox1": "true",
                     "RequiresInputComboBox2": "false",
                     "RequiresInputTextBox": "false"
+                }
+            ]
+        },
+        {
+            "UniqueId": "Group-5",
+            "Title": "Copy Notebooks, Sections, and Pages",
+            "ImagePath": "Assets/MediumGray.png",
+            "Description": "Examples of how to copy notebooks, sections, and pages.",
+            "Items": [
+                {
+                    "UniqueId": "Group-5-Item-0",
+                    "Title": "Copy Notebook",
+                    "ImagePath": "Assets/LightGray.png",
+                    "Description": "Choose the notebook you want to copy, and then enter a name for the new notebook.",
+                    "RequiresInputComboBox1": "true",
+                    "RequiresInputComboBox2": "false",
+                    "RequiresInputTextBox": "true"
+                },
+                {
+                    "UniqueId": "Group-5-Item-1",
+                    "Title": "Copy Section to Notebook",
+                    "ImagePath": "Assets/MediumGray.png",
+                    "Description": "Choose the section you want to copy and the destination notebook. Then, enter a name for the new section.",
+                    "RequiresInputComboBox1": "true",
+                    "RequiresInputComboBox2": "true",
+                    "RequiresInputTextBox": "true"
+                },
+                {
+                    "UniqueId": "Group-5-Item-2",
+                    "Title": "Copy Section to Section Group",
+                    "ImagePath": "Assets/DarkGray.png",
+                    "Description": "Choose the section you want to copy and the destination section group. Then, enter a name for the new section.",
+                    "RequiresInputComboBox1": "true",
+                    "RequiresInputComboBox2": "true",
+                    "RequiresInputTextBox": "true"
+                },
+                {
+                    "UniqueId": "Group-5-Item-3",
+                    "Title": "Copy Page to Section",
+                    "ImagePath": "Assets/MediumGray.png",
+                    "Description": "Choose the page you want to copy and the destination section. Then, enter a name for the new page.",
+                    "RequiresInputComboBox1": "true",
+                    "RequiresInputComboBox2": "true",
+                    "RequiresInputTextBox": "true"
                 }
             ]
         }

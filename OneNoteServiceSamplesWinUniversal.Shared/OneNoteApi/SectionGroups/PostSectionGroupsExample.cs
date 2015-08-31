@@ -63,7 +63,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.SectionGroups
         /// </summary>
         /// <param name="debug">Run the code under the debugger</param>
         /// <param name="notebookId">parent notebook's Id</param>
-        /// <param name="sectionName">name of the section group to create</param>
+        /// <param name="sectionGroupName">name of the section group to create</param>
         /// <param name="provider"></param>
         /// <param name="apiRoute"></param>
         /// <remarks>Create section group using a application/json content type</remarks>
@@ -105,8 +105,8 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.SectionGroups
         /// BETA Create a section group with a given name under a given sectionGroupId
         /// </summary>
         /// <param name="debug">Run the code under the debugger</param>
-        /// <param name="notebookId">parent section group's Id</param>
-        /// <param name="sectionName">name of the section group to create</param>
+        /// <param name="sectionGroupId">parent section group's Id</param>
+        /// <param name="sectionGroupName">name of the section group to create</param>
         /// <param name="provider"></param>
         /// <param name="apiRoute"></param>
         /// <remarks>Create section group using a application/json content type</remarks>

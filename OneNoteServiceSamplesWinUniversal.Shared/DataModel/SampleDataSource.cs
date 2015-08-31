@@ -254,7 +254,15 @@ namespace OneNoteServiceSamplesWinUniversal.Data
 				case "Group-3-Item-0":
 					return await PatchPagesExample.AppendToDefaultOutlineInPageContent(debug, requiredSelectedId, provider, apiEndPoint);
 				case "Group-4-Item-0":
-					return await DeletePagesExample.DeletePage(debug, requiredSelectedId, provider, apiEndPoint);
+                    return await DeletePagesExample.DeletePage(debug, requiredSelectedId, provider, apiEndPoint);
+                case "Group-5-Item-0":
+                    return await CopyNotebooksExample.CopyNotebook(debug, requiredSelectedId, requiredInputText, provider, apiEndPoint);
+                case "Group-5-Item-1":
+                    return await CopyNotebooksExample.CopyNotebook(debug, requiredSelectedId, requiredInputText, provider, apiEndPoint);
+                case "Group-5-Item-2":
+                    return await CopyNotebooksExample.CopyNotebook(debug, requiredSelectedId, requiredInputText, provider, apiEndPoint);
+                case "Group-5-Item-3":
+                    return await CopyNotebooksExample.CopyNotebook(debug, requiredSelectedId, requiredInputText, provider, apiEndPoint);
 			}
 			return null;
 		}
@@ -298,8 +306,15 @@ namespace OneNoteServiceSamplesWinUniversal.Data
 					return await GetPagesExample.GetAllPages(false, provider, apiEndPoint);
 				case "Group-3-Item-1":
 				case "Group-4-Item-0":
-					return await GetPagesExample.GetAllPages(false, provider, apiEndPoint);
-
+                    return await GetPagesExample.GetAllPages(false, provider, apiEndPoint);
+                case "Group-5-Item-0":
+                    return await GetNotebooksExample.GetAllNotebooks(false, provider, apiEndPoint);
+                case "Group-5-Item-1":
+                    return await GetNotebooksExample.GetAllNotebooks(false, provider, apiEndPoint);
+                case "Group-5-Item-2":
+                    return await GetSectionGroupsExample.GetAllSectionGroups(false, provider, apiEndPoint);
+                case "Group-5-Item-3":
+                    return await GetSectionsExample.GetAllSections(false, provider, apiEndPoint);
 			}
 			return null;
 		}

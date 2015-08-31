@@ -20,12 +20,14 @@
     <Compile Include="$(MSBuildThisFileDirectory)DataModel\SampleDataSource.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)OneNoteApi\ApiBaseResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)OneNoteApi\HttpUtils.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)OneNoteApi\Notebooks\CopyNotebooksExample.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)OneNoteApi\O365Auth.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)OneNoteApi\LiveIdAuth.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)OneNoteApi\Auth.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)OneNoteApi\GenericEntityResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)OneNoteApi\Notebooks\GetNotebooksExample.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)OneNoteApi\Notebooks\PostNotebooksExample.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)OneNoteApi\Pages\CopyPagesExample.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)OneNoteApi\Pages\DeletePageExample.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)OneNoteApi\Pages\GetPagesExample.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)OneNoteApi\Pages\PageResponse.cs" />
@@ -33,6 +35,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)OneNoteApi\Pages\PostPagesExample.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)OneNoteApi\SectionGroups\GetSectionGroupsExample.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)OneNoteApi\SectionGroups\PostSectionGroupsExample.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)OneNoteApi\Sections\CopySectionsExample.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)OneNoteApi\Sections\GetSectionsExample.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)OneNoteApi\Sections\PostSectionsExample.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SharedBasePage.xaml.cs">

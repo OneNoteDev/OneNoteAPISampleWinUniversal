@@ -35,8 +35,8 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 	/// <summary>
 	/// Class to show a selection of examples creating pages via HTTP POST to the OneNote API
 	/// - Creating a new page is represented via the POST HTTP verb.
-	/// - Creating a page in the default location is represented by the Uri: https://www.onenote.com/api/v1.0/pages
-	///    - Creating a page in the default notebook but under a specific named section is represented by the Uri: https://www.onenote.com/api/v1.0/pages?sectionName={SectionName}
+	/// - Creating a page in the default location is represented by the Uri: https://www.onenote.com/api/v1.0/me/notes/pages
+	///    - Creating a page in the default notebook but under a specific named section is represented by the Uri: https://www.onenote.com/api/v1.0/me/notes/pages?sectionName={SectionName}
 	/// - Creating a page in a specific section is represented by the Uri: https://www.onenote.com/api/v1.0/sections/{sectionId}/pages
 	/// For more info, see http://dev.onenote.com/docs
 	/// </summary>
@@ -53,7 +53,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 	///
 	///  string simpleHtml = "<html><head><title>Page Title</title></head>" +
 	///                      "<body><p>Hello World!</p></body></html>";
-	///  var createMessage = new HttpRequestMessage(HttpMethod.Post, "https://www.onenote.com/api/v1.0/pages")
+	///  var createMessage = new HttpRequestMessage(HttpMethod.Post, "https://www.onenote.com/api/v1.0/me/notes/pages")
 	///  {
 	///      Content = new StringContent(simpleHtml, System.Text.Encoding.UTF8, "text/HTML")
 	///  };
@@ -61,7 +61,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 	/// </code>
 	public static class PostPagesExample
 	{
-		#region Examples of POST https://www.onenote.com/api/v1.0/pages with different contents
+		#region Examples of POST https://www.onenote.com/api/v1.0/me/notes/pages with different contents
 
 		/// <summary>
 		/// Create a very simple page with some formatted text.
@@ -438,7 +438,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 			return await HttpUtils.TranslateResponse(response);
 		}
 
-		#region Examples of POST https://www.onenote.com/api/v1.0/pages with auto-extraction of entities
+		#region Examples of POST https://www.onenote.com/api/v1.0/me/notes/pages with auto-extraction of entities
 
 		/// <summary>
 		/// Create a page with auto-extracted business card on it.
@@ -618,7 +618,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 
 		#endregion
 
-		#region Example of POST https://www.onenote.com/api/v1.0/pages?sectionName={AppName}
+		#region Example of POST https://www.onenote.com/api/v1.0/me/notes/pages?sectionName={AppName}
 
 		/// <summary>
 		/// Create a very simple page with some formatted text in a  specific section (name provided by caller)
