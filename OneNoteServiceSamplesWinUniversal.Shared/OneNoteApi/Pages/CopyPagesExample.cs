@@ -28,10 +28,11 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 {
 	/// <summary>
     /// Class to show an example of copying notebooks via HTTP POST to the CopyToSection action. 
-    /// If successful, returns a 202 Accepted status code and a Microsoft.OneNote.Api.CopyStatusModel object.
+    /// If successful, returns a 202 Accepted status code, a Location header with the page's endpoint URL, and a Microsoft.OneNote.Api.CopyStatusModel object.
 	/// </summary>
 	/// <remarks>
-	/// NOTE: This action requires the ID of the page that you want to copy and the ID of the section you want to copy the page to. 
+	/// NOTE: This action requires the ID of the page that you want to copy and the ID of the section you want to copy the page to.
+	/// NOTE: These examples do not include copying to a SharePoint site or group. 
 	/// NOTE: It is not the goal of this code sample to produce well re-factored, elegant code.
 	/// You may notice code blocks being duplicated in various places in this project.
 	/// We have deliberately added these code blocks to allow anyone browsing the sample
@@ -43,7 +44,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 	///  client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await Auth.GetAuthToken());
     ///  var createMessage = new HttpRequestMessage(HttpMethod.Post, "https://www.onenote.com/api/beta/me/notes/pages/{id}/Microsoft.OneNote.Api.CopyToSection")
 	///  {
-    ///      Content = new StringContent("{"{ id : 'page-id', renameAs: 'New Page Name' }", System.Text.Encoding.UTF8, "application/json")
+    ///      Content = new StringContent("{ id : 'page-id', renameAs: 'New Page Name' }", System.Text.Encoding.UTF8, "application/json")
 	///  };
 	///  HttpResponseMessage response = await client.SendAsync(createMessage);
 	/// </code>
@@ -52,7 +53,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
         #region Examples of POST https://www.onenote.com/api/beta/me/notes/pages/{id}/Microsoft.OneNote.Api.CopyToSection
 
         /// <summary>
-		/// Copy a page
+		/// Copy a page to a section
 		/// </summary>
         /// <param name="debug">Run the code under the debugger</param>
         /// <param name="pageId">ID of the page to copy</param>
@@ -60,7 +61,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 		/// <param name="newPageName">Name for the new page</param>
 		/// <param name="provider">Live Connect or Azure AD</param>
         /// <param name="apiRoute">v1.0 or beta path</param>
-		/// <remarks>If you don't use the renameAs parameter, the page is overridden.</remarks>
+		/// <remarks></remarks>
 		/// <returns>The converted HTTP response message</returns>
 		public static async Task<ApiBaseResponse> CopyPageToSection(bool debug, string pageId, string sectionId, string newPageName, AuthProvider provider, string apiRoute)
 		{
@@ -79,12 +80,13 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 			client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer",
 				await Auth.GetAuthToken(provider));
 
-			// Prepare an HTTP POST request to the CopyToSection endpoint of the target notebook.
+			// Prepare an HTTP POST request to the CopyToSection endpoint of the target page.
             // The request body content type is application/json. 
-            // Requires the ID of the section to copy to. *Optional* parameters are: 
-            //   - siteCollectionId and siteId: The SharePoint site to copy the notebook to (if you're copying to a site).
-            //   - groupId: The ID of the group to copy to the notebook to (if you're copying to a group).
-            //   - renameAs: The name for the copy of the notebook. Overwrites the target notebook if not provided.
+            // Request body parameters: 
+            //   - id: The ID of the section to copy to. Required for all CopyToSection calls. 
+            //   - siteCollectionId and siteId: The SharePoint site to copy the page to. Required to copy to a site.
+            //   - groupId: The ID of the group to copy to the page to. Required to copy to a group.
+            //   - renameAs: The name for the copy of the page. If omitted, defaults to the name of the existing page. //xx
             var createMessage = new HttpRequestMessage(HttpMethod.Post, apiRoute + "pages/" + pageId + "/Microsoft.OneNote.Api.CopyToSection")
 			{
 				Content = new StringContent("{ id : '" + sectionId + "', renameAs : '" + newPageName + "' }", Encoding.UTF8, "application/json")

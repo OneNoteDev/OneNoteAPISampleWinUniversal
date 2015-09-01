@@ -13,6 +13,7 @@
                     "Description": "Create a simple page using HTML to describe the page content (under default section)",
                     "RequiresInputComboBox1": "false",
                     "RequiresInputComboBox2": "false",
+                    "RequiresTwoIds": "false",
                     "RequiresInputTextBox": "false"
                 },
                 {
@@ -22,6 +23,7 @@
                     "Description": "Create a page with some formatted text and an image",
                     "RequiresInputComboBox1": "true",
                     "RequiresInputComboBox2": "true",
+                    "RequiresTwoIds": "false",
                     "RequiresInputTextBox": "false"
                 },
                 {
@@ -31,6 +33,7 @@
                     "Description": "Create a page with a snapshot of the HTML of a web page on it",
                     "RequiresInputComboBox1": "true",
                     "RequiresInputComboBox2": "true",
+                    "RequiresTwoIds": "false",
                     "RequiresInputTextBox": "false"
                 },
                 {
@@ -40,6 +43,7 @@
                     "Description": "Create a page with a snapshot of the OneNote.com homepage on it.",
                     "RequiresInputComboBox1": "true",
                     "RequiresInputComboBox2": "true",
+                    "RequiresTwoIds": "false",
                     "RequiresInputTextBox": "false"
                 },
                 {
@@ -49,6 +53,7 @@
                     "Description": "Create a page with a PDF file attachment rendered",
                     "RequiresInputComboBox1": "true",
                     "RequiresInputComboBox2": "true",
+                    "RequiresTwoIds": "false",
                     "RequiresInputTextBox": "false"
                 },
                 {
@@ -58,6 +63,7 @@
                     "Description": "Create a page with examples of note tags. For example build a to do list",
                     "RequiresInputComboBox1": "true",
                     "RequiresInputComboBox2": "true",
+                    "RequiresTwoIds": "false",
                     "RequiresInputTextBox": "false"
                 },
                 {
@@ -67,6 +73,7 @@
                     "Description": "Create a page with a business card info automatically extracted from an image",
                     "RequiresInputComboBox1": "true",
                     "RequiresInputComboBox2": "true",
+                    "RequiresTwoIds": "false",
                     "RequiresInputTextBox": "false"
                 },
                 {
@@ -76,6 +83,7 @@
                     "Description": "Create a page with a cooking recipe automatically extracted from an example webpage",
                     "RequiresInputComboBox1": "true",
                     "RequiresInputComboBox2": "true",
+                    "RequiresTwoIds": "false",
                     "RequiresInputTextBox": "false"
                 },
                 {
@@ -85,6 +93,7 @@
                     "Description": "Create a page with a product info automatically extracted from an example amazon.com webpage",
                     "RequiresInputComboBox1": "true",
                     "RequiresInputComboBox2": "true",
+                    "RequiresTwoIds": "false",
                     "RequiresInputTextBox": "false"
                 },
                 {
@@ -94,6 +103,7 @@
                     "Description": "Create a page under a given section name using the 'sectionName' query parameter. Please enter a section name in the TextBox below. If the named section does not exist, it will be auto-created",
                     "RequiresInputComboBox1": "false",
                     "RequiresInputComboBox2": "false",
+                    "RequiresTwoIds": "false",
                     "RequiresInputTextBox": "true"
                 }
             ]
@@ -111,6 +121,7 @@
                     "Description": "Queries for all pages in OneNote and returns a paginated list. By default, paging returns the first 20 pages ordered by last modified time descending (default sort order). The @odata.nextLink in the Response or $skip and $top query parameters can be used to retrieve the next set of pages",
                     "RequiresInputComboBox1": "false",
                     "RequiresInputComboBox2": "false",
+                    "RequiresTwoIds": "false",
                     "RequiresInputTextBox": "false"
                 },
                 {
@@ -120,6 +131,7 @@
                     "Description": "Following the previous example, first we get a paginated list of all pages and then query the metadata for one of the selected pages. Please select a specific page from the drop-down below",
                     "RequiresInputComboBox1": "true",
                     "RequiresInputComboBox2": "false",
+                    "RequiresTwoIds": "false",
                     "RequiresInputTextBox": "false"
                 },
                 {
@@ -129,6 +141,7 @@
                     "Description": "Query for a paginated list of pages that contain a given title substring. This example shows how to use the $filter=contains(title, '<term>') query parameter. Please enter a case-sensitive title substring in the TextBox below.",
                     "RequiresInputComboBox1": "false",
                     "RequiresInputComboBox2": "false",
+                    "RequiresTwoIds": "false",
                     "RequiresInputTextBox": "true"
                 },
                 {
@@ -138,6 +151,7 @@
                     "Description": "Since the list of pages returned is paginated, this example shows how to use the $skip=20&$top=3 query parameters to get up to 3 additional pages after the first 20 pages",
                     "RequiresInputComboBox1": "false",
                     "RequiresInputComboBox2": "false",
+                    "RequiresTwoIds": "false",
                     "RequiresInputTextBox": "false"
                 },
                 {
@@ -147,6 +161,7 @@
                     "Description": "Get a sorted list of pages using the $orderBy=title asc query parameter and only specific metadata in the response using the $select=id,title query parameter. $orderBy can be used to specify your custom sort order",
                     "RequiresInputComboBox1": "false",
                     "RequiresInputComboBox2": "false",
+                    "RequiresTwoIds": "false",
                     "RequiresInputTextBox": "false"
                 },
                 {
@@ -156,6 +171,7 @@
                     "Description": "Search all pages and return the paginated list of matching pages that contain the given search term (case-insensitive search)",
                     "RequiresInputComboBox1": "false",
                     "RequiresInputComboBox2": "false",
+                    "RequiresTwoIds": "false",
                     "RequiresInputTextBox": "true"
                 },
                 {
@@ -165,6 +181,7 @@
                     "Description": "First we get a paginated list of all pages and then return back the content of one of the selected pages as HTML",
                     "RequiresInputComboBox1": "true",
                     "RequiresInputComboBox2": "false",
+                    "RequiresTwoIds": "false",
                     "RequiresInputTextBox": "false"
                 },
                 {
@@ -174,6 +191,7 @@
                     "Description": "Queries for all the pages that belong to a specific section",
                     "RequiresInputComboBox1": "true",
                     "RequiresInputComboBox2": "true",
+                    "RequiresTwoIds": "false",
                     "RequiresInputTextBox": "false"
                 }
             ]
@@ -191,6 +209,7 @@
                     "Description": "This is one example to demonstrate how the $expand query parameter can be used to return all notebooks and their descendant sections, sectionGroups in one roundtrip. In this case we are going to make a GET request on ~/notebooks?$expand=sections,sectionGroups($expand=sections)",
                     "RequiresInputComboBox1": "false",
                     "RequiresInputComboBox2": "false",
+                    "RequiresTwoIds": "false",
                     "RequiresInputTextBox": "false"
                 },
                 {
@@ -200,6 +219,7 @@
                     "Description": "Queries for all notebooks in OneNote and returns a list",
                     "RequiresInputComboBox1": "false",
                     "RequiresInputComboBox2": "false",
+                    "RequiresTwoIds": "false",
                     "RequiresInputTextBox": "false"
                 },
                 {
@@ -209,6 +229,7 @@
                     "Description": "Following the previous example, first we get a list of all notebooks and then query the metadata for one of the selected notebooks. Please select a specific notebook from the drop-down below",
                     "RequiresInputComboBox1": "true",
                     "RequiresInputComboBox2": "false",
+                    "RequiresTwoIds": "false",
                     "RequiresInputTextBox": "false"
                 },
                 {
@@ -218,6 +239,7 @@
                     "Description": "Queries for all sections under all notebooks in OneNote and returns a list",
                     "RequiresInputComboBox1": "false",
                     "RequiresInputComboBox2": "false",
+                    "RequiresTwoIds": "false",
                     "RequiresInputTextBox": "false"
                 },
                 {
@@ -227,6 +249,7 @@
                     "Description": "Following the previous example, first we get a list of all sections and then query the metadata for one of the selected sections. Please select a specific section from the drop-down below",
                     "RequiresInputComboBox1": "true",
                     "RequiresInputComboBox2": "false",
+                    "RequiresTwoIds": "false",
                     "RequiresInputTextBox": "false"
                 },
                 {
@@ -236,6 +259,7 @@
                     "Description": "Queries for all sectionGroups under all notebooks in OneNote and returns a list. SectionGroups are not very common, so you may see 0 results",
                     "RequiresInputComboBox1": "false",
                     "RequiresInputComboBox2": "false",
+                    "RequiresTwoIds": "false",
                     "RequiresInputTextBox": "false"
                 },
                 {
@@ -245,6 +269,7 @@
                     "Description": "Query for a list of all notebooks with a given name. This example shows how to use the '$filter=name eq '<term>' query parameter. Please enter the case-sensitive full notebook name to look for in the TextBox below",
                     "RequiresInputComboBox1": "false",
                     "RequiresInputComboBox2": "false",
+                    "RequiresTwoIds": "false",
                     "RequiresInputTextBox": "true"
                 },
                 {
@@ -254,6 +279,7 @@
                     "Description": "Query for a list of all notebooks where the current user is not an Owner (i.e. the notebooks are owned by someone else and were shared with the current user with either a Reader or Contributor access level). This example shows how to use the '$filter=userRole ne Microsoft.OneNote.Api.UserRole'Owner'' query parameter and will return non-zero results only if the current user has access to shared notebooks",
                     "RequiresInputComboBox1": "false",
                     "RequiresInputComboBox2": "false",
+                    "RequiresTwoIds": "false",
                     "RequiresInputTextBox": "false"
                 },
                 {
@@ -263,6 +289,7 @@
                     "Description": "Get a sorted list of notebooks using the $orderBy=name asc query parameter and only specific metadata in the response using the $select=id,name query parameter. $orderBy can be used to specify your custom sort order",
                     "RequiresInputComboBox1": "false",
                     "RequiresInputComboBox2": "false",
+                    "RequiresTwoIds": "false",
                     "RequiresInputTextBox": "false"
                 },
                 {
@@ -272,6 +299,7 @@
                     "Description": "First we get a list of all notebooks and then query for a list of all sections under one of the selected notebooks. Please select a specific notebook from the drop-down below",
                     "RequiresInputComboBox1": "true",
                     "RequiresInputComboBox2": "false",
+                    "RequiresTwoIds": "false",
                     "RequiresInputTextBox": "false"
                 },
                 {
@@ -281,6 +309,7 @@
                     "Description": "Query for a list of all sections with a given name. This example shows how to use the '$filter=name eq '<term>' query parameter. Please enter the case-sensitive full section name to look for in the TextBox below",
                     "RequiresInputComboBox1": "false",
                     "RequiresInputComboBox2": "false",
+                    "RequiresTwoIds": "false",
                     "RequiresInputTextBox": "true"
                 },
                 {
@@ -290,6 +319,7 @@
                     "Description": "Create a new blank notebook. Please enter the new notebook's name in the TextBox below",
                     "RequiresInputComboBox1": "false",
                     "RequiresInputComboBox2": "false",
+                    "RequiresTwoIds": "false",
                     "RequiresInputTextBox": "true"
                 },
                 {
@@ -299,6 +329,7 @@
                     "Description": "First we get a list of all notebooks and then create a new empty section under the selected notebook. Please select a specific notebook from the drop-down below and also enter the new section's name in the TextBox below",
                     "RequiresInputComboBox1": "true",
                     "RequiresInputComboBox2": "false",
+                    "RequiresTwoIds": "false",
                     "RequiresInputTextBox": "true"
                 },
                 {
@@ -309,6 +340,7 @@
                     "Description": "First we get a list of all section groups and then create a new empty section under the selected section group. Please select a specific section group from the drop-down below and also enter the new section's name in the TextBox below",
                     "RequiresInputComboBox1": "true",
                     "RequiresInputComboBox2": "false",
+                    "RequiresTwoIds": "false",
                     "RequiresInputTextBox": "true"
                 },
                 {
@@ -319,6 +351,7 @@
                     "Description": "First we get a list of all notebooks and then create a new empty section group under the selected notebook. Please select a specific notebook from the drop-down below and also enter the new section group's name in the TextBox below",
                     "RequiresInputComboBox1": "true",
                     "RequiresInputComboBox2": "false",
+                    "RequiresTwoIds": "false",
                     "RequiresInputTextBox": "true"
                 },
                 {
@@ -329,6 +362,7 @@
                     "Description": "First we get a list of all section groups and then create a new empty section group under the selected section group. Please select a specific section group from the drop-down below and also enter the new section group's name in the TextBox below",
                     "RequiresInputComboBox1": "true",
                     "RequiresInputComboBox2": "false",
+                    "RequiresTwoIds": "false",
                     "RequiresInputTextBox": "true"
                 }
             ]
@@ -346,6 +380,7 @@
                     "Description": "Add new trailing content to the default outline in an existing page",
                     "RequiresInputComboBox1": "true",
                     "RequiresInputComboBox2": "false",
+                    "RequiresTwoIds": "false",
                     "RequiresInputTextBox": "false"
                 }
             ]
@@ -363,6 +398,7 @@
                     "Description": "Delete an existing page",
                     "RequiresInputComboBox1": "true",
                     "RequiresInputComboBox2": "false",
+                    "RequiresTwoIds": "false",
                     "RequiresInputTextBox": "false"
                 }
             ]
@@ -380,6 +416,7 @@
                     "Description": "Choose the notebook you want to copy, and then enter a name for the new notebook.",
                     "RequiresInputComboBox1": "true",
                     "RequiresInputComboBox2": "false",
+                    "RequiresTwoIds": "false",
                     "RequiresInputTextBox": "true"
                 },
                 {
@@ -389,6 +426,7 @@
                     "Description": "Choose the section you want to copy and the destination notebook. Then, enter a name for the new section.",
                     "RequiresInputComboBox1": "true",
                     "RequiresInputComboBox2": "true",
+                    "RequiresTwoIds": "true",
                     "RequiresInputTextBox": "true"
                 },
                 {
@@ -398,6 +436,7 @@
                     "Description": "Choose the section you want to copy and the destination section group. Then, enter a name for the new section.",
                     "RequiresInputComboBox1": "true",
                     "RequiresInputComboBox2": "true",
+                    "RequiresTwoIds": "true",
                     "RequiresInputTextBox": "true"
                 },
                 {
@@ -407,6 +446,7 @@
                     "Description": "Choose the page you want to copy and the destination section. Then, enter a name for the new page.",
                     "RequiresInputComboBox1": "true",
                     "RequiresInputComboBox2": "true",
+                    "RequiresTwoIds": "true",
                     "RequiresInputTextBox": "true"
                 }
             ]

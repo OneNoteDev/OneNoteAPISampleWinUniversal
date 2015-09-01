@@ -79,12 +79,23 @@ namespace OneNoteServiceSamplesWinUniversal
 			Model.Item = item;
 			InputSelectionPanel2.Visibility = (item.RequiresInputComboBox2) ? Visibility.Visible : Visibility.Collapsed;
 			InputTextBox.Visibility = (item.RequiresInputTextBox) ? Visibility.Visible : Visibility.Collapsed;
-			if (item.RequiresInputComboBox1)
+			if ((item.RequiresInputComboBox1) && (!item.RequiresTwoIds))
 			{
 				var response = await SampleDataSource.ExecuteApiPrereq(item.UniqueId, UserData.Provider, UserData.UseBeta);
 				if (response is List<ApiBaseResponse>)
 				{
 					InputComboBox1.ItemsSource = response;
+					InputSelectionPanel1.Visibility = Visibility.Visible;
+				}
+			}
+			if (item.RequiresTwoIds)
+			{
+				var response = await SampleDataSource.ExecuteApiPrereq(item.UniqueId, UserData.Provider, UserData.UseBeta);
+				if (response is List<List<ApiBaseResponse>>)
+				{
+					List<List<ApiBaseResponse>> lists = (List<List<ApiBaseResponse>>) response;
+					InputComboBox1.ItemsSource = lists.ElementAt(0);
+					InputComboBox2.ItemsSource = lists.ElementAt(1);
 					InputSelectionPanel1.Visibility = Visibility.Visible;
 				}
 			}
@@ -136,7 +147,8 @@ namespace OneNoteServiceSamplesWinUniversal
             Model.ApiResponse = null;
 
 			string requiredSelectedId = null;
-			if (item.RequiresInputComboBox1)
+			string requiredSelectedId2= null;
+			if ((item.RequiresInputComboBox1) && (!item.RequiresTwoIds))
 			{
 				var selectedItem = (ApiBaseResponse) InputComboBox1.SelectedItem;
 				if (selectedItem != null)
@@ -149,7 +161,7 @@ namespace OneNoteServiceSamplesWinUniversal
 					return;
 				}
 			}
-			if (item.RequiresInputComboBox2)
+			if ((item.RequiresInputComboBox2) && (!item.RequiresTwoIds))
 			{
 				var selectedItem = (ApiBaseResponse) InputComboBox2.SelectedItem;
 				if (selectedItem != null)
@@ -162,7 +174,24 @@ namespace OneNoteServiceSamplesWinUniversal
 					return;
 				}
 			}
-
+			
+			// The operation requires two IDs (such as the Copy actions).
+			if (item.RequiresTwoIds)
+			{
+				var selectedItem1 = (ApiBaseResponse)InputComboBox1.SelectedItem;
+				var selectedItem2 = (ApiBaseResponse)InputComboBox2.SelectedItem;
+				if ((selectedItem1 != null) && (selectedItem2 != null))
+				{
+					requiredSelectedId = selectedItem1.Id;
+					requiredSelectedId2 = selectedItem2.Id;
+				}
+				else
+                {
+					FlyoutBase.ShowAttachedFlyout(InputComboBox1);
+					FlyoutBase.ShowAttachedFlyout(InputComboBox2);
+					return;
+				}
+			}
 			string requiredInputText = null;
 			if (item.RequiresInputTextBox)
 			{
@@ -174,7 +203,7 @@ namespace OneNoteServiceSamplesWinUniversal
 				}
 			}
 
-			Model.ApiResponse = await SampleDataSource.ExecuteApi(item.UniqueId, debug, requiredSelectedId, requiredInputText, UserData.Provider, UserData.UseBeta);
+			Model.ApiResponse = await SampleDataSource.ExecuteApi(item.UniqueId, debug, requiredSelectedId, requiredSelectedId2, requiredInputText, UserData.Provider, UserData.UseBeta);
 		}
 
 		/// <summary>

@@ -29,7 +29,7 @@ namespace OneNoteServiceSamplesWinUniversal.Data
 	public class SampleDataItem
 	{
 		public SampleDataItem(String uniqueId, String title, String subtitle, String imagePath, String description,
-			bool requiresInputComboBox1, bool requiresInputComboBox2, bool requiresInputTextBox)
+			bool requiresInputComboBox1, bool requiresInputComboBox2, bool requiresTwoIds, bool requiresInputTextBox)
 		{
 			this.UniqueId = uniqueId;
 			this.Title = title;
@@ -38,6 +38,7 @@ namespace OneNoteServiceSamplesWinUniversal.Data
 			this.ImagePath = imagePath;
 			this.RequiresInputComboBox1 = requiresInputComboBox1;
 			this.RequiresInputComboBox2 = requiresInputComboBox2;
+			this.RequiresTwoIds = requiresTwoIds;
 			this.RequiresInputTextBox = requiresInputTextBox;
 		}
 
@@ -48,7 +49,8 @@ namespace OneNoteServiceSamplesWinUniversal.Data
 		public string ImagePath { get; private set; }
 
 		public bool RequiresInputComboBox1 { get; private set; }
-		public bool RequiresInputComboBox2 { get; private set; }
+        public bool RequiresInputComboBox2 { get; private set; }
+        public bool RequiresTwoIds { get; private set; }
 		public bool RequiresInputTextBox { get; private set; }
 
 		public override string ToString()
@@ -138,6 +140,15 @@ namespace OneNoteServiceSamplesWinUniversal.Data
 			return null;
 		}
 
+
+		private static object CombineLists(List<ApiBaseResponse> firstList, List<ApiBaseResponse> secondList)
+		{
+			List<List<ApiBaseResponse>> combinedLists = new List<List<ApiBaseResponse>>();
+			combinedLists.Add(firstList);
+			combinedLists.Add(secondList);
+			return combinedLists;
+		}
+
 		private async Task GetSampleDataAsync()
 		{
 			if (this._groups.Count != 0)
@@ -171,13 +182,14 @@ namespace OneNoteServiceSamplesWinUniversal.Data
 													   itemObject["Description"].GetString(),
 													   Convert.ToBoolean(itemObject["RequiresInputComboBox1"].GetString()),
 													   Convert.ToBoolean(itemObject["RequiresInputComboBox2"].GetString()),
+													   Convert.ToBoolean(itemObject["RequiresTwoIds"].GetString()),
 													   Convert.ToBoolean(itemObject["RequiresInputTextBox"].GetString())));
 				}
 				this.Groups.Add(group);
 			}
 		}
 
-		public static async Task<object> ExecuteApi(string uniqueId, bool debug, string requiredSelectedId, 
+		public static async Task<object> ExecuteApi(string uniqueId, bool debug, string requiredSelectedId, string requiredSelectedId2, 
 												string requiredInputText, AuthProvider provider, bool useBeta)
 		{
 			var apiEndPoint = ApiEndPoint(useBeta);
@@ -258,11 +270,11 @@ namespace OneNoteServiceSamplesWinUniversal.Data
                 case "Group-5-Item-0":
                     return await CopyNotebooksExample.CopyNotebook(debug, requiredSelectedId, requiredInputText, provider, apiEndPoint);
                 case "Group-5-Item-1":
-                    return await CopyNotebooksExample.CopyNotebook(debug, requiredSelectedId, requiredInputText, provider, apiEndPoint);
+                    return await CopySectionsExample.CopySectionToNotebook(debug, requiredSelectedId, requiredSelectedId2, requiredInputText, provider, apiEndPoint);
                 case "Group-5-Item-2":
-                    return await CopyNotebooksExample.CopyNotebook(debug, requiredSelectedId, requiredInputText, provider, apiEndPoint);
+                    return await CopySectionsExample.CopySectionToSectionGroup(debug, requiredSelectedId, requiredSelectedId2, requiredInputText, provider, apiEndPoint);
                 case "Group-5-Item-3":
-                    return await CopyNotebooksExample.CopyNotebook(debug, requiredSelectedId, requiredInputText, provider, apiEndPoint);
+                    return await CopyPagesExample.CopyPageToSection(debug, requiredSelectedId, requiredSelectedId2, requiredInputText, provider, apiEndPoint);
 			}
 			return null;
 		}
@@ -310,11 +322,17 @@ namespace OneNoteServiceSamplesWinUniversal.Data
                 case "Group-5-Item-0":
                     return await GetNotebooksExample.GetAllNotebooks(false, provider, apiEndPoint);
                 case "Group-5-Item-1":
-                    return await GetNotebooksExample.GetAllNotebooks(false, provider, apiEndPoint);
+                    var sections = await GetSectionsExample.GetAllSections(false, provider, apiEndPoint);
+                    var notebooks = await GetNotebooksExample.GetAllNotebooks(false, provider, apiEndPoint);
+                    return CombineLists(sections, notebooks);
                 case "Group-5-Item-2":
-                    return await GetSectionGroupsExample.GetAllSectionGroups(false, provider, apiEndPoint);
+                    sections = await GetSectionsExample.GetAllSections(false, provider, apiEndPoint);
+                    var sectiongroups = await GetSectionGroupsExample.GetAllSectionGroups(false, provider, apiEndPoint);
+                    return CombineLists(sections, sectiongroups);
                 case "Group-5-Item-3":
-                    return await GetSectionsExample.GetAllSections(false, provider, apiEndPoint);
+                    var pages = await GetPagesExample.GetAllPages(false, provider, apiEndPoint);
+                    sections = await GetSectionsExample.GetAllSections(false, provider, apiEndPoint);
+                    return CombineLists(pages, sections);
 			}
 			return null;
 		}
