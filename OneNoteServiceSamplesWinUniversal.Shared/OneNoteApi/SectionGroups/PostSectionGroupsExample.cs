@@ -32,8 +32,8 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.SectionGroups
     /// <summary>
     /// Class to show a selection of examples creating section groups via HTTP POST to the OneNote API
     /// - Creating a new section group is represented via the POST HTTP verb.
-    /// - Creating a new section group under a given notebook is represented by the Uri: https://www.onenote.com/api/beta/me/notes/notebooks/{notebookId}/sectiongroups
-    /// - Creating a new section group under a given section group is represented by the Uri: https://www.onenote.com/api/beta/me/notes/sectiongroups/{sectionGroupId}/sectiongroups
+    /// - Creating a new section group under a given notebook is represented by the Uri: https://www.onenote.com/api/v1.0/me/notes/notebooks/{notebookId}/sectiongroups
+    /// - Creating a new section group under a given section group is represented by the Uri: https://www.onenote.com/api/v1.0/me/notes/sectiongroups/{sectionGroupId}/sectiongroups
     /// For more info, see http://dev.onenote.com/docs
     /// </summary>
     /// <remarks>
@@ -56,7 +56,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.SectionGroups
     /// </code>
     public static class PostSectionGroupsExample
     {
-        #region Examples of POST https://www.onenote.com/api/beta/me/notes/notebooks/{notebookId}/sectiongroups
+        #region Examples of POST https://www.onenote.com/api/v1.0/me/notes/notebooks/{notebookId}/sectiongroups
 
         /// <summary>
         ///  BETA Create a section group with a given name under a given notebookId
@@ -100,7 +100,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.SectionGroups
         #endregion
 
 
-        #region Examples of POST https://www.onenote.com/api/beta/me/notes/sectiongroups/{sectionGroupId}/sectiongroups
+        #region Examples of POST https://www.onenote.com/api/v1.0/me/notes/sectiongroups/{sectionGroupId}/sectiongroups
         /// <summary>
         /// BETA Create a section group with a given name under a given sectionGroupId
         /// </summary>

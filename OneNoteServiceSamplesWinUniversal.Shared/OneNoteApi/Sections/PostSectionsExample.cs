@@ -33,7 +33,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Sections
 	/// Class to show a selection of examples creating sections via HTTP POST to the OneNote API
 	/// - Creating a new section is represented via the POST HTTP verb.
     /// - Creating a new section under a given notebook is represented by the Uri: https://www.onenote.com/api/v1.0/me/notes/notebooks/{notebookId}/sections
-    /// - Creating a new section under a given section group is represented by the Uri: https://www.onenote.com/api/beta/me/notes/sectiongroups/{sectionGroupId}/sections
+    /// - Creating a new section under a given section group is represented by the Uri: https://www.onenote.com/api/v1.0/me/notes/sectiongroups/{sectionGroupId}/sections
 	/// For more info, see http://dev.onenote.com/docs
 	/// </summary>
 	/// <remarks>
@@ -99,7 +99,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Sections
  
         #endregion
 
-        #region Examples of POST https://www.onenote.com/api/beta/me/notes/sectiongroups/{sectionGroupId}/sections
+        #region Examples of POST https://www.onenote.com/api/v1.0/me/notes/sectiongroups/{sectionGroupId}/sections
 
         /// <summary>
         /// BETA Create a section with a given name under a given sectionGroupId
