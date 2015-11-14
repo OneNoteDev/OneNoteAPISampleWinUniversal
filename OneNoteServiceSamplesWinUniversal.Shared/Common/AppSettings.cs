@@ -22,7 +22,7 @@ namespace OneNoteServiceSamplesWinUniversal.Common
 		{
 			object result = false;
 			ApplicationData.Current.LocalSettings.Values.TryGetValue("UseBeta", out result);
-			return (bool)(result ?? true); // default to true
+			return (bool)(result ?? false); // default to true
 		}
 		public static void SetUseBeta(bool useBeta)
 		{

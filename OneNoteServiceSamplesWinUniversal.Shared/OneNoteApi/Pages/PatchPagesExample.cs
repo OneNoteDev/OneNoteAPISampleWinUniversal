@@ -42,7 +42,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 
 	/// <summary>
 	/// Class to show a selection of examples updating pages via HTTP PATCH requests to the OneNote API
-	/// Updating an existing page is achieved by sending HTTP PATCH requests to the URL: https://www.onenote.com/api/beta/pages/{id}/content
+	/// Updating an existing page is achieved by sending HTTP PATCH requests to the URL: https://www.onenote.com/api/v1.0/pages/{id}/content
 	/// For more info, see http://dev.onenote.com/docs
 	/// </summary>
 	/// <remarks>
@@ -56,7 +56,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 	///  client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 	///  client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await Auth.GetAuthToken());
 	/// 
-	///  var createMessage = new HttpRequestMessage(new HttpMethod("PATCH"), "https://www.onenote.com/api/beta/pages/{pageId}/content")
+	///  var createMessage = new HttpRequestMessage(new HttpMethod("PATCH"), "https://www.onenote.com/api/v1.0/pages/{pageId}/content")
 	///  {
 	///      Content = new StringContent("[{ 'target': 'body', 'action': 'append', 'content': '<p>New trailing content</p>' }]", Encoding.UTF8, "application/json")
 	///  };
@@ -64,7 +64,7 @@ namespace OneNoteServiceSamplesWinUniversal.OneNoteApi.Pages
 	/// </code>
 	public static class PatchPagesExample
 	{
-		#region Example of PATCH https://www.onenote.com/api/beta/pages/{id}/content
+		#region Example of PATCH https://www.onenote.com/api/v1.0/pages/{id}/content
 
 		/// <summary>
 		/// Append to the default outline in the content of an existing page
